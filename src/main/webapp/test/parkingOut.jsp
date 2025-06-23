@@ -7,11 +7,13 @@
 </head>
 <%@include file="inc/header.jsp" %>
 <body>
+<div class="container">
 <h2>🚘 차량 출차</h2>
 <form method="post" action="ParkingOutServlet">
     차량번호: <input type="text" name="car_number"><br><br>
     <button type="submit">출차 처리</button>
 </form>
+</div>
 <%@include file="inc/footer.jsp" %>
 </body>
 </html>

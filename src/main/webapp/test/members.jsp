@@ -6,7 +6,7 @@
 </head>
 <body>
 <%@include file="inc/header.jsp" %>
-
+<div class="container">
 <h2>👤 월정액 회원 관리</h2>
 <form method="post" action="AddMemberServlet">
     차량번호: <input type="text" name="car_number"><br><br>
@@ -16,6 +16,7 @@
     종료일: <input type="date" name="end_date"><br><br>
     <button type="submit">회원 등록</button>
 </form>
+</div>
 <%@include file="inc/footer.jsp" %>
 </body>
 </html>

@@ -6,6 +6,7 @@
 </head>
 <body>
 <%@include file="inc/header.jsp" %>
+<div class="container">
 <h2>🚗 차량 입차 등록</h2>
 <form method="post" action="ParkingInServlet">
     차량번호: <input type="text" name="car_number" required><br><br>
@@ -20,6 +21,7 @@
     월정액 회원: <input type="checkbox" name="is_monthly" value="true"><br><br>
     <button type="submit">입차 등록</button>
 </form>
+</div>
 <%@include file="inc/footer.jsp" %>
 </body>
 </html>

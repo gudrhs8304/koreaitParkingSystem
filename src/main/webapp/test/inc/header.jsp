@@ -1,23 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <style>
     #header{
-        margin: 20px auto;
+        margin: 20px;
     }
     #menu {
         display: flex;
         justify-content: space-evenly;
-    }
-    #menu > li {
-        padding: 20px;
-        border: 1px solid black;
+        flex-wrap: wrap;
     }
     #menu > li > a {
+        padding: 10px;
+        border: 1px solid black;
         color: black;
     }
 </style>
 
 <div id="header">
-
     <ul id="menu">
         <li><h3>주차관리 시스템</h3></li>
         <li><a href="login.jsp">login</a></li>

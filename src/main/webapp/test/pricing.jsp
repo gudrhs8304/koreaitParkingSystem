@@ -7,6 +7,7 @@
 </head>
 <body>
 <%@include file="inc/header.jsp" %>
+<div class="container">
 <h2>💰 요금 정책 수정</h2>
 <form method="post" action="UpdatePricingServlet">
     기본 요금 (1시간): <input type="number" name="base_fee"><br><br>
@@ -14,6 +15,7 @@
     일일 최대 요금: <input type="number" name="max_fee"><br><br>
     <button type="submit">수정</button>
 </form>
+</div>
 <%@include file="inc/footer.jsp" %>
 </body>
 </html>

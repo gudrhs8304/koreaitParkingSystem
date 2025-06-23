@@ -14,7 +14,7 @@
 <body>
 <%@include file="inc/header.jsp" %>
 
-<div>
+<div class="container">
     <h2>메인영역 테스트</h2>
 </div>
 

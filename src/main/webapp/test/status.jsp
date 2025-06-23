@@ -6,6 +6,7 @@
 </head>
 <body>
 <%@include file="inc/header.jsp" %>
+<div class="container">
 <h2>📊 실시간 주차 현황</h2>
 <table border="1">
     <tr>
@@ -21,6 +22,7 @@
         <td>3번</td>
     </tr>
 </table>
+</div>
 <%@include file="inc/footer.jsp" %>
 </body>
 </html>

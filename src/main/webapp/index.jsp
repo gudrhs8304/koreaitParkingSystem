@@ -10,7 +10,7 @@
 <br/>
 <a href="hello-servlet">Hello Servlet</a>
 <%
-    response.sendRedirect("test/main.jsp");
+    response.sendRedirect("main.jsp");
 %>
 </body>
 </html>

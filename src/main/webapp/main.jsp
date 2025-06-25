@@ -19,28 +19,20 @@
 </head>
 
 <body class="sb-nav-fixed">
-
+<!-- topbar 영역-->
 <%@ include file="/layout/topbar.jsp" %>
-
-<%@ include file="/layout/sidebar.jsp" %>
-
-
-<!-- Begin Page Content -->
-<div class="container-fluid mt-4">
-    <h1 class="h3 mb-4 text-gray-800">코리아 IT 주차관리 시스템</h1>
-
-    <div class="card shadow mb-4">
-        <div class="card-body">
-            <p>여기에 본문 내용을 작성하세요.</p>
-            <i class="fas fa-user fa-fw"></i>
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-car"></i>
+<div id="layoutSidenav">
+    <!-- sidebar 영역 -->
+    <%@ include file="/layout/sidebar.jsp" %>
+        <div id="layoutSidenav_content">
+    <!-- 여기서 부터 메인 작업 시작. -->
+            <%@ include file="/page/dashboard.jsp" %>
+            <!-- footer 영역 -->
+            <%@ include file="/layout/footer.jsp" %>
         </div>
-    </div>
 </div>
-<!-- /.container-fluid -->
 
-<%@ include file="/layout/footer.jsp" %>
+
 
 <!-- Bootstrap JS (Popper + Bootstrap Bundle) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

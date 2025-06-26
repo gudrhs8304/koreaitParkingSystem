@@ -28,12 +28,82 @@
     <div id="layoutSidenav_content">
         <!-- 여기서 부터 메인 작업 시작. -->
         <h1>상태 페이지 테스트</h1>
-        
+
+        <div class="container mt-5">
+            <h2 class="mb-4 text-primary">주차 현황 관리</h2>
+
+            <!-- 전체/사용중/빈자리 요약 -->
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="card text-bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">전체 공간</h5>
+                            <p class="card-text fs-3">10대</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-bg-success">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">사용 중</h5>
+                            <p class="card-text fs-3">7대</p> <!-- 예시 숫자 -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-bg-info">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">빈 자리</h5>
+                            <p class="card-text fs-3">3대</p> <!-- 예시 숫자 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 현재 주차중인 차량 테이블 -->
+            <h5>현재 주차 중 차량 목록</h5>
+            <table class="table table-bordered table-hover">
+                <thead class="table-light">
+                <tr>
+                    <th>차량번호</th>
+                    <th>운전자명</th>
+                    <th>연락처</th>
+                    <th>차량유형</th>
+                    <th>입차시간</th>
+                    <th>월정액회원</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- 예시 데이터 -->
+                <tr>
+                    <td>12가3456</td>
+                    <td>홍길동</td>
+                    <td>010-1234-5678</td>
+                    <td>일반</td>
+                    <td>2025-06-26 09:30</td>
+                    <td>아니오</td>
+                </tr>
+                <tr class="table-warning">
+                    <td>88나8888</td>
+                    <td>김하늘</td>
+                    <td>010-8888-8888</td>
+                    <td>장애인</td>
+                    <td>2025-06-25 23:00</td> <!-- 장시간 주차 예시 -->
+                    <td>예</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- 장시간 주차 알림 -->
+            <div class="alert alert-danger mt-4">
+                <strong>⚠ 장시간 주차 차량 있음!</strong> 기준 시간(예: 12시간) 초과 차량이 있습니다.
+            </div>
+
+        </div>
 
 
 
-
-        <%@ include file="dataTable.jsp"%>
+<%--        <%@ include file="dataTable.jsp"%>--%>
         <!-- footer 영역 -->
         <%@ include file="/layout/footer.jsp" %>
     </div>

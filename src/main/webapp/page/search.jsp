@@ -28,7 +28,21 @@
     <div id="layoutSidenav_content">
         <!-- 여기서 부터 메인 작업 시작. -->
         <h1>검색 페이지 테스트</h1>
-
+        <!-- 차량 검색 폼 -->
+        <form class="row g-3 mb-4" method="get" action="#">
+            <div class="col-md-3">
+                <input type="text" class="form-control" name="carNumber" placeholder="차량번호">
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" name="driverName" placeholder="운전자명">
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" name="phone" placeholder="연락처">
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary w-100">검색</button>
+            </div>
+        </form>
         <!-- footer 영역 -->
         <%@ include file="/layout/footer.jsp" %>
     </div>

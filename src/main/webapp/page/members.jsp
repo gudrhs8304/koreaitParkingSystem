@@ -28,6 +28,7 @@
     <div id="layoutSidenav_content">
         <!-- 여기서 부터 메인 작업 시작. -->
         <h1>회원관리 페이지 테스트</h1>
+        
 
         <!-- footer 영역 -->
         <%@ include file="/layout/footer.jsp" %>

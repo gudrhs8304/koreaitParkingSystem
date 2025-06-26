@@ -44,6 +44,7 @@
 <%--<script src="/assets/js/scripts.js"></script>--%>
 
 <!-- 부트스트랩 기본 js 임포트 -->
+<!-- 차트는 추후 삭제 가능성 있음. -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 <script src="/assets/demo/chart-area-demo.js"></script>
 <script src="/assets/demo/chart-bar-demo.js"></script>

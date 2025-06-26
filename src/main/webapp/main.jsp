@@ -27,6 +27,7 @@
         <div id="layoutSidenav_content">
     <!-- 여기서 부터 메인 작업 시작. -->
             <%@ include file="/page/dashboard.jsp" %>
+
             <!-- footer 영역 -->
             <%@ include file="/layout/footer.jsp" %>
         </div>
@@ -38,8 +39,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 
-<!-- 선택: Chart.js, jQuery 등 추가 가능 -->
-<%--<script src="/assets/js/scripts.js"></script>--%>
+
 
 <!-- 부트스트랩 기본 js 임포트 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -47,6 +47,20 @@
 <script src="/assets/demo/chart-bar-demo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
 <script src="/assets/js/datatables-simple-demo.js"></script>
+
+<!-- 선택: Chart.js, jQuery 등 추가 가능 -->
+<%--<script src="/assets/js/scripts.js"></script>--%>
+<script defer>
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     let dataTableText = document.querySelector("#layoutSidenav_content > main > div > div.card.mb-4 > div.card-body > div > div.datatable-top > div.datatable-dropdown > label");
+    //     dataTableText.innerText="뭥미..진짜";
+    // });
+    $('#example').DataTable({
+        language: {
+            lengthMenu: '_MENU_ 페이지당 항목 수'
+        }
+    });
+</script>
 
 </body>
 </html>

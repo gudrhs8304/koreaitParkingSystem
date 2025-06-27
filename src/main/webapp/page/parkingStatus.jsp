@@ -103,6 +103,7 @@
         <%--        <%@ include file="dataTable.jsp"%>--%>
         <!-- footer 영역 -->
         <%@ include file="/layout/footer.jsp" %>
+
     </div>
 </div>
 

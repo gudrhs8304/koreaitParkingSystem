@@ -27,39 +27,16 @@
     <%@ include file="/layout/sidebar.jsp" %>
     <div id="layoutSidenav_content">
         <!-- 여기서 부터 메인 작업 시작. -->
-        <div class="container mt-4">
-          <h1 class="mb-4">출차 관리</h1>
-          <form  method="post">
-            <div class="mb-3 row">
-              <label for="carNumber" class="col-sm-2 col-form-label">차량번호</label>
-              <div class="col-sm-4">
-                <input type="text" name="carNumber" id="carNumber" class="form-control" />
-              </div>
-              <div class="col-sm-2">
-                <input type="submit" name="search" value="검색" class="btn btn-primary" />
-              </div>
-            </div>
-
-            <div class="mb-3 row">
-              <label class="col-sm-2 col-form-label">입차 시간</label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control" name="inTime" readonly />
-              </div>
-            </div>
-
-            <div class="mb-3 row">
-              <label class="col-sm-2 col-form-label">주차 요금</label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control" name="fee" readonly />
-              </div>
-            </div>
-
-            <div class="mb-3 d-flex gap-2">
-              <a href="/page/disCount.jsp" class="btn btn-success">할인 적용</a>
-              <a href="/page/out.jsp" class="btn btn-success">출차</a>
-            </div>
-          </form>
+        <div class="container mt-5">
+            <h1 class="mb-4">출차 처리 완료</h1>
+            <form action="/page/vehicleOut.jsp" method="post">
+                <div class="alert alert-success" role="alert">
+                    출차 처리되었습니다.
+                </div>
+                <button type="submit" name="end" class="btn btn-success">메인메뉴</button>
+            </form>
         </div>
+
         <!-- footer 영역 -->
         <%@ include file="/layout/footer.jsp" %>
     </div>

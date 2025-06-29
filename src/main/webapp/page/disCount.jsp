@@ -42,7 +42,7 @@
             <div class="mb-3 row">
                 <label for="carNumber" class="col-sm-2 col-form-label">차량번호</label>
                 <div class="col-sm-4">
-                    <input type="text" name="carNumber" id="carNumber" class="form-control" />
+                    <input type="text" name="carNumber" id="carNumber" class="form-control" readonly/>
                 </div>
             </div>
 
@@ -60,6 +60,10 @@
                     <div class="form-check">
                         <input type="radio" name="discountType" id="discount3" class="form-check-input" value="electric" />
                         <label for="discount3" class="form-check-label">전기차</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="discountType" id="discount4" class="form-check-input" value="monthParking" />
+                        <label for="discount4" class="form-check-label">월주차</label>
                     </div>
                 </div>
             </div>

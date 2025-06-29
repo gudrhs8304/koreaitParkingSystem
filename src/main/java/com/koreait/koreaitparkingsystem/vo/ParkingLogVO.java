@@ -16,7 +16,7 @@ public class ParkingLogVO {
     private int id;
     private String carNumber;
     private String carTypeCode;
-    private String parkingSpot;
+    private int parkingSpot;
     private LocalDateTime inTime;
     private LocalDateTime outTime;
     private int fee;

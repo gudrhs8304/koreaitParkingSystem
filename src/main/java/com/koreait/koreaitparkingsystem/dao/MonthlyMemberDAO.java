@@ -25,7 +25,7 @@ public class MonthlyMemberDAO {
                         .carNumber(resultSet.getString("car_number"))
                         .driverName(resultSet.getString("driver_name"))
                         .phone(resultSet.getString("phone"))
-                        .startDate(LocalDate.parse(resultSet.getString("start_date")))
+                        .startDate(resultSet.getDate("start_date").toLocalDate())
                         .endDate(LocalDate.parse(resultSet.getString("end_date")))
                         .build();
                 monthlyMemberVOList.add(monthlyMemberVO);
@@ -47,8 +47,8 @@ public class MonthlyMemberDAO {
                         .carNumber(rs.getString("car_number"))
                         .driverName(rs.getString("driver_name"))
                         .phone(rs.getString("phone"))
-                        .startDate(LocalDate.parse(rs.getString("start_date")))
-                        .endDate(LocalDate.parse(rs.getString("end_date")))
+                        .startDate(rs.getDate("start_date").toLocalDate())
+                        .endDate(rs.getDate("end_date").toLocalDate())
                         .build();
             }
         } catch (SQLException e) {

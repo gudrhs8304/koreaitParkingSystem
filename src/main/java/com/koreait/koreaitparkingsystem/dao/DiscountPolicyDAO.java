@@ -23,7 +23,6 @@ public class DiscountPolicyDAO {
             if (resultSet.next()) {
                 return resultSet.getInt("discount_rate");
             }
-
         } catch (SQLException e) {
             log.error(e);
         }

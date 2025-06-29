@@ -69,3 +69,5 @@ ALTER TABLE pricing_policy
     ADD COLUMN duration_minutes INT, -- 적용 시간 (예: 60분, 30분)
     ADD COLUMN is_additional BOOLEAN DEFAULT FALSE, -- 추가 요금 여부
     ADD COLUMN is_daily_max BOOLEAN DEFAULT FALSE; -- 일일 최대 요금 여부
+
+

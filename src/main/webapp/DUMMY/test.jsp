@@ -10,7 +10,7 @@
 <body>
 
 <div style="display: none">
-    <%@ include file="/page/dataTable.jsp"%>
+    <%@ include file="/page/datatable/dataTable.jsp"%>
 </div>
 <div class="container" id="parking_area">
     <div class="row justify-content-center">

@@ -27,15 +27,15 @@
     <%@ include file="/layout/sidebar.jsp" %>
     <div id="layoutSidenav_content">
         <!-- 여기서 부터 메인 작업 시작. -->
-        <div class="container mt-5">
-            <h1 class="mb-4">출차 처리 완료</h1>
-            <form action="/page/vehicleOut.jsp" method="post">
+        <main class="container-fluid px-4">
+            <h1 class="mt-5">출차 처리 완료</h1>
+            <form action="/page/out/vehicleOut.jsp" method="post" class="mt-4">
                 <div class="alert alert-success" role="alert">
                     출차 처리되었습니다.
                 </div>
                 <button type="submit" name="end" class="btn btn-success">메인메뉴</button>
             </form>
-        </div>
+        </main>
 
         <!-- footer 영역 -->
         <%@ include file="/layout/footer.jsp" %>
@@ -53,8 +53,6 @@
 
 <!-- 부트스트랩 기본 js 임포트 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script src="/assets/demo/chart-area-demo.js"></script>
-<script src="/assets/demo/chart-bar-demo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
 <script src="/assets/js/datatables-simple-demo.js"></script>
 

@@ -14,7 +14,7 @@
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="@lbmdb_kdh" uuid="7bf0c234-7321-4514-b766-44a0f90b9176">
+    <data-source source="LOCAL" name="@lbmdb" uuid="7bf0c234-7321-4514-b766-44a0f90b9176">
       <driver-ref>mariadb</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>

@@ -30,7 +30,7 @@
     <div id="layoutSidenav_content">
         <!-- 여기서 부터 메인 작업 시작. -->
         <%!
-            public static class Member {
+            static class Member {
                 public String carNumber;
                 public String diverName;
                 public String phone;
@@ -50,7 +50,7 @@
         <%
         // sql 에서 가져올 데이터 대신 출력할 더미
             List<Member> members = new ArrayList<>();
-            for(int i = 0; i < 50; i++) {
+            for(int i = 0; i < 10; i++) {
                 members.add(new Member("car" + i, "driver" + i, "010-1234-567" + i, LocalDate.now(), LocalDate.now().plusDays(30)));
             }
         %>
@@ -104,8 +104,6 @@
 
 <!-- 부트스트랩 기본 js 임포트 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script src="/assets/demo/chart-area-demo.js"></script>
-<script src="/assets/demo/chart-bar-demo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
         crossorigin="anonymous"></script>
 

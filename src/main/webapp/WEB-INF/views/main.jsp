@@ -7,9 +7,9 @@
     <meta charset="UTF-8" />
     <title>코리아 IT 주차관리 시스템</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="./assets/js/scripts.js"></script>
+    <script src="../../assets/js/scripts.js"></script>
     <!-- Bootstrap 5 CSS (CDN) -->
-    <link href="./assets/css/styles.css" rel="stylesheet">
+    <link href="../../assets/css/styles.css" rel="stylesheet">
 
     <!-- SB Admin 스타일 또는 사용자 정의 CSS -->
 <%--    <link href="/assets/css/add_style.css" rel="stylesheet">--%>
@@ -20,16 +20,16 @@
 
 <body class="sb-nav-fixed">
 <!-- topbar 영역-->
-<%@ include file="/layout/topbar.jsp" %>
+<%@ include file="layout/topbar.jsp" %>
 <div id="layoutSidenav">
     <!-- sidebar 영역 -->
-    <%@ include file="/layout/sidebar.jsp" %>
+    <%@ include file="layout/sidebar.jsp" %>
         <div id="layoutSidenav_content">
     <!-- 여기서 부터 메인 작업 시작. -->
-            <%@ include file="/layout/dashboard.jsp" %>
+            <%@ include file="dashboard/dashboard.jsp" %>
 
             <!-- footer 영역 -->
-            <%@ include file="/layout/footer.jsp" %>
+            <%@ include file="layout/footer.jsp" %>
         </div>
 </div>
 

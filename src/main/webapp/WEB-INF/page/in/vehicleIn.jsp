@@ -29,7 +29,7 @@
         <!-- 여기서 부터 메인 작업 시작. -->
         <main class="container-fluid px-4">
             <h1 class="mt-4">입차 관리</h1>
-            <form action="/vehicleIn" method="post" class="mt-3">
+            <form action="${pageContext.request.contextPath}/entry.do" method="post" class="mt-3">
                 <div class="row mb-3">
                     <label for="carNumber" class="col-sm-2 col-form-label">차량번호</label>
                     <div class="col-sm-4">
@@ -59,21 +59,6 @@
                     <label for="phoneNumber" class="col-sm-2 col-form-label">연락처</label>
                     <div class="col-sm-4">
                         <input type="text" name="phoneNumber" id="phoneNumber" class="form-control" required/>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">월정액 회원</label>
-                    <div class="col-sm-4 d-flex align-items-center gap-3">
-                        <div class="form-check">
-                            <input type="radio" name="membership" id="memberYes" value="yes" class="form-check-input"/>
-                            <label for="memberYes" class="form-check-label">예</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="radio" name="membership" id="memberNo" value="no" class="form-check-input"
-                                   checked/>
-                            <label for="memberNo" class="form-check-label">아니오</label>
-                        </div>
                     </div>
                 </div>
 

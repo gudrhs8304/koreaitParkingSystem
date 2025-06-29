@@ -47,7 +47,7 @@ public class CarDAO {
         }
     }
 
-    public boolean isRegistered(String carNumber) {
+    public boolean selectIsRegistered(String carNumber) {
         String sql = "select count(*) from car where car_number=?";
         try {
             @Cleanup Connection connection = DBConnection.INSTANCE.getConnection();

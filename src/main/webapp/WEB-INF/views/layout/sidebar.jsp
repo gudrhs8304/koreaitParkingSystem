@@ -7,31 +7,31 @@
                 <%-- 기본 메뉴 영역 --%>
                 <div class="sb-sidenav-menu-heading">MENU</div>
 
-                <a class="nav-link" href="/index.jsp">
+                <a class="nav-link" href="/main.do">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     대시 보드
                 </a>
-                <a class="nav-link" href="/page/in/vehicleIn.jsp">
+                <a class="nav-link" href="page/in/vehicleIn.jsp">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-square-parking"></i></div>
                     차량 입차
                 </a>
-                <a class="nav-link" href="/page/out/vehicleOut.jsp">
+                <a class="nav-link" href="page/out/vehicleOut.jsp">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-car-rear"></i></div>
                     차량 출차
                 </a>
-                <a class="nav-link" href="/page/search/search.jsp">
+                <a class="nav-link" href="page/search/search.jsp">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
                     차량 검색
                 </a>
-                <a class="nav-link" href="/page/statement/parkingStatus.jsp">
+                <a class="nav-link" href="page/statement/parkingStatus.jsp">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-eye"></i></div>
                     실시간 현황
                 </a>
-                <a class="nav-link" href="/page/memberlist/members.jsp">
+                <a class="nav-link" href="page/memberlist/members.jsp">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
                     회원 관리
                 </a>
-                <a class="nav-link" href="/page/princing/pricing.jsp">
+                <a class="nav-link" href="page/princing/pricing.jsp">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-won-sign"></i></div>
                     요금 관리
                 </a>

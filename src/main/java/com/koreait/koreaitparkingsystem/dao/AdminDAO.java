@@ -21,7 +21,7 @@ public class AdminDAO {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
             @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.next();
+            return resultSet.next() && resultSet.getBoolean(1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -30,6 +30,6 @@ class CarDAOTest {
 
     @Test
     void isRegistered() {
-        System.out.println(((carDAO.isRegistered("12가3456") ? "있음" : "없음")));
+        System.out.println(((carDAO.selectIsRegistered("12가3456") ? "있음" : "없음")));
     }
 }

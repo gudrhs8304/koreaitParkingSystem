@@ -7,26 +7,30 @@
     </ol>
 
     <div class="row">
+
         <div class="col-xl-3 col-md-6">
-            <div class="card bg-primary text-white mb-4">
+            <div class="card bg-light text-dark mb-4">
                 <div class="card-body">전체 주차 공간: 10대</div>
             </div>
         </div>
+
         <div class="col-xl-3 col-md-6">
-            <div class="card bg-success text-white mb-4">
+            <div class="card bg-dark text-white mb-4">
                 <div class="card-body">사용 중: ${usedCount}대</div>
             </div>
         </div>
+
         <div class="col-xl-3 col-md-6">
-            <div class="card bg-warning text-white mb-4">
+            <div class="card bg-secondary text-white mb-4">
                 <div class="card-body">빈 자리: ${availableCount}대</div>
             </div>
         </div>
         <div class="col-xl-3 col-md-6">
-            <div class="card bg-danger text-white mb-4">
-                <div class="card-body">장시간 주차: ${overstayedCount}대</div>
-            </div>
+        <div class="card mb-4" style="border-left: 5px solid #323232; background-color: #f9f9f9;">
+            <div class="card-body text-dark">장시간 주차: ${overstayedCount}대</div>
         </div>
+        </div>
+
     </div>
 </main>
 
@@ -54,8 +58,8 @@
             boolean isOccupied = (boolean) spot.get("isOccupied");
         %>
         <div class="col">
-            <div class="card text-white text-center
-            <%= isOccupied ? "bg-danger" : "bg-success" %>">
+            <div class="card text-center
+            <%= isOccupied ? "bg-dark text-white" : "bg-light text-black" %>">
                 <div class="card-body">
                     <h5 class="card-title">P<%= num %></h5>
                     <p class="card-text">

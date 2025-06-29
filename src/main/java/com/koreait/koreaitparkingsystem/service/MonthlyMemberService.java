@@ -17,5 +17,21 @@ public enum MonthlyMemberService {
     public List<MonthlyMemberVO> getMonthlyMembers() {
         return monthlyMemberDAO.selectMonthlyMembers();
     }
-    
+
+    public MonthlyMemberVO getMonthlyMember(String carNumber) {
+        return monthlyMemberDAO.selectByCarNumber(carNumber);
+    }
+    public boolean isValidMonthlyMember(String carNumber) {
+        return monthlyMemberDAO.isValidMember(carNumber);
+    }
+
+    public void addMonthlyMember(MonthlyMemberVO monthlyMemberVO) {
+        monthlyMemberDAO.insertMember(monthlyMemberVO);
+    }
+    public void editMonthlyMember(MonthlyMemberVO monthlyMemberVO) {
+        monthlyMemberDAO.updateMember(monthlyMemberVO);
+    }
+    public void removeMonthlyMember(String cardNumber) {
+        monthlyMemberDAO.deleteMemberByCarNumber(cardNumber);
+    }
 }

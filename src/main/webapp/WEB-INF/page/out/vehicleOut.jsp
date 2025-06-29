@@ -28,15 +28,38 @@
     <div id="layoutSidenav_content">
         <!-- 여기서 부터 메인 작업 시작. -->
         <main class="container-fluid px-4">
-            <h1 class="mt-5">출차 처리 완료</h1>
-            <form action="/page/out/vehicleOut.jsp" method="post" class="mt-4">
-                <div class="alert alert-success" role="alert">
-                    출차 처리되었습니다.
+            <h1 class="mt-4">출차 관리</h1>
+            <form method="post" class="mt-3">
+                <div class="row mb-3">
+                    <label for="carNumber" class="col-sm-2 col-form-label">차량번호</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="carNumber" id="carNumber" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="submit" name="search" value="검색" class="btn btn-primary" />
+                    </div>
                 </div>
-                <button type="submit" name="end" class="btn btn-success">메인메뉴</button>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">입차 시간</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="inTime" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">주차 요금</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="fee" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <a href="/WEB-INF/page/out/disCount.jsp" class="btn btn-success">할인 적용</a>
+                    <a href="/WEB-INF/page/out/out.jsp" class="btn btn-success">출차</a>
+                </div>
             </form>
         </main>
-
         <!-- footer 영역 -->
         <%@ include file="/layout/footer.jsp" %>
     </div>

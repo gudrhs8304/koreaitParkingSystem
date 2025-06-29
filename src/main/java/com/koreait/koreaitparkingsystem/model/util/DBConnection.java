@@ -12,8 +12,8 @@ public class DBConnection {
     public static Connection getConnection() throws SQLException, ClassNotFoundException {
 
         String url = "jdbc:mariadb://sa98077.ipdisk.co.kr:3306/koreaPark";
-        String user = "sa98077";
-        String password = "lee97531!!@";
+        String user = "kmk";
+        String password = "kmk@123";
 
         Class.forName("org.mariadb.jdbc.Driver"); // forName 으로 클래스화
 

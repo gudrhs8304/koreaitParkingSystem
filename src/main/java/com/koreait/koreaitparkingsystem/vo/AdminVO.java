@@ -7,8 +7,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class DiscountPolicyVO {
 
-    private String carTypeCode;
-    private int discountRate;
+public class AdminVO {
+    private String username;
+    private String password;
 }

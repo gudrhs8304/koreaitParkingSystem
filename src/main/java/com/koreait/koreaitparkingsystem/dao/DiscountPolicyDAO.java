@@ -1,35 +1,69 @@
 package com.koreait.koreaitparkingsystem.dao;
 
-import com.koreait.koreaitparkingsystem.database.DBConnection;
-import com.koreait.koreaitparkingsystem.vo.DiscountPolicyVO;
+import com.koreait.koreaitparkingsystem.util.DBConnection;
 import lombok.Cleanup;
+import lombok.extern.log4j.Log4j2;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Log4j2
 public class DiscountPolicyDAO {
 
-    public DiscountPolicyVO select(String car_type_code) {
-        String sql = "select discount_rate from discount_policy where car_type_code = ?";
+    public int selectDiscountRate(String carTypeCode) {
+        String sql = "select discount_rate from discount_policy where car_type_code=?";
 
         try {
-            @Cleanup Connection connection = DBConnection.getConnection();
+            @Cleanup Connection connection = DBConnection.INSTANCE.getConnection();
             @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, car_type_code);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            preparedStatement.setString(1, carTypeCode);
+            @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                DiscountPolicyVO discountPolicyVO = DiscountPolicyVO.builder()
-                        .discount_rate(resultSet.getInt("discount_rate"))
-                        .car_type_code(resultSet.getString("car_type_code"))
-                        .build();
-                return discountPolicyVO;
-
+                return resultSet.getInt("discount_rate");
             }
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            log.error(e);
         }
-        return null;
+        return 0;
+    }
+
+    public void insertDiscountRate(String carTypeCode, int discountRate) {
+        String sql = "INSERT INTO discount_policy (car_type_code, discount_rate) VALUES (?,?)";
+        try {
+            @Cleanup Connection connection = DBConnection.INSTANCE.getConnection();
+            @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, carTypeCode);
+            preparedStatement.setInt(2, discountRate);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            log.error(e);
+        }
+    }
+
+    public void updateDiscountRate(String carTypeCode, int discountRate) {
+        String sql = "update discount_policy set discount_rate=? where car_type_code=?";
+        try {
+            @Cleanup Connection connection = DBConnection.INSTANCE.getConnection();
+            @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, carTypeCode);
+            preparedStatement.setInt(2, discountRate);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            log.error(e);
+        }
+    }
+
+    public void deleteDiscountRate(String carTypeCode) {
+        String sql = "delete from discount_policy where car_type_code=?";
+        try {
+            @Cleanup Connection connection = DBConnection.INSTANCE.getConnection();
+            @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, carTypeCode);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            log.error(e);
+        }
     }
 }

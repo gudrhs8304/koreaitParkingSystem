@@ -6,9 +6,8 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class DiscountPolicyVO {
+public class ParkingSpotVO {
 
-    private String carTypeCode;
-    private int discountRate;
+    private int spotNumber;
+    private boolean isOccupied;
 }

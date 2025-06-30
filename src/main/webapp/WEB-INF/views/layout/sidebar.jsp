@@ -15,7 +15,7 @@
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-square-parking"></i></div>
                     차량 입차
                 </a>
-                <a class="nav-link" href="page/out/vehicleOut.jsp">
+                <a class="nav-link" href="vehicleOut.do">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-car-rear"></i></div>
                     차량 출차
                 </a>

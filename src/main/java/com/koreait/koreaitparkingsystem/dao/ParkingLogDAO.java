@@ -82,4 +82,31 @@ public class ParkingLogDAO {
         }
         return list;
     }
+
+    // 출차된 로그 중 가장 최근 기록 1건을 반환
+    public ParkingLogVO selectLastLogByCarNumber(String carNumber) {
+        String sql = "SELECT * FROM parking_log WHERE car_number = ? AND out_time IS NOT NULL ORDER BY out_time DESC LIMIT 1";
+        try (
+                Connection connection = DBConnection.INSTANCE.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)
+        ) {
+            preparedStatement.setString(1, carNumber);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    return ParkingLogVO.builder()
+                            .id(rs.getInt("id"))
+                            .carNumber(rs.getString("car_number"))
+                            .carTypeCode(rs.getString("car_type_code"))
+                            .parkingSpot(rs.getInt("parking_spot"))
+                            .inTime(rs.getTimestamp("in_time").toLocalDateTime())
+                            .outTime(rs.getTimestamp("out_time").toLocalDateTime())
+                            .fee(rs.getInt("fee"))
+                            .build();
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
 }

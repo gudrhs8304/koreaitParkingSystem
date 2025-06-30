@@ -12,8 +12,6 @@
     <!-- Bootstrap 5 CSS (CDN) -->
     <link href="/assets/css/styles.css" rel="stylesheet">
 
-    <!-- SB Admin 스타일 또는 사용자 정의 CSS -->
-    <%--    <link href="/assets/css/add_style.css" rel="stylesheet">--%>
     <!--폰트 어썸 임폿 -->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 

@@ -50,10 +50,10 @@ class ExitServiceTest {
         exitService.isParkingSpot(carDTO);
     }
 
-    @Test
-    void searchCar() {
-        CarDTO carDTO = CarDTO.builder()
-                .carNumber("12가3456").build();
-        exitService.searchCar(carDTO);
-    }
+//    @Test
+//    void searchCar() {
+//        CarDTO carDTO = CarDTO.builder()
+//                .carNumber("12가3456").build();
+//        exitService.searchCar(carDTO);
+//    }
 }

@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'war'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 group 'com.koreait'
@@ -14,8 +15,6 @@ ext {
     junitVersion = '5.11.0'
 }
 
-sourceCompatibility = '17'
-targetCompatibility = '17'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -60,11 +59,14 @@ dependencies {
     implementation("jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0")
     // https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl
     implementation("org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.0")
-
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
 
 }
 
 test {
     useJUnitPlatform()
+}
+kotlin {
+    jvmToolchain(17)
 }

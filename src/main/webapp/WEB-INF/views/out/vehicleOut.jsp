@@ -24,45 +24,93 @@
     <%@ include file="../layout/sidebar.jsp" %>
     <div id="layoutSidenav_content">
         <!-- 여기서 부터 메인 작업 시작. -->
+
+        <%-- 기존 형곤 코드 --%>
+<%--        <main class="container-fluid px-4">--%>
+
+<%--            <h1 class="mt-4">출차 관리</h1>--%>
+<%--            <div class="row mb-3">--%>
+<%--                <form action="/vehicleOut.do" method="post" class="form-inline">--%>
+<%--                    <label for="carNumber" class="col-sm-2 col-form-label">차량번호</label>--%>
+<%--                    <div class="col-sm-4">--%>
+<%--                        <input type="text" name="carNumber" id="carNumber" class="form-control"--%>
+<%--                               value="${carNumber != null ? carNumber : ''}"/>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-sm-2">--%>
+<%--                        <input type="submit" name="search" value="검색" class="btn btn-primary"/>--%>
+<%--                    </div>--%>
+<%--                </form>--%>
+<%--            </div>--%>
+
+<%--            <div class="row mb-3">--%>
+<%--                <label class="col-sm-2 col-form-label">입차 시간</label>--%>
+<%--                <div class="col-sm-4">--%>
+<%--                    <input type="text" name="inTime" class="form-control" readonly--%>
+<%--                           value="${inTime != null ? inTime : ''}"/>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+
+<%--            <div class="row mb-3">--%>
+<%--                <label class="col-sm-2 col-form-label">주차 요금</label>--%>
+<%--                <div class="col-sm-4">--%>
+<%--                    <input type="text" name="fee" class="form-control" readonly--%>
+<%--                           value="${fee != null ? fee : ''}"/>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <form method="post" class="mt-3">--%>
+<%--                <div class="d-flex gap-2">--%>
+<%--                    <a href="/disCount.do" class="btn btn-success">할인 적용</a>--%>
+<%--                    <form action="/out.do" method="post" class="mt-3">--%>
+<%--                        <input type="submit" name="submitExit" value="출차 처리" class="btn btn-success"/>--%>
+<%--                    </form>--%>
+<%--                </div>--%>
+<%--            </form>--%>
+<%--        </main>--%>
+
+        <%-- 병민 리팩토링 --%>
+
         <main class="container-fluid px-4">
             <h1 class="mt-4">출차 관리</h1>
 
-            <div class="row mb-3">
-                <form action="/vehicleOut.do" method="post" class="form-inline">
-                    <label for="carNumber" class="col-sm-2 col-form-label">차량번호</label>
-                    <div class="col-sm-4">
-                        <input type="text" name="carNumber" id="carNumber" class="form-control"
-                               value="${carNumber != null ? carNumber : ''}"/>
-                    </div>
-                    <div class="col-sm-2">
-                        <input type="submit" name="search" value="검색" class="btn btn-primary"/>
-                    </div>
-                </form>
-            </div>
+            <%-- 차량 번호 검색 --%>
+            <form action="/vehicleOut.do" method="post" class="row mb-3">
+                <label for="carNumber" class="col-sm-2 col-form-label">차량번호</label>
+                <div class="col-sm-4">
+                    <input type="text" name="carNumber" id="carNumber" class="form-control" value="${carNumber}" />
+                </div>
+                <div class="col-sm-2">
+                    <input type="submit" value="검색" class="btn btn-primary" />
+                </div>
+            </form>
 
+            <%-- 입차 시간 --%>
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">입차 시간</label>
                 <div class="col-sm-4">
-                    <input type="text" name="inTime" class="form-control" readonly
-                           value="${inTime != null ? inTime : ''}"/>
+                    <input type="text" name="inTime" class="form-control" readonly value="${inTime}" />
                 </div>
             </div>
 
+            <%-- 주차 요금 --%>
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">주차 요금</label>
                 <div class="col-sm-4">
-                    <input type="text" name="fee" class="form-control" readonly
-                           value="${fee != null ? fee : ''}"/>
+                    <input type="text" name="fee" class="form-control" readonly value="${fee}" />
                 </div>
             </div>
-            <form method="post" class="mt-3">
-                <div class="d-flex gap-2">
-                    <a href="/disCount.do" class="btn btn-success">할인 적용</a>
-                    <form action="/out.do" method="post" class="mt-3">
-                        <input type="submit" name="submitExit" value="출차 처리" class="btn btn-success"/>
-                    </form>
-                </div>
-            </form>
+
+            <%-- 액션 버튼 --%>
+            <div class="d-flex gap-2 mt-3">
+                <form action="/disCount.do" method="post">
+                    <input type="hidden" name="carNumber" value="${carNumber}" />
+                    <input type="submit" value="할인 적용" class="btn btn-success" />
+                </form>
+
+                <form action="/out.do" method="post">
+                    <input type="hidden" name="carNumber" value="${carNumber}" />
+                    <input type="submit" name="submitExit" value="출차 처리" class="btn btn-success" />
+                </form>
+            </div>
         </main>
         <!-- footer 영역 -->
         <%@ include file="../layout/footer.jsp" %>

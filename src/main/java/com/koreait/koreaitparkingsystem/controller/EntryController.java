@@ -30,6 +30,14 @@ public class EntryController extends HttpServlet {
         log.info("*************entryController(doPost)*************");
 
         String carNumber = req.getParameter("carNumber");
+        
+        // 컨트롤러단에서 예외 처리할지 고민해봐야함.
+//        if (carNumber == null || carNumber.isBlank()) {
+//            req.setAttribute("error", "차량 번호는 필수입니다.");
+//            req.getRequestDispatcher("/WEB-INF/views/in/vehicleIn.jsp").forward(req, resp);
+//            return;
+//        }
+//
         String carTypeCode = req.getParameter("carTypeCode");
         String driverName = req.getParameter("driverName");
         String phone = req.getParameter("phone");
@@ -46,8 +54,14 @@ public class EntryController extends HttpServlet {
 
         req.setAttribute("carDTO", carDTO);
 
-        entryService.processEntry(carDTO);
-
-        resp.sendRedirect("/main.do");
+        // 예외 발생 시 처리.
+        try {
+            entryService.processEntry(carDTO);
+            resp.sendRedirect("/main.do");
+        } catch (RuntimeException e) {
+            log.error("입차 처리 중 오류 발생", e);
+            req.setAttribute("error", e.getMessage());
+            req.getRequestDispatcher("/WEB-INF/views/in/vehicleIn.jsp").forward(req, resp);
+        }
     }
 }

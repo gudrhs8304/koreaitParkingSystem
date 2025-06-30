@@ -98,7 +98,7 @@
                     <label class="col-sm-2 col-form-label">선택한 할인율 (%)</label>
                     <div class="col-sm-4">
                         <input type="number" name="discountValue" class="form-control"
-                               readonly ㅇ/>
+                               readonly />
                     </div>
                 </div>
 

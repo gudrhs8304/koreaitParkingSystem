@@ -19,7 +19,6 @@ public enum ParkingSpotService {
 
     public List<ParkingSpotDTO> getParkingSpots() {
 
-
         // 1. vo 타입으로 선언된 parkingSpotVOS 를 dao의 메서드로 사용해 가져오기
         List<ParkingSpotVO> parkingSpotVOS = parkingSpotDAO.selectAllParkingSpots();
 

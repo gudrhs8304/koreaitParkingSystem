@@ -1,6 +1,4 @@
-<%@ page import="java.time.LocalDate" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Membership Management Page -->
 <!DOCTYPE html>
@@ -29,33 +27,8 @@
     <%@ include file="../layout/sidebar.jsp" %>
     <div id="layoutSidenav_content">
         <!-- 여기서 부터 메인 작업 시작. -->
-        <%!
-            static class Member {
-                public String carNumber;
-                public String diverName;
-                public String phone;
-                public LocalDate startDate;
-                public LocalDate endDate;
-
-                public Member(String carNumber, String diverName, String phone, LocalDate startDate, LocalDate endDate) {
-                    this.carNumber = carNumber;
-                    this.diverName = diverName;
-                    this.phone = phone;
-                    this.startDate = startDate;
-                    this.endDate = endDate;
-                }
-            }
-        %>
-
-        <%
-        // sql 에서 가져올 데이터 대신 출력할 더미
-            List<Member> members = new ArrayList<>();
-            for(int i = 0; i < 10; i++) {
-                members.add(new Member("car" + i, "driver" + i, "010-1234-567" + i, LocalDate.now(), LocalDate.now().plusDays(30)));
-            }
-        %>
         <div class="container-fluid px-4">
-            <h2 class="mt-4 text-primary">회원 목록</h2>
+            <h1 class="mt-4">회원 목록</h1>
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table me-1"></i>
@@ -63,7 +36,7 @@
                 </div>
                 <div class="card-body">
                     <table id="membersTable" class="table table-bordered table-hover">
-                    <thead class="table-light text-center">
+                        <thead class="table-light text-center">
                         <tr>
                             <th>차량번호</th>
                             <th>운전자명</th>
@@ -73,21 +46,28 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <% for (Member member : members) { %>
-                        <tr class="text-center">
-                            <td><a href="#"><%= member.carNumber %></a></td>
-                            <td><%= member.diverName %></td>
-                            <td><%= member.phone %></td>
-                            <td><%= member.startDate %></td>
-                            <td><%= member.endDate %></td>
-                        </tr>
-                        <% } %>
+                        <%-- 반복될 부분 , 공백문자 대비 url jstl 코딩 , 파라미터로 넘길것. --%>
+                        <c:forEach var="member" items="${members}">
+                            <tr class="text-center">
+                                <td>
+                                    <c:url var="editUrl" value="/editMember.do">
+                                        <c:param name="carNumber" value="${member.carNumber}"/>
+                                    </c:url>
+                                    <a href="${editUrl}"><c:out value="${member.carNumber}"/></a>
+
+                                </td>
+                                <td><c:out value="${member.driverName}"/></td>
+                                <td><c:out value="${member.phone}"/></td>
+                                <td><c:out value="${member.startDate}"/></td>
+                                <td><c:out value="${member.endDate}"/></td>
+                            </tr>
+                        </c:forEach>
+
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
         <!-- footer 영역 -->
         <%@ include file="../layout/footer.jsp" %>
     </div>
@@ -99,15 +79,12 @@
         crossorigin="anonymous"></script>
 
 
-<!-- 선택: Chart.js, jQuery 등 추가 가능 -->
-<%--<script src="/assets/js/scripts.js"></script>--%>
-
 <!-- 부트스트랩 기본 js 임포트 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
         crossorigin="anonymous"></script>
 
-<script src="/assets/js/datatables-simple-demo.js"></script>
+<!-- 추후 js 파일 out 고려 -->
 <script>
     window.addEventListener('DOMContentLoaded', () => {
         const table = document.getElementById('membersTable');

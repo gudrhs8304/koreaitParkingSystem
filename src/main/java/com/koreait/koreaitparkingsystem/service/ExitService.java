@@ -74,10 +74,10 @@ public enum ExitService {
     }
 
     public void printMonthlyMember(CarDTO carDTO) {
-        MonthlyMemberVO memberVO = monthlyMemberService.getMonthlyMember(carDTO.getCarNumber());
+        MonthlyMemberDTO dto = monthlyMemberService.getMonthlyMember(carDTO.getCarNumber()); // 병민 의견 -> 멤버서비스의 dto 변환으로 dto 타입으로 변경하였음.
         MonthlyMemberDTO member = null;
-        if (memberVO != null) {
-            member = modelMapper.map(memberVO, MonthlyMemberDTO.class);
+        if (dto != null) {
+            member = modelMapper.map(dto, MonthlyMemberDTO.class);
         }
         if (member != null) {
             log.info("월정액 회원입니다. " + member);

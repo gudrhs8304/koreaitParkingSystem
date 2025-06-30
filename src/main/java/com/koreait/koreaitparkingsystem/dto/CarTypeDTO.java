@@ -1,14 +1,14 @@
-package com.koreait.koreaitparkingsystem.vo;
+package com.koreait.koreaitparkingsystem.dto;
 
 import lombok.*;
 
-@Getter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 
-public class CarTypeVO {
+public class CarTypeDTO {
 
     private String code;
     private String name;

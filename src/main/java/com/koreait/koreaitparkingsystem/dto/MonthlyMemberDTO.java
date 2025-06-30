@@ -1,15 +1,18 @@
-package com.koreait.koreaitparkingsystem.vo;
+package com.koreait.koreaitparkingsystem.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Getter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class MonthlyMemberVO {
+public class MonthlyMemberDTO {
 
     private String carNumber;
     private String driverName;

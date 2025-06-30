@@ -1,12 +1,15 @@
-package com.koreait.koreaitparkingsystem.vo;
+package com.koreait.koreaitparkingsystem.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PricingPolicyVO {
+public class PricingPolicyDTO {
 
   private int id;
   private String name;

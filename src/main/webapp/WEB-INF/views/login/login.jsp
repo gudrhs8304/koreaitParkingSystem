@@ -26,8 +26,8 @@
                             <div class="card-body">
                                 <form action="${pageContext.request.contextPath}/login.do" method="post">
                                 <div class="form-floating mb-3">
-                                        <input class="form-control" id="userName" name="userName" type="email"/>
-                                        <label for="userName">이메일</label>
+                                        <input class="form-control" id="username" name="username" type="email"/>
+                                        <label for="username">이메일</label>
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="password" name="password" type="password"/>

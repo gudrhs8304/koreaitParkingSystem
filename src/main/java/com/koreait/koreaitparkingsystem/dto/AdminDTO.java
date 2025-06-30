@@ -1,14 +1,14 @@
-package com.koreait.koreaitparkingsystem.vo;
+package com.koreait.koreaitparkingsystem.dto;
 
 import lombok.*;
 
-@Getter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 
-public class AdminVO {
+public class AdminDTO {
     private String username;
     private String password;
 }

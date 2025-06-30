@@ -1,21 +1,30 @@
 package com.koreait.koreaitparkingsystem.service;
 
 import com.koreait.koreaitparkingsystem.dao.AdminDAO;
+import com.koreait.koreaitparkingsystem.dto.AdminDTO;
+import com.koreait.koreaitparkingsystem.util.MapperUtil;
+import com.koreait.koreaitparkingsystem.vo.AdminVO;
+import org.modelmapper.ModelMapper;
 
 public enum AdminService {
     instance;
 
-    AdminDAO adminDAO;
+    private final AdminDAO adminDAO;
+    private final ModelMapper modelMapper;
 
     AdminService() {
-        if(adminDAO == null) adminDAO = new AdminDAO();
+        adminDAO = new AdminDAO();
+        modelMapper = MapperUtil.INSTANCE.getInstance();
     }
 
-    public boolean checkAdmin(String email, String password) {
-        return adminDAO.login(email, password);
+    public boolean checkAdmin(AdminDTO adminDTO) {
+        AdminDTO dto = modelMapper.map(adminDTO, AdminDTO.class);
+
+        return adminDAO.login(dto.getUsername(), dto.getPassword());
     }
 
-    public void updateAdmin(String email, String password) {
-        adminDAO.updatePassword(email,password);
+    public void updateAdmin(AdminDTO dto) {
+        AdminVO vo = modelMapper.map(dto, AdminVO.class);
+        adminDAO.updatePassword(vo.getUsername(), vo.getPassword());
     }
 }

@@ -1,6 +1,7 @@
 package com.koreait.koreaitparkingsystem.controller;
 
 
+import com.koreait.koreaitparkingsystem.dto.AdminDTO;
 import com.koreait.koreaitparkingsystem.service.AdminService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,19 +27,28 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String username = req.getParameter("userName");
+
+        // 파라미터로 id / pw 가져옴
+        String username = req.getParameter("username");
         String password = req.getParameter("password");
 
         log.info("로그인 연결 {} , {}", username, password);
 
-        boolean success = adminService.checkAdmin(username, password);
+        // dto 객체 생성
+        AdminDTO dto = AdminDTO.builder()
+                .username(username)
+                .password(password)
+                .build();
 
-        if (success) {
+        boolean success = adminService.checkAdmin(dto); // 서비스에서 check
+
+        if (success) {  // true면 main 으로
+            dto.setPassword(null);
             HttpSession session = req.getSession();
-            session.setAttribute("admin", username);
+            session.setAttribute("admin", dto);
             resp.sendRedirect("/main.do");
-        } else {
-            log.info("아이디 또는 비밀번호가 올바르지 않습니다.");
+        } else { // false 면 다시 로그인 화면으로. 차후 js 에서 alter 출력 예정.
+            log.warn("아이디 또는 비밀번호가 올바르지 않습니다.");
             req.setAttribute("error", "아이디 또는 비밀번호가 올바르지 않습니다.");
             req.getRequestDispatcher("/WEB-INF/views/login/login.jsp").forward(req, resp);
         }

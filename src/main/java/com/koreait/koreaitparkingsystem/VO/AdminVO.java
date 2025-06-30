@@ -8,7 +8,7 @@ import org.checkerframework.checker.units.qual.C;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AdminVO {
-    String username;
-    String password;
+    private String username;
+    private String password;
 
 }

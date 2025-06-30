@@ -4,7 +4,6 @@ import com.koreait.koreaitparkingsystem.VO.AdminVO;
 import com.koreait.koreaitparkingsystem.datebase.DBConnection;
 import lombok.Cleanup;
 import lombok.extern.log4j.Log4j2;
-import org.checkerframework.checker.units.qual.C;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -74,5 +73,4 @@ public class AdminDAO {
             throw new RuntimeException(e);
         }
     }
-
 }

@@ -7,6 +7,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ParkingSpotVO {
-    String spot_number;
-    String is_occupied;
+    private int spot_number; // 주차 공간 번호
+    private boolean is_occupied; // 사용 중 여부
 }

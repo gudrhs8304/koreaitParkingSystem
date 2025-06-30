@@ -11,7 +11,7 @@ public class ParkingSpotDAOTest {
 
     @Test
     void findAll() {
-        ParkingSpotDAO parkingSpotDAO = new ParkingSpotDAO();
+        ParkingSpotDAO parkingSpotDAO = ParkingSpotDAO.INSTANCE;
         List<ParkingSpotVO> parkingSpots = parkingSpotDAO.findAll();
         if (parkingSpots == null) {
             log.info(("주자 공간 목록 불러오기 실패."));
@@ -32,7 +32,7 @@ public class ParkingSpotDAOTest {
 
     @Test
     void findById() {
-        ParkingSpotDAO parkingSpotDAO = new ParkingSpotDAO();
+        ParkingSpotDAO parkingSpotDAO = ParkingSpotDAO.INSTANCE;
         int spot_number = 1;
         ParkingSpotVO parkingSpotVO = parkingSpotDAO.findById(spot_number);
         if (parkingSpotVO == null) {
@@ -46,7 +46,7 @@ public class ParkingSpotDAOTest {
 
     @Test
     void updateParkingSpot() {
-        ParkingSpotDAO parkingSpotDAO = new ParkingSpotDAO();
+        ParkingSpotDAO parkingSpotDAO = ParkingSpotDAO.INSTANCE;
         int spot_number = 1;
         ParkingSpotVO parkingSpotVO = parkingSpotDAO.findById(spot_number);
         boolean is_occupied = parkingSpotVO.is_occupied();

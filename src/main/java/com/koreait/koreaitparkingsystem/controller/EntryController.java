@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @WebServlet("/entry.do")
 public class EntryController extends HttpServlet {
 
-    private final EntryService entryService = new EntryService();
+    private final EntryService entryService = EntryService.INSTANCE;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

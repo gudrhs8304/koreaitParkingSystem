@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 @Log4j2
 public class PricingPolicyDAOTest {
-    PricingPolicyDAO pricingPolicyDAO = new PricingPolicyDAO();
+    PricingPolicyDAO pricingPolicyDAO = PricingPolicyDAO.INSTANCE;
 
 //    @Test
 //    public void updateIsAdditional() {

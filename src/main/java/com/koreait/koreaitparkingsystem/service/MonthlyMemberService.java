@@ -11,7 +11,7 @@ public enum MonthlyMemberService {
     private final MonthlyMemberDAO monthlyMemberDAO;
     
     MonthlyMemberService() {
-        monthlyMemberDAO = new MonthlyMemberDAO();
+        monthlyMemberDAO = MonthlyMemberDAO.INSTANCE;
     }
     
     public List<MonthlyMemberVO> getMonthlyMembers() {

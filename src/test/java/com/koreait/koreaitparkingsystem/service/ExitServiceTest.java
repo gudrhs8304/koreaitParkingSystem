@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ExitServiceTest {
-    ExitService exitService = new ExitService();
+    ExitService exitService = ExitService.INSTANCE;
 
     @Test
     void printCarType() {

@@ -13,7 +13,7 @@ public enum AdminService {
     private final ModelMapper modelMapper;
 
     AdminService() {
-        adminDAO = new AdminDAO();
+        adminDAO = AdminDAO.INSTANCE;
         modelMapper = MapperUtil.INSTANCE.getInstance();
     }
 

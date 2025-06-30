@@ -6,16 +6,15 @@ import com.koreait.koreaitparkingsystem.dao.ParkingSpotDAO;
 import com.koreait.koreaitparkingsystem.dto.CarDTO;
 import com.koreait.koreaitparkingsystem.dto.ParkingLogDTO;
 import com.koreait.koreaitparkingsystem.util.MapperUtil;
-
 import org.modelmapper.ModelMapper;
-
 import java.time.LocalDateTime;
 
-public class EntryService {
+public enum EntryService {
+    INSTANCE;
 
     private final CarService carService = CarService.INSTANCE;
-    private final ParkingSpotDAO spotDAO = new ParkingSpotDAO();
-    private final ParkingLogDAO logDAO = new ParkingLogDAO();
+    private final ParkingSpotDAO spotDAO = ParkingSpotDAO.INSTANCE;
+    private final ParkingLogDAO logDAO = ParkingLogDAO.INSTANCE;
     private final ModelMapper modelMapper = MapperUtil.INSTANCE.getInstance();
 
     public void processEntry(CarDTO carDTO) {

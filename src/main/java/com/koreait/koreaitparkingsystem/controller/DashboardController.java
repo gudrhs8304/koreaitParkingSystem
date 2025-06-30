@@ -19,7 +19,7 @@ public class DashboardController extends HttpServlet {
         HttpSession session = req.getSession(false);
 
         if (session == null || session.getAttribute("admin") == null) {
-            log.info("비정상적인 접근, main.do로 바로 접근.");
+            log.warn("비로그인 사용자의 대시보드 접근 시도");
             resp.sendRedirect(req.getContextPath() + "/login.do");
             return;
         }

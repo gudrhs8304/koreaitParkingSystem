@@ -15,8 +15,8 @@ import java.io.IOException;
 @Log4j2
 @WebServlet("/vehicleOut.do")
 public class vehicleOutController extends HttpServlet {
-    private final ParkingSpotDAO parkingSpotDAO = new ParkingSpotDAO();
-    private final ParkingLogDAO parkingLogDAO = new ParkingLogDAO();
+    private final ParkingSpotDAO parkingSpotDAO = ParkingSpotDAO.INSTANCE;
+    private final ParkingLogDAO parkingLogDAO = ParkingLogDAO.INSTANCE;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

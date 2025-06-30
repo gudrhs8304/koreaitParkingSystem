@@ -16,7 +16,7 @@ public enum CarService {
     private final ModelMapper modelMapper;
 
     CarService() {
-        carDAO = new CarDAO();
+        carDAO = CarDAO.INSTANCE;
         modelMapper = MapperUtil.INSTANCE.getInstance();
     }
 

@@ -8,7 +8,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParkingLogDAO {
+public enum ParkingLogDAO {
+    INSTANCE;
 
     public void insertEntry(ParkingLogVO log) {
         String sql = "INSERT INTO parking_log (car_number, car_type_code, parking_spot) VALUES (?, ?, ?)";

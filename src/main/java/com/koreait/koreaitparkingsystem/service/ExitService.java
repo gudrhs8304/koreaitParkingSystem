@@ -13,16 +13,17 @@ import com.koreait.koreaitparkingsystem.vo.ParkingLogVO;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 @Log4j2
-public class ExitService {
+public enum ExitService {
+    INSTANCE;
 
-    private final ParkingSpotDAO parkingSpotDAO =  new ParkingSpotDAO();
-    private final ParkingLogDAO parkingLogDAO  =  new ParkingLogDAO();
+    private final ParkingSpotDAO parkingSpotDAO =  ParkingSpotDAO.INSTANCE;
+    private final ParkingLogDAO parkingLogDAO  =  ParkingLogDAO.INSTANCE;
     private final CarService carService  =  CarService.INSTANCE;
     private final ModelMapper modelMapper = MapperUtil.INSTANCE.getInstance();
-    private final CarTypeDAO carTypeDAO = new CarTypeDAO();
-    private final DiscountPolicyDAO discountPolicyDAO = new DiscountPolicyDAO();
+    private final CarTypeDAO carTypeDAO = CarTypeDAO.INSTANCE;
+    private final DiscountPolicyDAO discountPolicyDAO = DiscountPolicyDAO.INSTANCE;
     private final MonthlyMemberService monthlyMemberService =  MonthlyMemberService.INSTANCE;
-    private final CarDAO carDAO = new CarDAO();
+    private final CarDAO carDAO = CarDAO.INSTANCE;
 
     public void printCar(CarDTO carDTO) {
         CarDTO result = carService.getCar(carDTO);

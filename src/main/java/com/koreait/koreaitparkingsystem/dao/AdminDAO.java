@@ -10,8 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Log4j2
-public class AdminDAO {
-
+public enum AdminDAO {
+    INSTANCE;
 
     public boolean login(String username, String password) {
         String sql = "SELECT * FROM admin WHERE username = ? AND password = ?";
@@ -21,7 +21,7 @@ public class AdminDAO {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
             @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.next() && resultSet.getBoolean(1);
+            return resultSet.next();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

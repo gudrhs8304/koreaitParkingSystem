@@ -10,8 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CarDAO {
-
+public enum CarDAO {
+INSTANCE;
     public CarVO selectCarByNum(String carNumber) {
         String sql = "select * from car where car_number=?";
 

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 @Log4j2
 class CarDAOTest {
 
-    private final static CarDAO carDAO = new CarDAO();
+    private final static CarDAO carDAO = CarDAO.INSTANCE;
 
     @Test
     void selectCarByNum() {

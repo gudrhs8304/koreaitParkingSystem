@@ -8,7 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ParkingSpotDAO {
+public enum ParkingSpotDAO {
+    INSTANCE;
 
     public Integer assignSpot() {
         String sql = "SELECT spot_number FROM parking_spot WHERE is_occupied = FALSE LIMIT 1";

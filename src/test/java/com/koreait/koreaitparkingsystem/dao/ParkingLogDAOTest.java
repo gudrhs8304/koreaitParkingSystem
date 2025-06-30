@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 
 class ParkingLogDAOTest {
-    ParkingLogDAO dao = new ParkingLogDAO();
+    ParkingLogDAO dao = ParkingLogDAO.INSTANCE;
 
     @Test
     void insertEntry() {

@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EntryServiceTest {
 
-    EntryService entryService = new EntryService();
+    EntryService entryService = EntryService.INSTANCE;
 
     @Test
     void processEntry() {

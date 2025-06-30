@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <div id="layoutSidenav_nav">
     <nav class="sb-sidenav accordion sb-sidenav-light bg-white border-end" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
@@ -38,12 +37,11 @@
             </div>
         </div>
         <div class="sb-sidenav-footer">
+            <c:if test="${not empty sessionScope.admin}">
             <div class="small">Logged in as:</div>
-            <%
-                String id = "Admin";
-            %>
-            <%=id%>님 환영합니다.
+                ${sessionScope.admin.username}님 환영합니다.
         </div>
+        </c:if>
     </nav>
 </div>
 

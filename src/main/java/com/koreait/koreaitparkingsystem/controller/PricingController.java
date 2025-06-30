@@ -19,7 +19,7 @@ public class PricingController extends HttpServlet {
     // 요금 관리 페이지 화면 열기 위해 사용
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PricingService pricingService = new PricingService();
+        PricingService pricingService = PricingService.INSTANCE;
         Object fee = null;
         req.setAttribute("fee", fee);
 
@@ -45,7 +45,7 @@ public class PricingController extends HttpServlet {
         pricingPolicyDTO.setPrice(price);
 
         // 서비스 호출해서 새로운 객체 생성 -> 수정하기
-        PricingService pricingService = new PricingService();
+        PricingService pricingService = PricingService.INSTANCE;
 
         resp.sendRedirect("/pricing.do");
     }

@@ -31,7 +31,7 @@
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
                     회원 관리
                 </a>
-                <a class="nav-link" href="page/princing/pricing.jsp">
+                <a class="nav-link" href="/pricing.do">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-won-sign"></i></div>
                     요금 관리
                 </a>

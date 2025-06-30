@@ -1,4 +1,4 @@
-package com.koreait.koreaitparkingsystem.DAO;
+package com.koreait.koreaitparkingsystem.dao;
 
 import com.koreait.koreaitparkingsystem.VO.ParkingSpotVO;
 import lombok.extern.log4j.Log4j2;

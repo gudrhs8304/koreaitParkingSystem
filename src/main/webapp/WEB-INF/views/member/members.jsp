@@ -89,7 +89,7 @@
         </div>
 
         <!-- footer 영역 -->
-        <%@ include file="/layout/footer.jsp" %>
+        <%@ include file="../layout/footer.jsp" %>
     </div>
 </div>
 

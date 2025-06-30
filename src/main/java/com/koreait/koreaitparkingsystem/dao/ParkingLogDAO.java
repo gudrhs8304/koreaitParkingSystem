@@ -1,7 +1,7 @@
 package com.koreait.koreaitparkingsystem.dao;
 
-import com.koreait.koreaitparkingsystem.util.DBConnection;
 import com.koreait.koreaitparkingsystem.vo.ParkingLogVO;
+import com.koreait.koreaitparkingsystem.util.DBConnection;
 import lombok.Cleanup;
 
 import java.sql.*;

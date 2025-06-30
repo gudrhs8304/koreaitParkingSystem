@@ -1,6 +1,6 @@
 package com.koreait.koreaitparkingsystem.dao;
 
-import com.koreait.koreaitparkingsystem.VO.ParkingSpotVO;
+import com.koreait.koreaitparkingsystem.vo.ParkingSpotVO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 

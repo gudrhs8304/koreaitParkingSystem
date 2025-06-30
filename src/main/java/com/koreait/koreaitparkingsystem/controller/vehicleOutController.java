@@ -2,7 +2,7 @@ package com.koreait.koreaitparkingsystem.controller;
 
 import com.koreait.koreaitparkingsystem.dao.ParkingSpotDAO;
 import com.koreait.koreaitparkingsystem.dao.ParkingLogDAO;
-import com.koreait.koreaitparkingsystem.vo.ParkingLogVO;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -28,13 +28,13 @@ public class vehicleOutController extends HttpServlet {
         String carNumber = req.getParameter("carNumber");
 
 
-        ParkingLogVO logVO = parkingLogDAO.selectLastLogByCarNumber(carNumber);
-        if (logVO != null) {
-            req.setAttribute("inTime", logVO.getInTime());
-            req.setAttribute("fee", logVO.getFee());
-        } else {
-            req.setAttribute("error", "차량 로그를 찾을 수 없습니다.");
-        }
+//        ParkingLogVO logVO = parkingLogDAO.selectLastLogByCarNumber(carNumber);
+//        if (logVO != null) {
+//            req.setAttribute("inTime", logVO.getInTime());
+//            req.setAttribute("fee", logVO.getFee());
+//        } else {
+//            req.setAttribute("error", "차량 로그를 찾을 수 없습니다.");
+//        }
         req.getRequestDispatcher("/WEB-INF/views/out/vehicleOut.jsp").forward(req,resp);
     }
 }

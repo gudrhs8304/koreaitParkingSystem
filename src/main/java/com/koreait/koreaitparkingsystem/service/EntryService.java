@@ -1,11 +1,12 @@
 package com.koreait.koreaitparkingsystem.service;
 
+import com.koreait.koreaitparkingsystem.vo.ParkingLogVO;
 import com.koreait.koreaitparkingsystem.dao.ParkingLogDAO;
 import com.koreait.koreaitparkingsystem.dao.ParkingSpotDAO;
 import com.koreait.koreaitparkingsystem.dto.CarDTO;
 import com.koreait.koreaitparkingsystem.dto.ParkingLogDTO;
 import com.koreait.koreaitparkingsystem.util.MapperUtil;
-import com.koreait.koreaitparkingsystem.vo.ParkingLogVO;
+
 import org.modelmapper.ModelMapper;
 
 import java.time.LocalDateTime;

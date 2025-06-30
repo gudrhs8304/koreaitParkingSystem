@@ -1,14 +1,13 @@
 package com.koreait.koreaitparkingsystem.service;
 
+import com.koreait.koreaitparkingsystem.vo.CarVO;
 import com.koreait.koreaitparkingsystem.dao.CarDAO;
-import com.koreait.koreaitparkingsystem.dao.MonthlyMemberDAO;
+
 import com.koreait.koreaitparkingsystem.dto.CarDTO;
 import com.koreait.koreaitparkingsystem.util.MapperUtil;
-import com.koreait.koreaitparkingsystem.vo.CarVO;
-import com.koreait.koreaitparkingsystem.vo.MonthlyMemberVO;
-import org.modelmapper.ModelMapper;
 
-import java.util.List;
+
+import org.modelmapper.ModelMapper;
 
 public enum CarService {
     INSTANCE;

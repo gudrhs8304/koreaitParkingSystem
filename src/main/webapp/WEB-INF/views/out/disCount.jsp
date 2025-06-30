@@ -1,13 +1,5 @@
 <!-- Vehicle Out Page -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    if (request.getMethod().equalsIgnoreCase("post")) {
-        if (request.getParameter("submitExit") != null) {
-            response.sendRedirect("out.jsp");
-            return;
-        }
-    }
-%>
 
 <!DOCTYPE html>
 
@@ -31,15 +23,15 @@
 </style>
 <body class="sb-nav-fixed">
 <!-- topbar 영역-->
-<%@ include file="/layout/topbar.jsp" %>
+<%@ include file="../layout/topbar.jsp" %>
 <div id="layoutSidenav">
     <!-- sidebar 영역 -->
-    <%@ include file="/layout/sidebar.jsp" %>
+    <%@ include file="../layout/sidebar.jsp" %>
     <div id="layoutSidenav_content">
         <!-- 여기서 부터 메인 작업 시작. -->
         <main class="container-fluid px-4">
             <h1 class="mt-4">할인 적용</h1>
-            <form method="post" class="mt-3">
+
                 <div class="row mb-3">
                     <label for="carNumber" class="col-sm-2 col-form-label">차량번호</label>
                     <div class="col-sm-4">
@@ -80,13 +72,17 @@
                 </div>
 
                 <div class="d-flex gap-2">
+                    <form  method="post" class="mt-3">
                     <input type="submit" name="applyDiscount" value="할인 적용" class="btn btn-primary" />
+                    </form>
+                    <form action="/out.do" method="post" class="mt-3">
                     <input type="submit" name="submitExit" value="출차 처리" class="btn btn-success" />
+                    </form>
                 </div>
-            </form>
+
         </main>
         <!-- footer 영역 -->
-        <%@ include file="/layout/footer.jsp" %>
+        <%@ include file="../layout/footer.jsp" %>
     </div>
 </div>
 

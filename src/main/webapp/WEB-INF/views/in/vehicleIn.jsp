@@ -21,10 +21,10 @@
 
 <body class="sb-nav-fixed">
 <!-- topbar 영역-->
-<%@ include file="/layout/topbar.jsp" %>
+<%@ include file="../layout/topbar.jsp" %>
 <div id="layoutSidenav">
     <!-- sidebar 영역 -->
-    <%@ include file="/layout/sidebar.jsp" %>
+    <%@ include file="../layout/sidebar.jsp" %>
     <div id="layoutSidenav_content">
         <!-- 여기서 부터 메인 작업 시작. -->
         <main class="container-fluid px-4">
@@ -79,7 +79,7 @@
         </main>
 
         <!-- footer 영역 -->
-        <%@ include file="/layout/footer.jsp" %>
+        <%@ include file="../layout/footer.jsp" %>
     </div>
 </div>
 

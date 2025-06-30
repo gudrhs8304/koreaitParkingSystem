@@ -22,6 +22,7 @@ public class DashboardController extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
         }
+
         req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);
     }
 

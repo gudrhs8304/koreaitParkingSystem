@@ -153,15 +153,15 @@ public class ExitService {
         }
     }
 
-    public void searchCar(CarDTO carDTO) {
-        CarVO carVO = carDAO.selectCarByNum(carDTO.getCarNumber());
-        carDAO.selectCarByNum(carDTO.getCarNumber()) == parkingLogDAO.selectLastLogByCarNumber(carDTO.getCarNumber())
-        CarDTO car = null;
-        if (carVO.getOutTime() != null) {
-            car = modelMapper.map(carVO, CarDTO.class);
-            log.info(car.getCarNumber());
-        } else {
-            log.info("차량이 없습니다.");
-        }
-    }
+//    public void searchCar(CarDTO carDTO) {
+//        CarVO carVO = carDAO.selectCarByNum(carDTO.getCarNumber());
+//        carDAO.selectCarByNum(carDTO.getCarNumber()) == parkingLogDAO.selectLastLogByCarNumber(carDTO.getCarNumber())
+//        CarDTO car = null;
+//        if (carVO.getOutTime() != null) {
+//            car = modelMapper.map(carVO, CarDTO.class);
+//            log.info(car.getCarNumber());
+//        } else {
+//            log.info("차량이 없습니다.");
+//        }
+//    }
 }

@@ -26,7 +26,7 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        log.info("*************loginController*************");
 
         // 파라미터로 id / pw 가져옴
         String username = req.getParameter("username");

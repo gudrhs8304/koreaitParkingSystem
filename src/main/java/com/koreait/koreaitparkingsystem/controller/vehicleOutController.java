@@ -26,15 +26,25 @@ public class vehicleOutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String carNumber = req.getParameter("carNumber");
+        req.setAttribute("carNumber", carNumber);
 
+        ParkingLogVO logVO = parkingLogDAO.selectActiveLogByCarNumber(carNumber);
+        if (logVO != null && logVO.getOutTime() == null) {
+            req.setAttribute("inTime", logVO.getInTime().toString().replace("T", " "));
 
-        ParkingLogVO logVO = parkingLogDAO.selectLastLogByCarNumber(carNumber);
-        if (logVO != null) {
-            req.setAttribute("inTime", logVO.getInTime());
-            req.setAttribute("fee", logVO.getFee());
+            java.sql.Timestamp now = java.sql.Timestamp.valueOf(java.time.LocalDateTime.now());
+            java.sql.Timestamp inTime = java.sql.Timestamp.valueOf(logVO.getInTime());
+            long durationMillis = now.getTime() - inTime.getTime();
+            long durationMinutes = durationMillis / (1000 * 60);
+            if (durationMinutes < 30) durationMinutes = 30;
+            double units = Math.ceil(durationMinutes / 30.0);
+            int fee = (int)(units * 3000.0);
+
+            req.setAttribute("fee", fee);
         } else {
-            req.setAttribute("error", "차량 로그를 찾을 수 없습니다.");
+            req.setAttribute("error", "출차된 차량이거나 주차 기록이 없습니다.");
         }
-        req.getRequestDispatcher("/WEB-INF/views/out/vehicleOut.jsp").forward(req,resp);
+
+        req.getRequestDispatcher("/WEB-INF/views/out/vehicleOut.jsp").forward(req, resp);
     }
 }

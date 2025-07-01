@@ -35,7 +35,7 @@
                 <div class="row mb-3">
                     <label for="carNumber" class="col-sm-2 col-form-label">차량번호</label>
                     <div class="col-sm-4">
-                        <input type="text" name="carNumber" id="carNumber" class="form-control" />
+                        <input type="text" name="carNumber" id="carNumber" class="form-control" readonly value="${carNumber}"/>
                     </div>
                 </div>
 
@@ -43,15 +43,18 @@
                     <label class="col-sm-2 col-form-label">할인 종류</label>
                     <div class="col-sm-10 d-flex align-items-center gap-3">
                         <div class="form-check">
-                            <input type="radio" name="discountType" id="discount1" value="disabled" class="form-check-input" />
+                            <input type="radio" name="discountType" id="discount1" value="disabled" class="form-check-input"
+                                   ${carTypeCode == 'disabled' ? 'checked' : ''} />
                             <label for="discount1" class="form-check-label">장애인</label>
                         </div>
                         <div class="form-check">
-                            <input type="radio" name="discountType" id="discount2" value="compact" class="form-check-input" />
+                            <input type="radio" name="discountType" id="discount2" value="compact" class="form-check-input"
+                                   ${carTypeCode == 'compact' ? 'checked' : ''} />
                             <label for="discount2" class="form-check-label">경차</label>
                         </div>
                         <div class="form-check">
-                            <input type="radio" name="discountType" id="discount3" value="electric" class="form-check-input" />
+                            <input type="radio" name="discountType" id="discount3" value="electric" class="form-check-input"
+                                   ${carTypeCode == 'electric' ? 'checked' : ''} />
                             <label for="discount3" class="form-check-label">전기차</label>
                         </div>
                     </div>
@@ -60,15 +63,13 @@
                 <div class="row mb-3">
                     <label for="discountAmount" class="col-sm-2 col-form-label">할인 적용 금액</label>
                     <div class="col-sm-4">
-                        <input type="text" name="discountAmount" id="discountAmount" class="form-control" readonly />
-                    </div>
+                        <input type="text" name="discountAmount" id="discountAmount" class="form-control" readonly value="${discountAmount != null ? discountAmount : ''}"/>                    </div>
                 </div>
 
                 <div class="row mb-3">
                     <label for="finalFee" class="col-sm-2 col-form-label">결제 요금</label>
                     <div class="col-sm-4">
-                        <input type="text" name="finalFee" id="finalFee" class="form-control" readonly />
-                    </div>
+                        <input type="text" name="finalFee" id="finalFee" class="form-control" readonly value="${finalFee != null ? finalFee : ''}"/>                    </div>
                 </div>
 
                 <div class="d-flex gap-2">

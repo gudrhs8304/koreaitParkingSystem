@@ -53,7 +53,9 @@ class ExitServiceTest {
     @Test
     void searchCar() {
         CarDTO carDTO = CarDTO.builder()
-                .carNumber("12가3456").build();
+                .carNumber("55가1234").build();
         exitService.searchCar(carDTO);
     }
+
+
 }

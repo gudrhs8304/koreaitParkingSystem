@@ -60,7 +60,7 @@
             </div>
             <form method="post" class="mt-3">
                 <div class="d-flex gap-2">
-                    <a href="/disCount.do" class="btn btn-success">할인 적용</a>
+                    <a href="/disCount.do?carNumber=${carNumber}" class="btn btn-success">할인 적용</a>
                     <form action="/out.do" method="post" class="mt-3">
                         <input type="submit" name="submitExit" value="출차 처리" class="btn btn-success"/>
                     </form>

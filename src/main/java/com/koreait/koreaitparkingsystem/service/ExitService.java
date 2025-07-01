@@ -154,14 +154,31 @@ public class ExitService {
     }
 
     public void searchCar(CarDTO carDTO) {
-        CarVO carVO = carDAO.selectCarByNum(carDTO.getCarNumber());
-        carDAO.selectCarByNum(carDTO.getCarNumber()) == parkingLogDAO.selectLastLogByCarNumber(carDTO.getCarNumber())
-        CarDTO car = null;
-        if (carVO.getOutTime() != null) {
-            car = modelMapper.map(carVO, CarDTO.class);
-            log.info(car.getCarNumber());
+        ParkingLogVO logVO = parkingLogDAO.selectActiveLogByCarNumber(carDTO.getCarNumber());
+        ParkingLogDTO logDTO = null;
+        if (logVO != null) {
+            logDTO = modelMapper.map(logVO, ParkingLogDTO.class);
+        }
+
+        if (logDTO != null && logDTO.getOutTime() == null) {
+            log.info("차량번호: " + logDTO.getCarNumber());
+            log.info("입차 시간: " + logDTO.getInTime());
+
+            java.sql.Timestamp now = java.sql.Timestamp.valueOf(java.time.LocalDateTime.now());
+            java.sql.Timestamp inTime = java.sql.Timestamp.valueOf(logDTO.getInTime());
+
+            long durationMillis = now.getTime() - inTime.getTime();
+            long durationMinutes = durationMillis / (1000 * 60);
+            if (durationMinutes < 30) durationMinutes = 30;
+
+            double baseRatePer30Min = 3000.0;
+            double fee = (durationMinutes / 30.0) * baseRatePer30Min;
+
+            int finalFee = (int) fee;
+
+            log.info("실시간 계산 요금: " + finalFee);
         } else {
-            log.info("차량이 없습니다.");
+            log.info("출차된 차량이거나 주차 기록을 찾을 수 없습니다.");
         }
     }
 }

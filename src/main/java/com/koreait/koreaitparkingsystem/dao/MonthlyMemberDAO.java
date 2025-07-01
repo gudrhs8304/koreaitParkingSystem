@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
-public class MonthlyMemberDAO {
+public enum MonthlyMemberDAO {
+    INSTANCE;
 
     public List<MonthlyMemberVO> selectMonthlyMembers() {
         String sql = "select * from monthly_member";

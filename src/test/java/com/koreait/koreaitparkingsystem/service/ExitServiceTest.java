@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ExitServiceTest {
-    ExitService exitService = new ExitService();
+    ExitService exitService = ExitService.INSTANCE;
 
     @Test
     void printCarType() {
@@ -50,12 +50,10 @@ class ExitServiceTest {
         exitService.isParkingSpot(carDTO);
     }
 
-    @Test
-    void searchCar() {
-        CarDTO carDTO = CarDTO.builder()
-                .carNumber("55가1234").build();
-        exitService.searchCar(carDTO);
-    }
-
-
+//    @Test
+//    void searchCar() {
+//        CarDTO carDTO = CarDTO.builder()
+//                .carNumber("12가3456").build();
+//        exitService.searchCar(carDTO);
+//    }
 }

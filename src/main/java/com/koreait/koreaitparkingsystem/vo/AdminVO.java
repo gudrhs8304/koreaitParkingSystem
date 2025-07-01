@@ -2,13 +2,12 @@ package com.koreait.koreaitparkingsystem.vo;
 
 import lombok.*;
 
-@Getter
+@Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-@ToString
-
+@AllArgsConstructor
 public class AdminVO {
     private String username;
     private String password;
+
 }

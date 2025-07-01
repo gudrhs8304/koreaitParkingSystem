@@ -13,16 +13,17 @@ import com.koreait.koreaitparkingsystem.vo.ParkingLogVO;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 @Log4j2
-public class ExitService {
+public enum ExitService {
+    INSTANCE;
 
-    private final ParkingSpotDAO parkingSpotDAO =  new ParkingSpotDAO();
-    private final ParkingLogDAO parkingLogDAO  =  new ParkingLogDAO();
+    private final ParkingSpotDAO parkingSpotDAO =  ParkingSpotDAO.INSTANCE;
+    private final ParkingLogDAO parkingLogDAO  =  ParkingLogDAO.INSTANCE;
     private final CarService carService  =  CarService.INSTANCE;
     private final ModelMapper modelMapper = MapperUtil.INSTANCE.getInstance();
-    private final CarTypeDAO carTypeDAO = new CarTypeDAO();
-    private final DiscountPolicyDAO discountPolicyDAO = new DiscountPolicyDAO();
+    private final CarTypeDAO carTypeDAO = CarTypeDAO.INSTANCE;
+    private final DiscountPolicyDAO discountPolicyDAO = DiscountPolicyDAO.INSTANCE;
     private final MonthlyMemberService monthlyMemberService =  MonthlyMemberService.INSTANCE;
-    private final CarDAO carDAO = new CarDAO();
+    private final CarDAO carDAO = CarDAO.INSTANCE;
 
     public void printCar(CarDTO carDTO) {
         CarDTO result = carService.getCar(carDTO);
@@ -73,10 +74,10 @@ public class ExitService {
     }
 
     public void printMonthlyMember(CarDTO carDTO) {
-        MonthlyMemberVO memberVO = monthlyMemberService.getMonthlyMember(carDTO.getCarNumber());
+        MonthlyMemberDTO dto = monthlyMemberService.getMonthlyMember(carDTO.getCarNumber()); // 병민 의견 -> 멤버서비스의 dto 변환으로 dto 타입으로 변경하였음.
         MonthlyMemberDTO member = null;
-        if (memberVO != null) {
-            member = modelMapper.map(memberVO, MonthlyMemberDTO.class);
+        if (dto != null) {
+            member = modelMapper.map(dto, MonthlyMemberDTO.class);
         }
         if (member != null) {
             log.info("월정액 회원입니다. " + member);
@@ -153,32 +154,15 @@ public class ExitService {
         }
     }
 
-    public void searchCar(CarDTO carDTO) {
-        ParkingLogVO logVO = parkingLogDAO.selectActiveLogByCarNumber(carDTO.getCarNumber());
-        ParkingLogDTO logDTO = null;
-        if (logVO != null) {
-            logDTO = modelMapper.map(logVO, ParkingLogDTO.class);
-        }
-
-        if (logDTO != null && logDTO.getOutTime() == null) {
-            log.info("차량번호: " + logDTO.getCarNumber());
-            log.info("입차 시간: " + logDTO.getInTime());
-
-            java.sql.Timestamp now = java.sql.Timestamp.valueOf(java.time.LocalDateTime.now());
-            java.sql.Timestamp inTime = java.sql.Timestamp.valueOf(logDTO.getInTime());
-
-            long durationMillis = now.getTime() - inTime.getTime();
-            long durationMinutes = durationMillis / (1000 * 60);
-            if (durationMinutes < 30) durationMinutes = 30;
-
-            double baseRatePer30Min = 3000.0;
-            double fee = (durationMinutes / 30.0) * baseRatePer30Min;
-
-            int finalFee = (int) fee;
-
-            log.info("실시간 계산 요금: " + finalFee);
-        } else {
-            log.info("출차된 차량이거나 주차 기록을 찾을 수 없습니다.");
-        }
-    }
+//    public void searchCar(CarDTO carDTO) {
+//        CarVO carVO = carDAO.selectCarByNum(carDTO.getCarNumber());
+//        carDAO.selectCarByNum(carDTO.getCarNumber()) == parkingLogDAO.selectLastLogByCarNumber(carDTO.getCarNumber())
+//        CarDTO car = null;
+//        if (carVO.getOutTime() != null) {
+//            car = modelMapper.map(carVO, CarDTO.class);
+//            log.info(car.getCarNumber());
+//        } else {
+//            log.info("차량이 없습니다.");
+//        }
+//    }
 }

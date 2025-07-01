@@ -2,7 +2,7 @@ package com.koreait.koreaitparkingsystem.vo;
 
 import lombok.*;
 
-@Data
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

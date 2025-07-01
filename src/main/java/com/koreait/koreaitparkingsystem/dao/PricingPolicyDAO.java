@@ -1,18 +1,20 @@
 package com.koreait.koreaitparkingsystem.dao;
 
+import com.koreait.koreaitparkingsystem.dto.PricingPolicyDTO;
 import com.koreait.koreaitparkingsystem.util.DBConnection;
 import com.koreait.koreaitparkingsystem.vo.PricingPolicyVO;
 import com.koreait.koreaitparkingsystem.vo.DiscountPolicyVO;
 import lombok.Cleanup;
+import lombok.extern.log4j.Log4j2;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@Log4j2
 public enum PricingPolicyDAO {
     INSTANCE;
 
-    public List<PricingPolicyVO> selectAllPolicies() {
+    public List<PricingPolicyVO> selectAllFees() {
         String sql = "SELECT * FROM pricing_policy";
         List<PricingPolicyVO> list = new ArrayList<>();
         try {
@@ -52,18 +54,41 @@ public enum PricingPolicyDAO {
         }
     }
 
-    public void updatePolicyPrice(PricingPolicyVO vo) {
+    public void updateFeeById(int price, int id) {
         String sql = "UPDATE pricing_policy SET price = ? WHERE id = ?";
 
         try (Connection connection = DBConnection.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            preparedStatement.setInt(1, vo.getPrice());
-            preparedStatement.setInt(2, vo.getId());
+            preparedStatement.setInt(1, price);
+            preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public PricingPolicyVO selectPriceById(int id) {
+        String sql = "select id,price,name from pricing_policy WHERE id = ?";
+
+        try {
+            @Cleanup Connection connection = DBConnection.INSTANCE.getConnection();
+            @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                PricingPolicyVO policy = PricingPolicyVO.builder()
+                        .price(resultSet.getInt("price"))
+                        .id(resultSet.getInt("id"))
+                        .name(resultSet.getString("name"))
+                        .build();
+                return policy;
+            }
+        } catch (SQLException e) {
+            log.error(e);
+        }
+        return null;
+
     }
 }

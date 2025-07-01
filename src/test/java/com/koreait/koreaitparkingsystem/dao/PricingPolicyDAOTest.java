@@ -8,6 +8,15 @@ import org.junit.jupiter.api.Test;
 public class PricingPolicyDAOTest {
     PricingPolicyDAO pricingPolicyDAO = PricingPolicyDAO.INSTANCE;
 
+    @Test
+    void selectPriceById() {
+        int priceId = 1;
+        int id = 2;
+        String name = "name";
+        pricingPolicyDAO.selectPriceById(id);
+        log.info(pricingPolicyDAO);
+    }
+
 //    @Test
 //    public void updateIsAdditional() {
 //        String name = "기본요금2";

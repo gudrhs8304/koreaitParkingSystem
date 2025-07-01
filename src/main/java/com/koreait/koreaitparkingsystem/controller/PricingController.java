@@ -1,8 +1,12 @@
 package com.koreait.koreaitparkingsystem.controller;
 
 
+import com.koreait.koreaitparkingsystem.dao.PricingPolicyDAO;
 import com.koreait.koreaitparkingsystem.dto.PricingPolicyDTO;
+import com.koreait.koreaitparkingsystem.service.DiscountPolicyService;
 import com.koreait.koreaitparkingsystem.service.PricingService;
+import com.koreait.koreaitparkingsystem.vo.DiscountPolicyVO;
+import com.koreait.koreaitparkingsystem.vo.PricingPolicyVO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,42 +15,89 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
+import java.util.List;
 
 @Log4j2
-@WebServlet (urlPatterns = {"/pricing.do"})
+@WebServlet("/pricing.do")
 public class PricingController extends HttpServlet {
-    //    private final PricingService pricingService = PricingService.instance();
-    // 요금 관리 페이지 화면 열기 위해 사용
+    private final PricingService pricingService = PricingService.INSTANCE;
+    private final DiscountPolicyService discountPolicyService = DiscountPolicyService.INSTANCE;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PricingService pricingService = PricingService.INSTANCE;
-        Object fee = null;
-        req.setAttribute("fee", fee);
+        // db 에서 전체 요금 목록 가져오기
+        List<PricingPolicyVO> feeList = pricingService.getSelectAllFees();
 
+        int baseFee = 0;
+        int extraFee = 0;
+        int maxFee = 0;
+
+        for(PricingPolicyVO dto : feeList) {
+            if (dto.getId() == 1) baseFee = dto.getPrice();
+            else if (dto.getId() == 2) extraFee = dto.getPrice();
+            else if(dto.getId() == 3) maxFee = dto.getPrice();
+        }
+
+        // 할인율 정보
+        List<DiscountPolicyVO> discountList = discountPolicyService.getAllDiscounts();
+        req.setAttribute("discountList", discountList);
+
+        // 선택한 카테고리(기본값은 disabled)
+        String selectedCategory = req.getParameter("discountCategory");
+        if(selectedCategory == null) selectedCategory = "disabled";
+
+        int selectedRate = 0;
+        for(DiscountPolicyVO dto : discountList) {
+            if(dto.getCarTypeCode().equals(selectedCategory)) {
+                selectedRate = dto.getDiscountRate();
+                break;
+            }
+        }
+
+        req.setAttribute("baseFee", baseFee);
+        req.setAttribute("extraFee", extraFee);
+        req.setAttribute("maxFee", maxFee);
+        req.setAttribute("discountCategory", selectedCategory);
+        req.setAttribute("discountValue", selectedRate);
+        req.setAttribute("discountList", discountList);
+
+        // pricing.jsp로 forward
+        req.setAttribute("pricings",pricingService.getSelectAllFees());
         req.getRequestDispatcher("/WEB-INF/views/pricing/pricing.jsp").forward(req, resp);
+
     }
 
-
-    // 요금수정관리를 위해 doPost를 사용한다. -> 많은 데이터를 사용, 민감한 정보를 보낼때 사용.(주소록에 보이지 않음), 로그인,회원가입 비밀번호 등 사용됨.
-    // 요금관리 페이지에서는 기본요금, 추가요금, 일일최대요금 수정 등 할 수 있다. -> 요금관리페이지에서 액션 처리용으로 사용
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String carTypeCode = req.getParameter("discountCategory");
+        int discountRate = Integer.parseInt(req.getParameter("discountValue"));
 
-        // 사용자가 보낸 값을 가져오기, 파라미터로 id 가져오기.
-        int id = Integer.parseInt(req.getParameter("id"));
-        int price = Integer.parseInt(req.getParameter("price"));
+        discountPolicyService.editDiscountRate(carTypeCode, discountRate);
 
-        log.info("수정이 완료되었습니다. {}, {}", id, price);
+        int baseFee = Integer.parseInt(req.getParameter("baseFee"));
+        int extraFee = Integer.parseInt(req.getParameter("extraFee"));
+        int maxFee = Integer.parseInt(req.getParameter("maxFee"));
+//        int selectedRate = Integer.parseInt(req.getParameter("discountRate"));
 
+        pricingService.updateFees(1,baseFee);
+        pricingService.updateFees(2,extraFee);
+        pricingService.updateFees(3,maxFee);
 
-        // DTO를 가져와서 새로운 객체 생성 -> 담기
-        PricingPolicyDTO pricingPolicyDTO = new PricingPolicyDTO();
-        pricingPolicyDTO.setId(id);
-        pricingPolicyDTO.setPrice(price);
+        resp.sendRedirect("/main.do?message=변경사항이 수정되었습니다.");
 
-        // 서비스 호출해서 새로운 객체 생성 -> 수정하기
-        PricingService pricingService = PricingService.INSTANCE;
-
-        resp.sendRedirect("/pricing.do");
+//        resp.sendRedirect("/pricing.do?discountCategory=" + carTypeCode); // 선택값 유지해서 리다이렉트
     }
 }
+//        String code = req.getParameter("code");
+//        int rate = Integer.parseInt(req.getParameter("rate"));
+//
+//
+//        log.info("수정이 완료되었습니다. {}, {}", id, price);
+//
+//
+//        // DTO를 가져와서 새로운 객체 생성 -> 담기
+//
+//        req.getRequestDispatcher("/pricing.do").forward(req, resp);
+//        resp.sendRedirect("/main.do");
+//    }
+//}

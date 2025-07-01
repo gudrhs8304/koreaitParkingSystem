@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 @Log4j2
 @WebServlet("/disCount.do")
@@ -34,22 +35,25 @@ public class DisCountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String carNumber = req.getParameter("carNumber");
-        String discountType = req.getParameter("discountType");
+        int finalFee = Integer.parseInt(req.getParameter("finalFee"));
 
 
 
         if (carNumber != null && !carNumber.isBlank()) {
             // ExitService 에서 할인 계산하고 결과 세팅
-            ExitService.INSTANCE.calculateDiscountAndSetAttributes(req, carNumber, discountType);
+            ExitService.INSTANCE.prepareDiscountPage(req, carNumber);
         }
 
         req.setAttribute("carNumber", carNumber);
-        req.setAttribute("discountType", discountType);
+        req.setAttribute("finalFee", finalFee);
 
         log.info("=== DisCountController.doPost ===");
-        log.info("carNumber = " + carNumber);
-        log.info("discountType = " + discountType);
+        log.info("DisCountController carNumber = " + carNumber);
 
-        req.getRequestDispatcher("/WEB-INF/views/out/disCount.jsp").forward(req, resp);
+        String encodedCarNumber = URLEncoder.encode(carNumber, "UTF-8");
+        log.info("DisCountController encodedCarNumber = " + encodedCarNumber);
+
+
+        resp.sendRedirect("/disCount.do?carNumber=" + encodedCarNumber);
     }
 }

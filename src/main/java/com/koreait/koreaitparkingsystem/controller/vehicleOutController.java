@@ -27,10 +27,18 @@ public class vehicleOutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String carNumber = req.getParameter("carNumber");
-        req.setAttribute("carNumber", carNumber);
+        log.info("carNumber = {}", carNumber);
 
         ParkingLogVO logVO = parkingLogDAO.selectActiveLogByCarNumber(carNumber);
-        if (logVO != null && logVO.getOutTime() == null) {
+        log.info("logVO = {}", logVO);
+
+        if (logVO == null) {
+            req.setAttribute("errorMessage", "입차 기록이 없습니다.");
+        } else if (logVO.getOutTime() != null) {
+            req.setAttribute("errorMessage", "이미 출차된 차량입니다.");
+        } else {
+            // 정상인 경우
+            req.setAttribute("carNumber", carNumber);
             req.setAttribute("inTime", logVO.getInTime().toString().replace("T", " "));
 
             java.sql.Timestamp now = java.sql.Timestamp.valueOf(java.time.LocalDateTime.now());
@@ -40,10 +48,7 @@ public class vehicleOutController extends HttpServlet {
             if (durationMinutes < 30) durationMinutes = 30;
             double units = Math.ceil(durationMinutes / 30.0);
             int fee = (int)(units * 3000.0);
-
             req.setAttribute("fee", fee);
-        } else {
-            req.setAttribute("errorMessage", "출차된 차량이거나 주차 기록이 없습니다.");
         }
 
         req.getRequestDispatcher("/WEB-INF/views/out/vehicleOut.jsp").forward(req, resp);

@@ -30,6 +30,12 @@
         <main class="container-fluid px-4">
 
             <h1 class="mt-4">출차 관리</h1>
+            <c:if test="${not empty errorMessage}">
+              <script>
+                alert('${errorMessage}');
+                history.back();
+              </script>
+            </c:if>
             <div class="row mb-3">
                 <form action="/vehicleOut.do" method="post" class="form-inline">
                     <label for="carNumber" class="col-sm-2 col-form-label">차량번호</label>
@@ -51,21 +57,23 @@
                 </div>
             </div>
 
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">주차 요금</label>
-                <div class="col-sm-4">
-                    <input type="text" name="fee" class="form-control" readonly
-                           value="${fee != null ? fee : ''}"/>
+            <form action="/disCount.do" method="post">
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">주차 요금</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="finalFee" class="form-control" readonly
+                               value="${fee != null ? fee : 0}"/>
+                    </div>
                 </div>
-            </div>
-            <div class="d-flex gap-2">
-                <form action="/disCount.do" method="post">
-                    <input type="hidden" name="carNumber" value="${carNumber}" />
-                    <input type="submit" value="할인 적용" class="btn btn-success" />
-                </form>
+                <div class="d-flex gap-2">
+                    <input type="hidden" name="carNumber" value="${carNumber}"/>
+                    <input type="submit" value="할인 적용" class="btn btn-success"/>
+                </div>
+            </form>
+            <div>
                 <form action="/out.do" method="post">
-                    <input type="hidden" name="carNumber" value="${carNumber}" />
-                    <input type="submit" name="submitExit" value="출차 처리" class="btn btn-success" />
+                    <input type="hidden" name="carNumber" value="${carNumber}"/>
+                    <input type="submit" name="submitExit" value="출차 처리" class="btn btn-success"/>
                 </form>
             </div>
         </main>

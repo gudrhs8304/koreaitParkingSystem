@@ -154,6 +154,42 @@ public enum ExitService {
         req.setAttribute("finalFee", finalFee);
     }
 
+    public void processExit(CarDTO carDTO) {
+        log.info("✅ processExit 시작");
+        log.info("차량번호 = " + carDTO.getCarNumber());
+
+        // 1. 활성 로그 가져오기
+        ParkingLogDTO logDTO = ParkingLogService.INSTANCE.getActiveLogByCarNumber(carDTO.getCarNumber());
+        if (logDTO == null) {
+            log.warn("❌ 활성 주차 기록이 없습니다. 출차 처리 불가.");
+            throw new RuntimeException("출차 처리할 입차 기록이 없습니다.");
+        }
+
+        // 2. 요금 계산
+        int fee = ParkingLogService.INSTANCE.calculateFee(logDTO);
+        log.info("💰 계산된 주차 요금 = " + fee);
+
+        // 3. parking_log 출차시간, 요금 update
+        ParkingLogService.INSTANCE.updateParkingLog(carDTO);
+
+        // 4. parking_spot 자리 비우기
+        ParkingSpotService.INSTANCE.isParkingSpot(carDTO);
+
+        log.info("✅ 출차 처리 완료");
+    }
+
+    public void processExitByCarNumber(String carNumber) {
+        CarDTO carDTO = CarDTO.builder().carNumber(carNumber).build();
+
+        // 1. 출차 로그 업데이트
+        ParkingLogService.INSTANCE.updateParkingLog(carDTO);
+
+        // 2. 주차 자리 상태 비움 처리
+        ParkingSpotService.INSTANCE.isParkingSpot(carDTO);
+
+        // 필요하다면 추가 처리 가능!
+    }
+
 
 
 

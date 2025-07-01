@@ -1,4 +1,4 @@
-package com.koreait.koreaitparkingsystem.vo;
+package com.koreait.koreaitparkingsystem.VO;
 
 import lombok.*;
 

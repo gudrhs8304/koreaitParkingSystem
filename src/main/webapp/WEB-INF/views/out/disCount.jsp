@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!-- Vehicle Out Page -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -29,54 +30,64 @@
         <main class="container-fluid px-4">
             <h1 class="mt-4">할인 적용</h1>
 
-                <div class="row mb-3">
-                    <label for="carNumber" class="col-sm-2 col-form-label">차량번호</label>
-                    <div class="col-sm-4">
-                        <input type="text" name="carNumber" id="carNumber" class="form-control" readonly value="${carNumber}"/>
+            <div class="row mb-3">
+                <label for="carNumber" class="col-sm-2 col-form-label">차량번호</label>
+                <div class="col-sm-4">
+                    <input type="text" name="carNumber" id="carNumber" class="form-control" readonly
+                           value="${carNumber}"/>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">할인 종류</label>
+                <div class="col-sm-10 d-flex align-items-center gap-3">
+                    <div class="form-check">
+                        <input type="radio" name="discountType" id="discount1" value="disabled" class="form-check-input"
+                               ${carTypeCode eq 'disabled' ? ' checked="checked"' : ''}/>
+                        <label for="discount1" class="form-check-label">장애인</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="discountType" id="discount2" value="compact" class="form-check-input"
+                                ${carTypeCode eq 'disabled' ? ' checked="checked"' : ''}/>
+                        <label for="discount2" class="form-check-label">경차</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="discountType" id="discount3" value="electric" class="form-check-input"
+                                ${carTypeCode eq 'disabled' ? ' checked="checked"' : ''}/>
+                        <label for="discount3" class="form-check-label">전기차</label>
                     </div>
                 </div>
-
+            </div>
+            <!-- 할인 적용 금액 -->
+            <c:if test="${not empty discountAmount}">
                 <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">할인 종류</label>
-                    <div class="col-sm-10 d-flex align-items-center gap-3">
-                        <div class="form-check">
-                            <input type="radio" name="discountType" id="discount1" value="disabled" class="form-check-input"
-                                   ${carTypeCode == 'disabled' ? 'checked' : ''} />
-                            <label for="discount1" class="form-check-label">장애인</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="radio" name="discountType" id="discount2" value="compact" class="form-check-input"
-                                   ${carTypeCode == 'compact' ? 'checked' : ''} />
-                            <label for="discount2" class="form-check-label">경차</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="radio" name="discountType" id="discount3" value="electric" class="form-check-input"
-                                   ${carTypeCode == 'electric' ? 'checked' : ''} />
-                            <label for="discount3" class="form-check-label">전기차</label>
-                        </div>
+                    <label class="col-sm-2 col-form-label">할인 적용 금액</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" readonly value="${discountAmount}" />
                     </div>
                 </div>
+            </c:if>
 
+            <!-- 결제 요금 -->
+            <c:if test="${not empty finalFee}">
                 <div class="row mb-3">
-                    <label for="discountAmount" class="col-sm-2 col-form-label">할인 적용 금액</label>
+                    <label class="col-sm-2 col-form-label">결제 요금</label>
                     <div class="col-sm-4">
-                        <input type="text" name="discountAmount" id="discountAmount" class="form-control" readonly value="${discountAmount != null ? discountAmount : ''}"/>                    </div>
+                        <input type="text" class="form-control" readonly value="${finalFee}" />
+                    </div>
                 </div>
+            </c:if>
 
-                <div class="row mb-3">
-                    <label for="finalFee" class="col-sm-2 col-form-label">결제 요금</label>
-                    <div class="col-sm-4">
-                        <input type="text" name="finalFee" id="finalFee" class="form-control" readonly value="${finalFee != null ? finalFee : ''}"/>                    </div>
-                </div>
-
-                <div class="d-flex gap-2">
-                    <form  method="post" class="mt-3">
-                    <input type="submit" name="applyDiscount" value="할인 적용" class="btn btn-primary" />
-                    </form>
-                    <form action="/out.do" method="post" class="mt-3">
-                    <input type="submit" name="submitExit" value="출차 처리" class="btn btn-success" />
-                    </form>
-                </div>
+            <div class="d-flex gap-2">
+                <form action="/disCount.do" method="post" class="mt-3">
+                    <input type="hidden" name="carNumber" value="${carNumber}"/>
+                    <input type="hidden" name="discountType" value="${discountType}"/>
+                    <input type="submit" name="applyDiscount" value="할인 적용" class="btn btn-primary"/>
+                </form>
+                <form action="/out.do" method="post" class="mt-3">
+                    <input type="submit" name="submitExit" value="출차 처리" class="btn btn-success"/>
+                </form>
+            </div>
 
         </main>
         <!-- footer 영역 -->

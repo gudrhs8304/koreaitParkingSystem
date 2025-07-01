@@ -36,12 +36,6 @@
                 </a>
             </div>
         </div>
-        <div class="sb-sidenav-footer">
-            <c:if test="${not empty sessionScope.admin}">
-            <div class="small">Logged in as:</div>
-                ${sessionScope.admin.username}님 환영합니다.
-        </div>
-        </c:if>
     </nav>
 </div>
 

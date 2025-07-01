@@ -43,7 +43,7 @@ public class vehicleOutController extends HttpServlet {
 
             req.setAttribute("fee", fee);
         } else {
-            req.setAttribute("error", "출차된 차량이거나 주차 기록이 없습니다.");
+            req.setAttribute("errorMessage", "출차된 차량이거나 주차 기록이 없습니다.");
         }
 
         req.getRequestDispatcher("/WEB-INF/views/out/vehicleOut.jsp").forward(req, resp);

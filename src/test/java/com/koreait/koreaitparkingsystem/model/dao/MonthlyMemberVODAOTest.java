@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 @Log4j2
 class MonthlyMemberVODAOTest {
 
-    private final MonthlyMemberDAO monthlyMemberDAO = new MonthlyMemberDAO();
+    private final MonthlyMemberDAO monthlyMemberDAO = MonthlyMemberDAO.INSTANCE;
 
     @Test
     void selectMonthlyMember() {

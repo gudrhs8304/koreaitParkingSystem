@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
 class AdminDAOTest {
-   private final AdminDAO dao = new AdminDAO();
+   private final AdminDAO dao = AdminDAO.INSTANCE;
 
     @Test
     void login() {

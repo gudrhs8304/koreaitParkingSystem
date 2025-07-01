@@ -34,7 +34,7 @@
                                         <label for="password">비밀 번호</label>
                                     </div>
                                     <div class="form-check mb-3">
-                                        <input class="form-check-input" id="rememberPassword" type="checkbox" value="" />
+                                        <input class="form-check-input" id="rememberPassword" type="checkbox" name="remember" value="" />
                                         <label class="form-check-label" for="rememberPassword">자동 로그인</label>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">

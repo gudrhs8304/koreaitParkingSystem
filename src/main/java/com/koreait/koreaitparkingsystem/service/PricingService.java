@@ -6,8 +6,10 @@ import com.koreait.koreaitparkingsystem.util.MapperUtil;
 import com.koreait.koreaitparkingsystem.vo.PricingPolicyVO;
 import org.modelmapper.ModelMapper;
 
-public class PricingService {
-    private final PricingPolicyDAO dao = new PricingPolicyDAO();
+public enum PricingService {
+    INSTANCE;
+
+    private final PricingPolicyDAO dao = PricingPolicyDAO.INSTANCE;
     private final ModelMapper modelMapper = MapperUtil.INSTANCE.getInstance();
 
     public void updatePricingPolicy(PricingPolicyDTO pricingPolicyDTO) {

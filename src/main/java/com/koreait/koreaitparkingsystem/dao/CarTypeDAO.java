@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
-public class CarTypeDAO {
+public enum CarTypeDAO {
+    INSTANCE;
 
     public List<CarTypeVO> selectCarType() {
         String sql = "select * from car_type";

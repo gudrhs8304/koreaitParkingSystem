@@ -10,7 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Log4j2
-public class DiscountPolicyDAO {
+public enum DiscountPolicyDAO {
+    INSTANCE;
 
     public int selectDiscountRate(String carTypeCode) {
         String sql = "select discount_rate from discount_policy where car_type_code=?";

@@ -12,8 +12,6 @@
     <!-- Bootstrap 5 CSS (CDN) -->
     <link href="/assets/css/styles.css" rel="stylesheet">
 
-    <!-- SB Admin 스타일 또는 사용자 정의 CSS -->
-    <%--    <link href="/assets/css/add_style.css" rel="stylesheet">--%>
     <!--폰트 어썸 임폿 -->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
@@ -21,10 +19,10 @@
 
 <body class="sb-nav-fixed">
 <!-- topbar 영역-->
-<%@ include file="/layout/topbar.jsp" %>
+<%@ include file="../layout/topbar.jsp" %>
 <div id="layoutSidenav">
     <!-- sidebar 영역 -->
-    <%@ include file="/layout/sidebar.jsp" %>
+    <%@ include file="../layout/sidebar.jsp" %>
     <div id="layoutSidenav_content">
         <!-- 여기서 부터 메인 작업 시작. -->
         <main class="container-fluid px-4">
@@ -38,10 +36,10 @@
                 </div>
 
                 <div class="row mb-3">
-                    <label for="carType" class="col-sm-2 col-form-label">차량 유형</label>
+                    <label for="carTypeCode" class="col-sm-2 col-form-label">차량 유형</label>
                     <div class="col-sm-4">
-                        <select name="carType" id="carType" class="form-select" required>
-                            <option value="normal">일반</option>
+                        <select name="carTypeCode" id="carTypeCode" class="form-select" required>
+                            <option value="normal" selected>일반</option>
                             <option value="disabled">장애인</option>
                             <option value="compact">경차</option>
                         </select>
@@ -56,9 +54,9 @@
                 </div>
 
                 <div class="row mb-3">
-                    <label for="phoneNumber" class="col-sm-2 col-form-label">연락처</label>
+                    <label for="phone" class="col-sm-2 col-form-label">연락처</label>
                     <div class="col-sm-4">
-                        <input type="text" name="phoneNumber" id="phoneNumber" class="form-control" required/>
+                        <input type="text" name="phone" id="phone" class="form-control" required/>
                     </div>
                 </div>
 
@@ -79,7 +77,7 @@
         </main>
 
         <!-- footer 영역 -->
-        <%@ include file="/layout/footer.jsp" %>
+        <%@ include file="../layout/footer.jsp" %>
     </div>
 </div>
 

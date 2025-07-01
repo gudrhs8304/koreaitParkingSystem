@@ -1,13 +1,5 @@
 <!-- Vehicle Out Page -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    if (request.getMethod().equalsIgnoreCase("post")) {
-        if (request.getParameter("submitExit") != null) {
-            response.sendRedirect("out.jsp");
-            return;
-        }
-    }
-%>
 
 <!DOCTYPE html>
 
@@ -19,9 +11,6 @@
     <script src="/assets/js/scripts.js"></script>
     <!-- Bootstrap 5 CSS (CDN) -->
     <link href="/assets/css/styles.css" rel="stylesheet">
-
-    <!-- SB Admin 스타일 또는 사용자 정의 CSS -->
-    <%--    <link href="/assets/css/add_style.css" rel="stylesheet">--%>
     <!--폰트 어썸 임폿 -->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
@@ -31,15 +20,15 @@
 </style>
 <body class="sb-nav-fixed">
 <!-- topbar 영역-->
-<%@ include file="/layout/topbar.jsp" %>
+<%@ include file="../layout/topbar.jsp" %>
 <div id="layoutSidenav">
     <!-- sidebar 영역 -->
-    <%@ include file="/layout/sidebar.jsp" %>
+    <%@ include file="../layout/sidebar.jsp" %>
     <div id="layoutSidenav_content">
         <!-- 여기서 부터 메인 작업 시작. -->
         <main class="container-fluid px-4">
             <h1 class="mt-4">할인 적용</h1>
-            <form method="post" class="mt-3">
+
                 <div class="row mb-3">
                     <label for="carNumber" class="col-sm-2 col-form-label">차량번호</label>
                     <div class="col-sm-4">
@@ -80,13 +69,17 @@
                 </div>
 
                 <div class="d-flex gap-2">
+                    <form  method="post" class="mt-3">
                     <input type="submit" name="applyDiscount" value="할인 적용" class="btn btn-primary" />
+                    </form>
+                    <form action="/out.do" method="post" class="mt-3">
                     <input type="submit" name="submitExit" value="출차 처리" class="btn btn-success" />
+                    </form>
                 </div>
-            </form>
+
         </main>
         <!-- footer 영역 -->
-        <%@ include file="/layout/footer.jsp" %>
+        <%@ include file="../layout/footer.jsp" %>
     </div>
 </div>
 
@@ -95,15 +88,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
 
-
-<!-- 선택: Chart.js, jQuery 등 추가 가능 -->
-<%--<script src="/assets/js/scripts.js"></script>--%>
-
 <!-- 부트스트랩 기본 js 임포트 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
         crossorigin="anonymous"></script>
-<script src="/assets/js/datatables-simple-demo.js"></script>
-
 </body>
 </html>

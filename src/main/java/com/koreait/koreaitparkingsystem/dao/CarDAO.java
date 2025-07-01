@@ -1,7 +1,8 @@
 package com.koreait.koreaitparkingsystem.dao;
 
-import com.koreait.koreaitparkingsystem.util.DBConnection;
 import com.koreait.koreaitparkingsystem.vo.CarVO;
+import com.koreait.koreaitparkingsystem.util.DBConnection;
+
 import lombok.Cleanup;
 
 import java.sql.Connection;
@@ -9,8 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CarDAO {
-
+public enum CarDAO {
+INSTANCE;
     public CarVO selectCarByNum(String carNumber) {
         String sql = "select * from car where car_number=?";
 

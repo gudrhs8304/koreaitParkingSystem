@@ -9,7 +9,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PricingPolicyDAO {
+public enum PricingPolicyDAO {
+    INSTANCE;
 
     public List<PricingPolicyVO> selectAllPolicies() {
         String sql = "SELECT * FROM pricing_policy";

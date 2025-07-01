@@ -1,6 +1,6 @@
 package com.koreait.koreaitparkingsystem.controller;
 
-import com.koreait.koreaitparkingsystem.dao.PricingPolicyDAO;
+
 import com.koreait.koreaitparkingsystem.dto.PricingPolicyDTO;
 import com.koreait.koreaitparkingsystem.service.PricingService;
 import jakarta.servlet.ServletException;
@@ -15,7 +15,7 @@ import java.io.IOException;
 @Log4j2
 @WebServlet (urlPatterns = {"/pricing.do"})
 public class PricingController extends HttpServlet {
-//    private final PricingService pricingService = PricingService.instance();
+    //    private final PricingService pricingService = PricingService.instance();
     // 요금 관리 페이지 화면 열기 위해 사용
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

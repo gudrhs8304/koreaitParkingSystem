@@ -11,12 +11,8 @@ public class PricingService {
     private final ModelMapper modelMapper = MapperUtil.INSTANCE.getInstance();
 
     public void updatePricingPolicy(PricingPolicyDTO pricingPolicyDTO) {
-        PricingPolicyVO vo = modelMapper.map(pricingPolicyDTO,PricingPolicyVO.class);
+        PricingPolicyVO vo = modelMapper.map(pricingPolicyDTO, PricingPolicyVO.class);
         dao.updatePolicy(vo);
-
     }
-    
-
-
-}
+    }
 

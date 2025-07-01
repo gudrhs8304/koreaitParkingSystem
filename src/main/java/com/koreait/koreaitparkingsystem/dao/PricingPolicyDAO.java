@@ -1,8 +1,8 @@
 package com.koreait.koreaitparkingsystem.dao;
 
 import com.koreait.koreaitparkingsystem.util.DBConnection;
-import com.koreait.koreaitparkingsystem.util.MapperUtil;
 import com.koreait.koreaitparkingsystem.vo.PricingPolicyVO;
+import com.koreait.koreaitparkingsystem.vo.DiscountPolicyVO;
 import lombok.Cleanup;
 
 import java.sql.*;
@@ -46,6 +46,21 @@ public class PricingPolicyDAO {
             preparedStatement.setBoolean(4, policy.isDailyMax());
             preparedStatement.setInt(5, policy.getId());
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updatePolicyPrice(PricingPolicyVO vo) {
+        String sql = "UPDATE pricing_policy SET price = ? WHERE id = ?";
+
+        try (Connection connection = DBConnection.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setInt(1, vo.getPrice());
+            preparedStatement.setInt(2, vo.getId());
+            preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

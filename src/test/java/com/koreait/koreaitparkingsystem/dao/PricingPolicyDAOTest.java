@@ -17,6 +17,15 @@ public class PricingPolicyDAOTest {
         log.info(pricingPolicyDAO);
     }
 
+    @Test
+    void updatePriceById() {
+        int price = 2000;
+        int id = 1;
+        String name = "name";
+        pricingPolicyDAO.updateFeeById(price,id);
+        log.info(pricingPolicyDAO);
+    }
+
 //    @Test
 //    public void updateIsAdditional() {
 //        String name = "기본요금2";

@@ -22,6 +22,7 @@ public enum PricingPolicyDAO {
             @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
             @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+
                 PricingPolicyVO policy = PricingPolicyVO.builder()
                         .id(resultSet.getInt("id"))
                         .name(resultSet.getString("name"))
@@ -54,14 +55,14 @@ public enum PricingPolicyDAO {
         }
     }
 
-    public void updateFeeById(int price, int id) {
+    public void updateFeeById(int id,int price) {
         String sql = "UPDATE pricing_policy SET price = ? WHERE id = ?";
 
         try (Connection connection = DBConnection.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            preparedStatement.setInt(1, price);
-            preparedStatement.setInt(2, id);
+            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(2, price);
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

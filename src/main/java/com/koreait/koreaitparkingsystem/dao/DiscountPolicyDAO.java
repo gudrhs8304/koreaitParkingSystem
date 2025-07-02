@@ -51,8 +51,8 @@ public enum DiscountPolicyDAO {
         try {
             @Cleanup Connection connection = DBConnection.INSTANCE.getConnection();
             @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, carTypeCode);
-            preparedStatement.setInt(2, discountRate);
+            preparedStatement.setInt(1, discountRate);
+            preparedStatement.setString(2,carTypeCode);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             log.error(e);

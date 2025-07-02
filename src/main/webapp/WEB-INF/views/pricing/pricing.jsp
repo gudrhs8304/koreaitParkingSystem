@@ -26,9 +26,9 @@
         <!-- 여기서 부터 메인 작업 시작. -->
         <main class="container-fluid px-4">
             <h1 class="mt-4">요금 설정</h1>
-            <c:if test="${not empty param.message}">
+            <c:if test="${not empty message}">
                 <div class="alert alert-success" role="alert">
-                    ${param.message}
+                        ${message}
                 </div>
             </c:if>
             <form method="post" action="/pricing.do" class="mt-3">
@@ -36,91 +36,82 @@
                 <div class="row mb-3">
                     <label for="baseFee" class="col-sm-2 col-form-label">기본 1시간 요금</label>
                     <div class="col-sm-4">
-                        <input type="number" name="baseFee" id="baseFee" class="form-control" value="${baseFee}"/>
+                        <input type="number" name="baseFee" id="baseFee" class="form-control" value="${pricingList[0].price}"/>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <label for="extraFee" class="col-sm-2 col-form-label">30분당 추가 요금</label>
                     <div class="col-sm-4">
-                        <input type="number" name="extraFee" id="extraFee" class="form-control" value="${extraFee}"/>
+                        <input type="number" name="extraFee" id="extraFee" class="form-control" value="${pricingList[1].price}"/>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <label for="maxFee" class="col-sm-2 col-form-label">일일 최대 요금</label>
                     <div class="col-sm-4">
-                        <input type="number" name="maxFee" id="maxFee" class="form-control" value="${maxFee}"/>
+                        <input type="number" name="maxFee" id="maxFee" class="form-control" value="${pricingList[2].price}"/>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <%--                    <label class="col-sm-2 col-form-label">장애인 할인율 (%)</label>--%>
-                    <%--                    <div class="col-sm-4">--%>
-                    <%--                        <input type="number" name="disabledDiscount" class="form-control"--%>
-                    <%--                               value="${fee.disabledDiscount}" required/>--%>
-                    <%--                    </div>--%>
-                    <%--                </div>--%>
-                    <%--                <div class="row mb-3">--%>
-                    <%--                    <label class="col-sm-2 col-form-label">경차 할인율 (%)</label>--%>
-                    <%--                    <div class="col-sm-4">--%>
-                    <%--                        <input type="number" name="compactDiscount" class="form-control" value="${fee.compactDiscount}"--%>
-                    <%--                               required/>--%>
-                    <%--                    </div>--%>
-                    <%--                </div>--%>
-
-                    <%--                <div class="row mb-3">--%>
-                    <%--                    <label class="col-sm-2 col-form-label">전기차 할인율 (%)</label>--%>
-                    <%--                    <div class="col-sm-4">--%>
-                    <%--                        <input type="number" name="electricDiscount" class="form-control" value="${fee.compactDiscount}"--%>
-                    <%--                               required/>--%>
-                    <%--                    </div>--%>
-                    <%--                </div>--%>
-                    <%--                <div class="row mb-3">--%>
-                    <%--                    <label class="col-sm-2 col-form-label">일반 할인율 (%)</label>--%>
-                    <%--                    <div class="col-sm-4">--%>
-                    <%--                        <input type="number" name="normalDiscount" class="form-control" value="${fee.compactDiscount}"--%>
-                    <%--                               required/>--%>
-                    <%--                    </div>--%>
-                    <%--                </div>--%>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">할인 카테고리</label>
-                        <div class="col-sm-4">
-                            <select name="discountCategory" class="form-select" onchange="this.form.submit()">
-                                <option value="disabled" <c:if test="${discountCategory eq 'disabled'}">selected</c:if>>
-                                    장애인 할인율
-                                </option>
-                                <option value="compact" <c:if test="${discountCategory eq 'compact'}">selected</c:if>>경차
-                                    할인율
-                                </option>
-                                <option value="electric" <c:if test="${discountCategory eq 'electric'}">selected</c:if>>
-                                    전기차 할인율
-                                </option>
-                                <option value="normal" <c:if test="${discountCategory eq 'normal'}">selected</c:if>>일반
-                                    할인율
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">선택한 할인율 (%)</label>
+                    <label class="col-sm-2 col-form-label">장애인 할인율 (%)</label>
                     <div class="col-sm-4">
-                        <input type="number" name="discountValue" class="form-control"
-                               value="${discountValue}" required/>
+                        <input type="number" name="disabled" class="form-control"
+                               value="${discountList[1].discountRate}" required/>
                     </div>
                 </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">경차 할인율 (%)</label>
+                    <div class="col-sm-4">
+                        <input type="number" name="compact" class="form-control"
+                               value="${discountList[2].discountRate}"
+                               required/>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">전기차 할인율 (%)</label>
+                    <div class="col-sm-4">
+                        <input type="number" name="electric" class="form-control"
+                               value="${discountList[2].discountRate}"
+                               required/>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">일반 할인율 (%)</label>
+                    <div class="col-sm-4">
+                        <input type="number" name="normal" class="form-control"
+                               value="${discountList[3].discountRate}"
+                               required/>
+                    </div>
+                </div>
+                <%--                    <div class="row mb-3">--%>
+                <%--                        <label class="col-sm-2 col-form-label">할인 카테고리</label>--%>
+                <%--                        <div class="col-sm-4">--%>
+                <%--                            <select name="discountCategory" class="form-select">--%>
+                <%--                                <option value="disabled" <c:if test="${discountCategory eq 'disabled'}">selected</c:if>>--%>
+                <%--                                    장애인 할인율--%>
+                <%--                                </option>--%>
+                <%--                                <option value="compact" <c:if test="${discountCategory eq 'compact'}">selected</c:if>>경차--%>
+                <%--                                    할인율--%>
+                <%--                                </option>--%>
+                <%--                                <option value="electric" <c:if test="${discountCategory eq 'electric'}">selected</c:if>>--%>
+                <%--                                    전기차 할인율--%>
+                <%--                                </option>--%>
+                <%--                                <option value="normal" <c:if test="${discountCategory eq 'normal'}">selected</c:if>>일반--%>
+                <%--                                    할인율--%>
+                <%--                                </option>--%>
+                <%--                            </select>--%>
                 <button type="submit" class="btn btn-primary">적용</button>
-
             </form>
-
-            <%--            <a href="/main.do" class="btn btn-primary" type="submit">저장</a>--%>
-
-
         </main>
-
-        <!-- footer 영역 -->
-        <%@ include file="../layout/footer.jsp" %>
     </div>
+</div>
+</body>
+
+<!-- footer 영역 -->
+<%@ include file="../layout/footer.jsp" %>
+</div>
 </div>
 <!-- Bootstrap JS (Popper + Bootstrap Bundle) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

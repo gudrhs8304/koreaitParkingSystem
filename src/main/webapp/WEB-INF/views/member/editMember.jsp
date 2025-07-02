@@ -12,8 +12,6 @@
   <!-- Bootstrap 5 CSS (CDN) -->
   <link href="/assets/css/styles.css" rel="stylesheet">
 
-  <!-- SB Admin 스타일 또는 사용자 정의 CSS -->
-  <%--    <link href="/assets/css/add_style.css" rel="stylesheet">--%>
   <!--폰트 어썸 임폿 -->
   <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
@@ -61,6 +59,12 @@
         </div>
 
         <button type="submit" class="btn btn-primary">수정 완료</button>
+
+
+        <c:url var="editUrl" value="/removeMember.do">
+          <c:param name="carNumber" value="${member.carNumber}"/>
+        </c:url>
+        <a href="${editUrl}" class="btn btn-danger">삭제</a>
         <a href="/members.do" class="btn btn-secondary">취소</a>
       </form>
     </main>

@@ -10,11 +10,11 @@
 
 
     <!-- Navbar Search-->
-    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" action="/topbar.do" method="post">
         <div class="input-group">
-            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
+            <input class="form-control" type="text" placeholder="차량번호 입력" aria-label="carNumber" name="carNumber"
                    aria-describedby="btnNavbarSearch"/>
-            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+            <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
         </div>
     </form>
 
@@ -29,7 +29,7 @@
                 <li>
                     <hr class="dropdown-divider"/>
                 </li>
-                <li><a class="dropdown-item" href="/page/login/login.jsp">로그아웃</a></li>
+                <li><a class="dropdown-item" href="/logout.do">로그아웃</a></li>
             </ul>
         </li>
     </ul>

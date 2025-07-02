@@ -12,8 +12,6 @@
     <!-- Bootstrap 5 CSS (CDN) -->
     <link href="/assets/css/styles.css" rel="stylesheet">
 
-    <!-- SB Admin 스타일 또는 사용자 정의 CSS -->
-    <%--    <link href="/assets/css/add_style.css" rel="stylesheet">--%>
     <!--폰트 어썸 임폿 -->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
@@ -27,47 +25,56 @@
     <%@ include file="../layout/sidebar.jsp" %>
     <div id="layoutSidenav_content">
         <!-- 여기서 부터 메인 작업 시작. -->
-        <div class="container-fluid px-4">
-            <h1 class="mt-4">회원 목록</h1>
-            <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-table me-1"></i>
-                    등록된 회원 정보
-                </div>
-                <div class="card-body">
-                    <table id="membersTable" class="table table-bordered table-hover">
-                        <thead class="table-light text-center">
-                        <tr>
-                            <th>차량번호</th>
-                            <th>운전자명</th>
-                            <th>전화번호</th>
-                            <th>시작일</th>
-                            <th>종료일</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <%-- 반복될 부분 , 공백문자 대비 url jstl 코딩 , 파라미터로 넘길것. --%>
-                        <c:forEach var="member" items="${members}">
-                            <tr class="text-center">
-                                <td>
-                                    <c:url var="editUrl" value="/editMember.do">
-                                        <c:param name="carNumber" value="${member.carNumber}"/>
-                                    </c:url>
-                                    <a href="${editUrl}"><c:out value="${member.carNumber}"/></a>
-
-                                </td>
-                                <td><c:out value="${member.driverName}"/></td>
-                                <td><c:out value="${member.phone}"/></td>
-                                <td><c:out value="${member.startDate}"/></td>
-                                <td><c:out value="${member.endDate}"/></td>
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">회원 목록</h1>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        등록된 회원 정보
+                    </div>
+                    <div class="card-body">
+                        <table id="membersTable" class="table table-bordered table-hover">
+                            <thead class="table-light text-center">
+                            <tr>
+                                <th>차량번호</th>
+                                <th>운전자명</th>
+                                <th>전화번호</th>
+                                <th>시작일</th>
+                                <th>종료일</th>
                             </tr>
-                        </c:forEach>
+                            </thead>
+                            <tbody>
+                            <%-- 반복될 부분 , 공백문자 대비 url jstl 코딩 , 파라미터로 넘길것. --%>
+                            <c:forEach var="member" items="${members}">
+                                <tr class="text-center">
+                                    <td>
+                                        <c:url var="editUrl" value="/editMember.do">
+                                            <c:param name="carNumber" value="${member.carNumber}"/>
+                                        </c:url>
+                                        <a class="text-decoration-none text-dark fw-bold"
+                                                href="${editUrl}"><c:out value="${member.carNumber}"/></a>
 
-                        </tbody>
-                    </table>
+                                    </td>
+                                    <td><c:out value="${member.driverName}"/></td>
+                                    <td><c:out value="${member.phone}"/></td>
+                                    <td><c:out value="${member.startDate}"/></td>
+                                    <td><c:out value="${member.endDate}"/></td>
+                                </tr>
+                            </c:forEach>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="d-flex justify-content-end">
+                        <a href="/addMember.do" class="btn btn-dark">회원 등록</a>
+                    </div>
                 </div>
             </div>
-        </div>
+
+        </main>
         <!-- footer 영역 -->
         <%@ include file="../layout/footer.jsp" %>
     </div>

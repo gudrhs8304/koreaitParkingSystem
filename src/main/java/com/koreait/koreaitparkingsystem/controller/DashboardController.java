@@ -32,6 +32,8 @@ public class DashboardController extends HttpServlet {
         int usedCount = (int) spots.stream().filter(ParkingSpotDTO::isOccupied).count();
         int availableCount = spots.size() - usedCount;
 
+
+
         req.setAttribute("spots", spots);
         req.setAttribute("usedCount", usedCount);
         req.setAttribute("availableCount", availableCount);

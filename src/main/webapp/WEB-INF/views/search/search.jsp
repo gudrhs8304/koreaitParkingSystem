@@ -99,6 +99,29 @@
                 </c:if>
                 </tbody>
             </table>
+
+            <!-- 페이지네이션 -->
+            <nav class="mt-4">
+                <ul class="pagination justify-content-center">
+
+                    <!-- 이전 -->
+                    <li class="page-item ${page == 1 ? 'disabled' : ''}">
+                        <a class="page-link" href="/search.do?page=${page - 1}&keyword=${keyword}">이전</a>
+                    </li>
+
+                    <!-- 페이지 번호 -->
+                    <c:forEach begin="1" end="${totalPage}" var="p">
+                        <li class="page-item ${p == page ? 'active' : ''}">
+                            <a class="page-link" href="/search.do?page=${p}&keyword=${keyword}">${p}</a>
+                        </li>
+                    </c:forEach>
+
+                    <!-- 다음 -->
+                    <li class="page-item ${page == totalPage ? 'disabled' : ''}">
+                        <a class="page-link" href="/search.do?page=${page + 1}&keyword=${keyword}">다음</a>
+                    </li>
+                </ul>
+            </nav>
         </main>
         <!-- footer 영역 -->
         <%@ include file="../layout/footer.jsp" %>

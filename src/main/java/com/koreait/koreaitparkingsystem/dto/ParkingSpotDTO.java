@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ParkingSpotDTO {
-
     private int spotNumber;
     private boolean isOccupied;
 }

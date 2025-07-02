@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ParkingLogDTO {
-
     private int id;
     private String carNumber;
     private String carTypeCode;

@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 
 public class MonthlyMemberDTO {
-
     private String carNumber;
     private String driverName;
     private String phone;

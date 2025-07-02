@@ -19,7 +19,7 @@
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-car-rear"></i></div>
                     차량 출차
                 </a>
-                <a class="nav-link" href="page/search/search.jsp">
+                <a class="nav-link" href="/search.do">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
                     차량 검색
                 </a>

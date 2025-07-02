@@ -20,8 +20,8 @@ public enum DBConnection {
 
         config.setDriverClassName("org.mariadb.jdbc.Driver");
         config.setJdbcUrl("jdbc:mariadb://sa98077.ipdisk.co.kr:3306/koreaPark");
-        config.setUsername("kmk");
-        config.setPassword("kmk@123");
+        config.setUsername("kdh");
+        config.setPassword("kdh@123");
         config.addDataSourceProperty("cachePrepStmts", "true"); // ps
         config.addDataSourceProperty("prepStmtCacheSize", "250"); // ps의 캐시 크기
         config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048"); // ps의 캐시 sql 제한.

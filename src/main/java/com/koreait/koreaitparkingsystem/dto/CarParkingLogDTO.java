@@ -1,15 +1,16 @@
-package com.koreait.koreaitparkingsystem.vo;
+package com.koreait.koreaitparkingsystem.dto;
 
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-@Getter
+@Data
 @Builder
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class ParkingLogVO {
+public class CarParkingLogDTO {
     private int id;
     private String carNumber;
     private String carTypeCode;
@@ -17,4 +18,6 @@ public class ParkingLogVO {
     private LocalDateTime inTime;
     private LocalDateTime outTime;
     private int fee;
+
+
 }

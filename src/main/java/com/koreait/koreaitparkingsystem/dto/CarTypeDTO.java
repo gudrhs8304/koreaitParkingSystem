@@ -9,7 +9,6 @@ import lombok.*;
 @ToString
 
 public class CarTypeDTO {
-
     private String code;
     private String name;
 }

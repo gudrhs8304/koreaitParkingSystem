@@ -63,4 +63,5 @@ public enum CarTypeDAO {
             log.error(e);
         }
     }
+
 }

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class ParkingLogVO {
+public class CarParkingLogVO {
     private int id;
     private String carNumber;
     private String carTypeCode;

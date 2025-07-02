@@ -1,19 +1,17 @@
 package com.koreait.koreaitparkingsystem.vo;
 
-
 import lombok.*;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Builder
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class CarVO {
+public class CarStatusVO {
     private String carNumber;
-    private String carTypeCode;
     private String driverName;
     private String phone;
 }

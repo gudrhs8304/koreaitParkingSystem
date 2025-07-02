@@ -20,10 +20,7 @@ public enum PricingService {
     }
 
     public void updateFees(int id,int price) {
-        dao.updateFeeById(id,price);
-    }
-    public void updateFeeById(int id,int price) {
-        dao.updateFeeById(id,price);
+        dao.updateFeeById(price,id);
     }
 
     public PricingPolicyDTO searchPolicy(int id) {

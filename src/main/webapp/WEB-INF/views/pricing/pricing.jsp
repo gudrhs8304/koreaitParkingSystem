@@ -64,7 +64,7 @@
                     <label class="col-sm-2 col-form-label">경차 할인율 (%)</label>
                     <div class="col-sm-4">
                         <input type="number" name="compact" class="form-control"
-                               value="${discountList[2].discountRate}"
+                               value="${discountList[0].discountRate}"
                                required/>
                     </div>
                 </div>

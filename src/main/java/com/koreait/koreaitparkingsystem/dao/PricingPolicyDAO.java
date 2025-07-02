@@ -68,6 +68,7 @@ public enum PricingPolicyDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        System.out.println("실행 쿼리: UPDATE pricing_policy SET price = " + price + " WHERE id = " + id);
     }
 
     public PricingPolicyVO selectPriceById(int id) {
@@ -90,6 +91,7 @@ public enum PricingPolicyDAO {
             log.error(e);
         }
         return null;
+
 
     }
 }

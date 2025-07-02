@@ -46,7 +46,7 @@ public class PricingController extends HttpServlet {
 
 //                req.setAttribute("discountCategory", );
         String message = req.getParameter("message");
-        if(message != null){
+        if (message != null) {
             req.setAttribute("message", message);
         }
         log.info("*******doGet2***********");
@@ -69,47 +69,50 @@ public class PricingController extends HttpServlet {
         String maxFeeParam = req.getParameter("maxFee");
         log.info("베이스피" + baseFeeParam);
 
-//        if (baseFeeParam != null && !baseFeeParam.isEmpty()) {
-        pricingPolicyDAO.updateFeeById(1, Integer.parseInt(baseFeeParam));
+        if (baseFeeParam != null && !baseFeeParam.isEmpty()) {
+            pricingService.updateFees(1, Integer.parseInt(baseFeeParam));
             log.info(baseFeeParam);
 
-//        if (extraFeeParam != null && !extraFeeParam.isEmpty()) {
-            pricingService.updateFees(2, Integer.parseInt(extraFeeParam));
-            log.info(extraFeeParam);
+            if (extraFeeParam != null && !extraFeeParam.isEmpty()) {
+                pricingService.updateFees(2, Integer.parseInt(extraFeeParam));
+                log.info(extraFeeParam);
 
-//        if (maxFeeParam != null && !maxFeeParam.isEmpty()) {
-            pricingService.updateFees(3, Integer.parseInt(maxFeeParam));
-            log.info(maxFeeParam);
+                if (maxFeeParam != null && !maxFeeParam.isEmpty()) {
+                    pricingService.updateFees(3, Integer.parseInt(maxFeeParam));
+                    log.info(maxFeeParam);
 
-        log.info("baseFee 업데이트 " + baseFeeParam);
+                    log.info("baseFee 업데이트 " + baseFeeParam);
 //        pricingService.updateFees(1, baseFeeParam);
 
-        // 할인율 설정 업데이트
-        String disabledParam = req.getParameter("disabled");
-        String compactParam = req.getParameter("compact");
-        String electricParam = req.getParameter("electric");
-        String normalParam = req.getParameter("normal");
+                    // 할인율 설정 업데이트
+                    String disabledParam = req.getParameter("disabled");
+                    String compactParam = req.getParameter("compact");
+                    String electricParam = req.getParameter("electric");
+                    String normalParam = req.getParameter("normal");
 
-        if (disabledParam != null && !disabledParam.isEmpty()) {
-            discountPolicyService.editDiscountRate("disabled", Integer.parseInt(disabledParam));
-        }
-        if (compactParam != null && !compactParam.isEmpty()) {
-            discountPolicyService.editDiscountRate("compact", Integer.parseInt(compactParam));
-        }
-        if (electricParam != null && !electricParam.isEmpty()) {
-            discountPolicyService.editDiscountRate("electric", Integer.parseInt(electricParam));
-        }
-        if (normalParam != null && !normalParam.isEmpty()) {
-            discountPolicyService.editDiscountRate("normal", Integer.parseInt(normalParam));
-        }
+                    if (disabledParam != null && !disabledParam.isEmpty()) {
+                        discountPolicyService.editDiscountRate("disabled", Integer.parseInt(disabledParam));
+                    }
+                    if (compactParam != null && !compactParam.isEmpty()) {
+                        discountPolicyService.editDiscountRate("compact", Integer.parseInt(compactParam));
+                    }
+                    if (electricParam != null && !electricParam.isEmpty()) {
+                        discountPolicyService.editDiscountRate("electric", Integer.parseInt(electricParam));
+                    }
+                    if (normalParam != null && !normalParam.isEmpty()) {
+                        discountPolicyService.editDiscountRate("normal", Integer.parseInt(normalParam));
+                    }
 
 
-        req.setAttribute("message", "변경이 완료되었습니다." );
-        doGet(req, resp);
-
+                    req.setAttribute("message", "변경이 완료되었습니다.");
+                    doGet(req, resp);
+//                    resp.sendRedirect("/pricing.do");
+                }
+            }
+        }
     }
-//        resp.sendRedirect("/pricing.do?discountCategory=" + carTypeCode); // 선택값 유지해서 리다이렉트
 }
+
 //        String code = req.getParameter("code");
 //        int rate = Integer.parseInt(req.getParameter("rate"));
 //

@@ -5,6 +5,7 @@ import com.koreait.koreaitparkingsystem.dao.ParkingLogDAO;
 
 import com.koreait.koreaitparkingsystem.dto.CarDTO;
 import com.koreait.koreaitparkingsystem.service.CarService;
+import com.koreait.koreaitparkingsystem.service.MonthlyMemberService;
 import com.koreait.koreaitparkingsystem.vo.ParkingLogVO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -50,11 +51,11 @@ public class vehicleOutController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 📌 클라이언트가 입력한 차량번호 가져오기
         String carNumber = req.getParameter("carNumber");
-        log.info("vehicleOutController 32 carNumber = {}", carNumber);
+        log.info("vehicleOutController carNumber = {}", carNumber);
 
         // 📌 차량의 활성화된 주차 로그 가져오기
         ParkingLogVO logVO = parkingLogDAO.selectActiveLogByCarNumber(carNumber);
-        log.info("vehicleOutController 38 logVO = {}", logVO);
+        log.info("vehicleOutController logVO = {}", logVO);
 
         if (logVO == null) {
             // 🚫 입차 기록 없음
@@ -62,21 +63,30 @@ public class vehicleOutController extends HttpServlet {
         } else if (logVO.getOutTime() != null) {
             // 🚫 이미 출차된 차량
             req.setAttribute("errorMessage", "이미 출차된 차량입니다.");
-        } else {
-            // ✅ 정상 입차 상태인 차량
-            req.setAttribute("carNumber", carNumber);
-            req.setAttribute("inTime", logVO.getInTime().toString().replace("T", " "));
-            req.setAttribute("carTypeCode", logVO.getCarTypeCode());
+        } else {// ✅ 월정액 회원 여부 체크
+            boolean isMonthly = MonthlyMemberService.INSTANCE.isValidMonthlyMember(carNumber);
 
-            // 📌 주차 요금 계산 로직
-            java.sql.Timestamp now = java.sql.Timestamp.valueOf(java.time.LocalDateTime.now());
-            java.sql.Timestamp inTime = java.sql.Timestamp.valueOf(logVO.getInTime());
-            long durationMillis = now.getTime() - inTime.getTime();
-            long durationMinutes = durationMillis / (1000 * 60);
-            if (durationMinutes < 30) durationMinutes = 30;
-            double units = Math.ceil(durationMinutes / 30.0);
-            int fee = (int)(units * 3000.0);
-            req.setAttribute("fee", fee);
+            if (isMonthly) {
+                req.setAttribute("inTime", "월정액 회원");
+                req.setAttribute("fee", "0");
+            } else {
+                // 📌 주차 요금 계산 로직
+                java.sql.Timestamp now = java.sql.Timestamp.valueOf(java.time.LocalDateTime.now());
+                java.sql.Timestamp inTime = java.sql.Timestamp.valueOf(logVO.getInTime());
+                long durationMillis = now.getTime() - inTime.getTime();
+                long durationMinutes = durationMillis / (1000 * 60);
+                if (durationMinutes < 30) durationMinutes = 30;
+                double units = Math.ceil(durationMinutes / 30.0);
+                int fee = (int)(units * 3000.0);
+                req.setAttribute("fee", fee);
+                req.setAttribute("inTime", logVO.getInTime().toString().replace("T", " "));
+            }
+                req.setAttribute("carNumber", carNumber);
+                req.setAttribute("carTypeCode", logVO.getCarTypeCode());
+            // ✅ 정상 입차 상태인 차량
+
+
+
         }
 
         // 📌 결과 JSP 페이지로 포워드

@@ -31,11 +31,10 @@
             </c:if>
 
             <!-- 차량 검색 -->
-            <form action="/vehicleOut.do" method="post" class="row align-items-center mb-5">
-                <div class="col-auto">
-                    <label for="carNumber" class="col-form-label fs-3">차량번호</label>
-                </div>
+            <form action="/vehicleOut.do" method="post" class="row align-items-center d-grid gap-3 column-gap-1">
+
                 <div class="col-md-6">
+                    <label for="carNumber" class="col-form-control fs-3">차량 번호</label>
                     <input type="text" id="carNumber" name="carNumber"
                            class="form-control form-control-lg w-100"
                            value="${carNumber != null ? carNumber : ''}" placeholder="차량번호 입력"/>
@@ -80,10 +79,10 @@
                 </div>
             </div>
         </main>
-    </div>3
+        <%@ include file="../layout/footer.jsp" %>
+    </div>
 </div>
 
-<%@ include file="../layout/footer.jsp" %>
 </div>
 
 

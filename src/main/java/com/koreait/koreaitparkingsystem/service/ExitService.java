@@ -161,13 +161,19 @@ public enum ExitService {
             log.warn("ExitService 164 ❌ 활성 주차 기록이 없습니다. 출차 처리 불가.");
             throw new RuntimeException("출차 처리할 입차 기록이 없습니다.");
         }
-
-        // 2. 요금 계산
         int fee = ParkingLogService.INSTANCE.calculateFee(logDTO);
+
+        boolean isMonthly = MonthlyMemberService.INSTANCE.isValidMonthlyMember(carDTO.getCarNumber());
+        if (isMonthly) {
+            fee = 0;
+        }
+        ParkingLogService.INSTANCE.updateParkingLog(carDTO, fee);
+        // 2. 요금 계산
         log.info("ExitService 170 💰 계산된 주차 요금 = " + fee);
 
         // 3. parking_log 출차시간, 요금 update
-        ParkingLogService.INSTANCE.updateParkingLog(carDTO);
+        java.sql.Timestamp outTime = java.sql.Timestamp.valueOf(java.time.LocalDateTime.now());
+        ParkingLogDAO.INSTANCE.updateExit(carDTO.getCarNumber(), outTime, fee);
 
         // 4. parking_spot 자리 비우기
         ParkingSpotService.INSTANCE.isParkingSpot(carDTO);
@@ -179,12 +185,60 @@ public enum ExitService {
     public void processExitByCarNumber(String carNumber) {
         CarDTO carDTO = CarDTO.builder().carNumber(carNumber).build();
 
-        // 1. parking_log 테이블에 출차시간/요금 갱신
-        ParkingLogService.INSTANCE.updateParkingLog(carDTO);
+        // 활성 로그 가져오기
+        ParkingLogDTO logDTO = ParkingLogService.INSTANCE.getActiveLogByCarNumber(carNumber);
+        if (logDTO == null) {
+            log.warn("processExitByCarNumber ❌ 활성 주차 기록이 없습니다.");
+            throw new RuntimeException("출차 처리할 입차 기록이 없습니다.");
+        }
 
-        // 2. 주차 자리 상태 비움 처리
+        int fee = ParkingLogService.INSTANCE.calculateFee(logDTO);
+
+        boolean isMonthly = MonthlyMemberService.INSTANCE.isValidMonthlyMember(carNumber);
+        if (isMonthly) {
+            fee = 0;
+        }
+
+        ParkingLogService.INSTANCE.updateParkingLog(carDTO, fee);
         ParkingSpotService.INSTANCE.isParkingSpot(carDTO);
 
-        // 👉 간단히 차량번호만으로 빠르게 출차 처리할 때 사용
+        log.info("processExitByCarNumber ✅ 출차 처리 완료");
+    }
+
+    public void searchCarAndSetAttributeWithMonthlyCheck(HttpServletRequest req, CarDTO carDTO) {
+        String carNumber = carDTO.getCarNumber();
+
+        // ✅ 월정액 회원 여부 체크
+        boolean isMonthlyMember = MonthlyMemberService.INSTANCE.isValidMonthlyMember(carNumber);
+
+        if (isMonthlyMember) {
+            log.info("✅ 월정액 회원입니다. 주차요금은 0원!");
+            req.setAttribute("inTime", "월정액 회원");
+            req.setAttribute("fee", "0원");
+            req.setAttribute("carNumber", carNumber);
+            return;
+        }
+
+        // ✅ 월정액 회원 아니면 기존 검색 로직 사용
+        ParkingLogDTO dto = ParkingLogService.INSTANCE.getActiveLogByCarNumber(carNumber);
+
+        if (dto == null) {
+            req.setAttribute("errorMessage", "차량 정보가 없습니다.");
+            return;
+        }
+        if (dto.getInTime() == null) {
+            req.setAttribute("errorMessage", "입차 기록이 없습니다.");
+            return;
+        }
+        if (dto.getOutTime() != null) {
+            req.setAttribute("errorMessage", "이미 출차된 차량입니다.");
+            return;
+        }
+
+        int finalFee = TotalFeeService.INSTANCE.calculateFee(dto);
+
+        req.setAttribute("inTime", dto.getInTime().toString().replace("T", " "));
+        req.setAttribute("fee", finalFee);
+        req.setAttribute("carNumber", carNumber);
     }
 }

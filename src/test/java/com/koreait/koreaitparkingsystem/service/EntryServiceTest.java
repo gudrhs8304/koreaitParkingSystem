@@ -13,8 +13,8 @@ class EntryServiceTest {
     @Test
     void processEntry() {
         CarDTO carDTO = CarDTO.builder()
-                .carNumber("123456")
-                .carTypeCode("normal")
+                .carNumber("123460")
+                .carTypeCode("electric")
                 .phone("010-1234-5678")
                 .driverName("김갑환")
                 .build();

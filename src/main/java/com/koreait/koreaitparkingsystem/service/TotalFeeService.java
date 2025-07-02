@@ -21,6 +21,11 @@ public enum TotalFeeService {
     private final MonthlyMemberService monthlyMemberService =  MonthlyMemberService.INSTANCE;
     private final CarDAO carDAO = CarDAO.INSTANCE;
 
+    /*
+     * ✅ [출차 차량 요금 정보 출력]
+     * - 차량번호로 마지막 출차된 ParkingLog 조회
+     * - 할인율 계산해서 원래 요금과 할인 후 요금을 log로 출력
+     */
     public void printTotalFee(CarDTO carDTO) {
         // 출차된 parking_log 중 가장 최근 기록 가져오기
         ParkingLogVO logVO = parkingLogDAO.selectLastLogByCarNumber(carDTO.getCarNumber());
@@ -39,13 +44,18 @@ public enum TotalFeeService {
                 discountedFee = originalFee - (originalFee * discountRate / 100);
             }
 
-            log.info("원래 요금: " + originalFee);
-            log.info("할인율(" + discountRate + "%) 적용된 최종 요금: " + discountedFee);
+            log.info("TotalFeeService 42 원래 요금: " + originalFee);
+            log.info("TotalFeeService 43 할인율(" + discountRate + "%) 적용된 최종 요금: " + discountedFee);
         } else {
-            log.info("주차 로그를 찾을 수 없습니다.");
+            log.info("TotalFeeService 45 주차 로그를 찾을 수 없습니다.");
         }
     }
 
+    /*
+     * ✅ [주차 요금 계산]
+     * - 입차시간과 현재시간 차이를 계산
+     * - 30분 단위로 기본 요금을 곱해 주차 요금 산출
+     */
     public int calculateFee(ParkingLogDTO logDTO) {
         if (logDTO == null || logDTO.getInTime() == null) {
             return 0; // 안전: 계산 못하면 기본 0원
@@ -64,6 +74,10 @@ public enum TotalFeeService {
         return (int) fee;
     }
 
+    /*
+     * ✅ [할인 금액 계산]
+     * - 원래 요금과 할인율을 받아서 할인 금액만 계산
+     */
     public int calculateDiscountAmount(int originalFee, int discountRate) {
         return (originalFee * discountRate) / 100;
     }

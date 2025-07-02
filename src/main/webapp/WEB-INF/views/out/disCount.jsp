@@ -46,19 +46,19 @@
                         <div class="col-sm-10 d-flex align-items-center gap-3">
                             <div class="form-check">
                                 <input type="radio" name="discountType" value="disabled"
-                                ${empty carTypeCode eq 'disabled' ? 'checked="checked"' : ''} />
+                                ${empty discountType eq 'disabled' ? 'checked="checked"' : ''} />
                                 <label for="discount1" class="form-check-label">장애인</label>
                             </div>
                             <div class="form-check">
                                 <input type="radio" name="discountType" id="discount2" value="compact"
                                        class="form-check-input"
-                                ${carTypeCode eq 'compact' ? 'checked="checked"' : ''}/>
+                                ${discountType eq 'compact' ? 'checked="checked"' : ''}/>
                                 <label for="discount2" class="form-check-label">경차</label>
                             </div>
                             <div class="form-check">
                                 <input type="radio" name="discountType" id="discount3" value="electric"
                                        class="form-check-input"
-                                ${carTypeCode eq 'electric' ? 'checked="checked"' : ''}/>
+                                ${discountType eq 'electric' ? 'checked="checked"' : ''}/>
                                 <label for="discount3" class="form-check-label">전기차</label>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">할인 적용 금액</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" readonly value="${discountAmount}"/>
+                    <input type="text" name=discountAmount" class="form-control"  value="${discountAmount}원" readonly/>
                 </div>
             </div>
 
@@ -82,10 +82,11 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">결제 요금</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" readonly value="${finalFee}"/>
+                    <input type="text" name="finalFee" class="form-control"  value="${finalFee}원" readonly/>
                 </div>
             </div>
             <form action="/out.do" method="post" class="mt-3">
+                <input type="hidden" name="carNumber" value="${carNumber}"/>
                 <input type="submit" name="submitExit" value="출차 처리" class="btn btn-success"/>
             </form>
 

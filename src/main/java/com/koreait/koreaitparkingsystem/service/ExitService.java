@@ -27,6 +27,7 @@ public enum ExitService {
     private final CarDAO carDAO = CarDAO.INSTANCE;
 
 
+    // ✅ 차량 검색: 활성 주차 기록 확인 후 요금 계산값 세팅
     public void searchCarAndSetAttribute(HttpServletRequest req, CarDTO carDTO) {
         ParkingLogDTO dto = ParkingLogService.INSTANCE.getActiveLogByCarNumber(carDTO.getCarNumber());
 
@@ -50,6 +51,7 @@ public enum ExitService {
         req.setAttribute("carNumber", carDTO.getCarNumber());
     }
 
+    // ✅ 차량의 carTypeCode를 조회하여 할인용 라디오 버튼 자동 체크용으로 세팅.
     public void setCarTypeCodeForDiscount(HttpServletRequest req, CarDTO carDTO) {
         // 차량 정보 조회
         CarDTO result = CarService.INSTANCE.getCar(carDTO);
@@ -63,6 +65,7 @@ public enum ExitService {
         }
     }
 
+    // ✅ 특정 차량번호의 마지막 출차 로그를 기반으로 할인 금액 계산 + 세팅.
     public void calculateDiscountedFee(HttpServletRequest req, CarDTO carDTO, String discountType) {
         // 1) 최근 출차 로그 가져오기 (DTO)
         ParkingLogDTO logDTO = ParkingLogService.INSTANCE.getLastLogByCarNumber(carDTO.getCarNumber());
@@ -90,6 +93,7 @@ public enum ExitService {
         req.setAttribute("discountRate", discountRate);
     }
 
+    // ✅ 할인 페이지 진입 시: 활성 로그 + carTypeCode + 요금 + 할인율 세팅
     public void prepareDiscountPage(HttpServletRequest req, String carNumber) {
         ParkingLogDTO logDTO = ParkingLogService.INSTANCE.getActiveLogByCarNumber(carNumber);
 
@@ -99,75 +103,68 @@ public enum ExitService {
         }
 
         String carTypeCode = logDTO.getCarTypeCode();
+        req.setAttribute("carTypeCode", carTypeCode);
 
         // 요금 가져오기 (출차 전이면 실시간 계산)
-        int fee = logDTO.getFee();
-        if (fee == 0) {
-            fee = ParkingLogService.INSTANCE.calculateFee(logDTO);
-        }
+        int fee = TotalFeeService.INSTANCE.calculateFee(logDTO);
 
-        // 할인율 가져오기
-        int discountRate = 0;
-        switch (carTypeCode) {
-            case "disabled":
-                discountRate = 50; break;
-            case "compact":
-                discountRate = 30; break;
-            case "electric":
-                discountRate = 20; break;
-        }
-
-        int discountAmount = fee * discountRate / 100;
+        int discountRate = DiscountPolicyService.INSTANCE.getDiscountRateByTypeCode(carTypeCode);
+        log.info("ExitService 108 discountRate = {}", discountRate);
+        int discountAmount = TotalFeeService.INSTANCE.calculateDiscountAmount(fee, discountRate);
+        log.info("ExitService 110 discountAmount = {}", discountAmount);
         int finalFee = fee - discountAmount;
+        log.info("ExitService 112 finalFee = {}", finalFee);
+
 
         req.setAttribute("carNumber", carNumber);
-        req.setAttribute("carTypeCode", carTypeCode);
         req.setAttribute("discountAmount", discountAmount);
         req.setAttribute("finalFee", finalFee);
     }
 
+    // ✅ 할인 계산 + 결과 세팅 (출차 시점에서 실행)
     public void calculateDiscountAndSetAttributes(HttpServletRequest req, String carNumber, String discountType) {
-        log.info("✅ calculateDiscountAndSetAttributes 시작");
-        log.info("carNumber = " + carNumber);
-        log.info("discountType = " + discountType);
+        log.info("ExitService 130 ✅ calculateDiscountAndSetAttributes 시작");
+        log.info("ExitService 131 carNumber = " + carNumber);
+        log.info("ExitService 132 discountType = " + discountType);
 
         ParkingLogDTO logDTO = ParkingLogService.INSTANCE.getActiveLogByCarNumber(carNumber);
         if (logDTO == null) {
-            log.info("❌ logDTO is null");
+            log.info("ExitService 136 ❌ logDTO is null");
             req.setAttribute("error", "차량 정보를 찾을 수 없습니다.");
             return;
         }
 
         int originalFee = ParkingLogService.INSTANCE.calculateFee(logDTO);
-        log.info("originalFee = " + originalFee);
+        log.info("ExitService 142 originalFee = " + originalFee);
 
         int discountRate = DiscountPolicyDAO.INSTANCE.selectDiscountRate(discountType);
-        log.info("discountRate = " + discountRate);
+        log.info("ExitService 145 discountRate = " + discountRate);
 
         int discountAmount = originalFee * discountRate / 100;
         int finalFee = originalFee - discountAmount;
 
-        log.info("discountAmount = " + discountAmount);
-        log.info("finalFee = " + finalFee);
+        log.info("ExitService 150 discountAmount = " + discountAmount);
+        log.info("ExitService 151 finalFee = " + finalFee);
 
         req.setAttribute("discountAmount", discountAmount);
         req.setAttribute("finalFee", finalFee);
     }
 
+    // ✅ 출차 처리 메인 메서드: parking_log 출차시간/요금 갱신 + 자리 비움
     public void processExit(CarDTO carDTO) {
-        log.info("✅ processExit 시작");
-        log.info("차량번호 = " + carDTO.getCarNumber());
+        log.info("ExitService 158 ✅ processExit 시작");
+        log.info("ExitService 159 차량번호 = " + carDTO.getCarNumber());
 
         // 1. 활성 로그 가져오기
         ParkingLogDTO logDTO = ParkingLogService.INSTANCE.getActiveLogByCarNumber(carDTO.getCarNumber());
         if (logDTO == null) {
-            log.warn("❌ 활성 주차 기록이 없습니다. 출차 처리 불가.");
+            log.warn("ExitService 164 ❌ 활성 주차 기록이 없습니다. 출차 처리 불가.");
             throw new RuntimeException("출차 처리할 입차 기록이 없습니다.");
         }
 
         // 2. 요금 계산
         int fee = ParkingLogService.INSTANCE.calculateFee(logDTO);
-        log.info("💰 계산된 주차 요금 = " + fee);
+        log.info("ExitService 170 💰 계산된 주차 요금 = " + fee);
 
         // 3. parking_log 출차시간, 요금 update
         ParkingLogService.INSTANCE.updateParkingLog(carDTO);
@@ -175,38 +172,19 @@ public enum ExitService {
         // 4. parking_spot 자리 비우기
         ParkingSpotService.INSTANCE.isParkingSpot(carDTO);
 
-        log.info("✅ 출차 처리 완료");
+        log.info("ExitService 178 ✅ 출차 처리 완료");
     }
 
+    // ✅ 차량번호로 간단 출차 처리: ParkingLog 출차시간/요금 갱신 + 자리 비움
     public void processExitByCarNumber(String carNumber) {
         CarDTO carDTO = CarDTO.builder().carNumber(carNumber).build();
 
-        // 1. 출차 로그 업데이트
+        // 1. parking_log 테이블에 출차시간/요금 갱신
         ParkingLogService.INSTANCE.updateParkingLog(carDTO);
 
         // 2. 주차 자리 상태 비움 처리
         ParkingSpotService.INSTANCE.isParkingSpot(carDTO);
 
-        // 필요하다면 추가 처리 가능!
+        // 👉 간단히 차량번호만으로 빠르게 출차 처리할 때 사용
     }
-
-
-
-
-
-
-
-
-
-//    public void searchCar(CarDTO carDTO) {
-//        CarVO carVO = carDAO.selectCarByNum(carDTO.getCarNumber());
-//        carDAO.selectCarByNum(carDTO.getCarNumber()) == parkingLogDAO.selectLastLogByCarNumber(carDTO.getCarNumber())
-//        CarDTO car = null;
-//        if (carVO.getOutTime() != null) {
-//            car = modelMapper.map(carVO, CarDTO.class);
-//            log.info(car.getCarNumber());
-//        } else {
-//            log.info("차량이 없습니다.");
-//        }
-//    }
 }

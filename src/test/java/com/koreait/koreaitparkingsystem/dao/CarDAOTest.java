@@ -17,10 +17,10 @@ class CarDAOTest {
     @Test
     void insertCar() {
         CarVO carVO = CarVO.builder()
-                .carNumber("냐옹")
-                .carTypeCode("normal")
+                .carNumber("10가1239")
+                .carTypeCode("electric")
                 .driverName("냐옹")
-                .phone("냐옹")
+                .phone("123")
                 .build();
         carDAO.insertCar(carVO);
     }

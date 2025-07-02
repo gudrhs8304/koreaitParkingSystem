@@ -24,18 +24,20 @@ public enum CarselectService {
     public void printCar(CarDTO carDTO) {
         CarDTO result = carService.getCar(carDTO);
         if (result != null) {
-            log.info("차량 타입: " + result.getCarTypeCode());
+            log.info("CarselectService 27 차량 타입: " + result.getCarTypeCode());
         } else {
-            log.info("해당 차량이 존재하지 않습니다.");
+            log.info("CarselectService 29 해당 차량이 존재하지 않습니다.");
         }
     }
 
+    // 차량 정보 출력 (차량 타입 이름까지 출력)
     public void printCarType(CarDTO carDTO) {
         CarDTO result = carService.getCar(carDTO);
         if (result != null) {
             String carTypeCode = result.getCarTypeCode();
             CarTypeDTO carTypeDTO = null;
 
+            // 모든 차량 타입 목록 조회 후 코드 비교
             for (CarTypeVO ctVO : carTypeDAO.selectCarType()) {
                 CarTypeDTO ct = modelMapper.map(ctVO, CarTypeDTO.class);
                 if (ct.getCode().equals(carTypeCode)) {
@@ -45,12 +47,12 @@ public enum CarselectService {
             }
 
             if (carTypeDTO != null) {
-                log.info("차량 이름: " + carTypeDTO.getName());
+                log.info("CarselectService 48 차량 이름: " + carTypeDTO.getName());
             } else {
-                log.info("차종 정보를 찾을 수 없습니다.");
+                log.info("CarselectService 50 차종 정보를 찾을 수 없습니다.");
             }
         } else {
-            log.info("해당 차량이 존재하지 않습니다.");
+            log.info("CarselectService 53 해당 차량이 존재하지 않습니다.");
         }
     }
 }

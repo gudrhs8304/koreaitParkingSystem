@@ -3,8 +3,11 @@ package com.koreait.koreaitparkingsystem.service;
 import com.koreait.koreaitparkingsystem.dao.*;
 import com.koreait.koreaitparkingsystem.dto.CarDTO;
 import com.koreait.koreaitparkingsystem.util.MapperUtil;
+import com.koreait.koreaitparkingsystem.vo.DiscountPolicyVO;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
+
+import java.util.List;
 
 @Log4j2
 public enum DiscountPolicyService {
@@ -19,7 +22,9 @@ public enum DiscountPolicyService {
     private final MonthlyMemberService monthlyMemberService =  MonthlyMemberService.INSTANCE;
     private final CarDAO carDAO = CarDAO.INSTANCE;
 
-
+    public void editDiscountRate(String code, int rate) {
+        discountPolicyDAO.updateDiscountRate(code, rate);
+    }
 
     // 차량 정보 기반으로 할인 정책 확인 후 로그 출력
     public static void printDiscountPolicy(CarDTO carDTO) {
@@ -40,5 +45,8 @@ public enum DiscountPolicyService {
     // 차종 코드로 할인율 조회 (출차 계산 등에 활용)
     public int getDiscountRateByTypeCode(String carTypeCode) {
         return discountPolicyDAO.selectDiscountRate(carTypeCode);
+    }
+    public List<DiscountPolicyVO> getAllDiscounts() {
+        return discountPolicyDAO.selectAll(); // DAO에서 전체 할인 정보 불러오는 메서드
     }
 }

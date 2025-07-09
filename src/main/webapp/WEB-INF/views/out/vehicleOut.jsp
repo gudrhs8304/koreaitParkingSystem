@@ -6,9 +6,13 @@
 <head>
     <meta charset="UTF-8"/>
     <title>코리아 IT 주차관리 시스템</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link href="/assets/css/styles.css" rel="stylesheet"/>
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- side_bar toggle -->
+    <script src="../../../assets/js/scripts.js"></script>
+    <!-- Bootstrap 5 CSS -->
+    <link href="../../../assets/css/styles.css" rel="stylesheet">
+    <!--폰트 어썸 -->
+    <script src="../../../assets/js/fontAwsome.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -25,9 +29,9 @@
 
             <!-- 경고 메시지 -->
             <c:if test="${not empty errorMessage}">
-            <div class="alert alert-danger" role="alert">
-                    ${errorMessage}
-            </div>
+                <div class="alert alert-danger" role="alert">
+                        ${errorMessage}
+                </div>
             </c:if>
 
             <!-- 차량 검색 -->
@@ -73,32 +77,27 @@
                 </div>
             </div>
 
-    <!-- 할인 적용 & 출차 처리 -->
-    <div class="row g-4 mt-5">
-        <div class="col-12 col-md-6">
-            <form action="/disCount.do" method="post" class="h-100">
-                <input type="hidden" name="carNumber" value="${carNumber}"/>
-                <input type="hidden" name="carTypeCode" value="${carTypeCode}"/>
-                <button type="submit" class="btn btn-success btn-lg w-100 py-4">할인 적용</button>
-            </form>
-        </div>
-        <div class="col-12 col-md-6">
-            <form action="/out.do" method="post" class="h-100">
-                <input type="hidden" name="carNumber" value="${carNumber}"/>
-                <button type="submit" class="btn btn-secondary btn-lg w-100 py-4">출차 처리</button>
-            </form>
-        </div>
+            <!-- 할인 적용 & 출차 처리 -->
+            <div class="row g-4 mt-5">
+                <div class="col-12 col-md-6">
+                    <form action="/disCount.do" method="post" class="h-100">
+                        <input type="hidden" name="carNumber" value="${carNumber}"/>
+                        <input type="hidden" name="carTypeCode" value="${carTypeCode}"/>
+                        <button type="submit" class="btn btn-success btn-lg w-100 py-4">할인 적용</button>
+                    </form>
+                </div>
+                <div class="col-12 col-md-6">
+                    <form action="/out.do" method="post" class="h-100">
+                        <input type="hidden" name="carNumber" value="${carNumber}"/>
+                        <button type="submit" class="btn btn-secondary btn-lg w-100 py-4">출차 처리</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <%@ include file="../layout/footer.jsp" %>
     </div>
-    </main>
-    <%@ include file="../layout/footer.jsp" %>
 </div>
-</div>
-
-</div>
-
 
 <!-- Bootstrap Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
-</body>
+<script src="../../../assets/js/bootStrap.js"></script></body>
 </html>

@@ -1,4 +1,4 @@
-package com.koreait.koreaitparkingsystem.controller;
+package com.koreait.koreaitparkingsystem.controller.view;
 
 
 import jakarta.servlet.ServletException;

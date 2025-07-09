@@ -1,8 +1,7 @@
-package com.koreait.koreaitparkingsystem.controller;
+package com.koreait.koreaitparkingsystem.controller.pricing;
 
 
 import com.koreait.koreaitparkingsystem.dao.PricingPolicyDAO;
-import com.koreait.koreaitparkingsystem.dto.PricingPolicyDTO;
 import com.koreait.koreaitparkingsystem.service.DiscountPolicyService;
 import com.koreait.koreaitparkingsystem.service.PricingService;
 import com.koreait.koreaitparkingsystem.vo.DiscountPolicyVO;
@@ -15,7 +14,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.List;
 
 @Log4j2

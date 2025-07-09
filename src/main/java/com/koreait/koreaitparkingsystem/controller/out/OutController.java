@@ -1,6 +1,5 @@
-package com.koreait.koreaitparkingsystem.controller;
+package com.koreait.koreaitparkingsystem.controller.out;
 
-import com.koreait.koreaitparkingsystem.dto.CarDTO;
 import com.koreait.koreaitparkingsystem.service.ExitService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

@@ -1,6 +1,5 @@
-package com.koreait.koreaitparkingsystem.controller;
+package com.koreait.koreaitparkingsystem.controller.search;
 
-import com.koreait.koreaitparkingsystem.dto.CarParkingLogDTO;
 import com.koreait.koreaitparkingsystem.dto.CarStatusDTO;
 import com.koreait.koreaitparkingsystem.service.CarStatusService;
 import jakarta.servlet.http.HttpServlet;

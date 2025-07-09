@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class ParkingSpotDTO {
     private int spotNumber;
     private boolean isOccupied;
-    private String carNumber;
+    private String carNumber; // 컬럼 형태의 카넘버 추가.
 
     // jstl 호환성 문제로 메서드 재정의. 오버라이드는 아님.
     public boolean getIsOccupied() {

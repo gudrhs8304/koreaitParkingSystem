@@ -1,9 +1,8 @@
-package com.koreait.koreaitparkingsystem.controller;
+package com.koreait.koreaitparkingsystem.controller.out;
 
 import com.koreait.koreaitparkingsystem.dao.ParkingLogDAO;
 import com.koreait.koreaitparkingsystem.dto.CarDTO;
 import com.koreait.koreaitparkingsystem.dto.ParkingLogDTO;
-import com.koreait.koreaitparkingsystem.service.CarService;
 import com.koreait.koreaitparkingsystem.service.ExitService;
 import com.koreait.koreaitparkingsystem.service.ParkingLogService;
 import com.koreait.koreaitparkingsystem.vo.ParkingLogVO;
@@ -15,7 +14,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
 @Log4j2
 @WebServlet("/disCount.do")

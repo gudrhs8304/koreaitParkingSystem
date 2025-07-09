@@ -1,7 +1,6 @@
-package com.koreait.koreaitparkingsystem.controller;
+package com.koreait.koreaitparkingsystem.controller.in;
 
 import com.koreait.koreaitparkingsystem.dto.CarDTO;
-import com.koreait.koreaitparkingsystem.dto.ParkingLogDTO;
 import com.koreait.koreaitparkingsystem.service.EntryService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 /**
  * ✅ EntryController
@@ -23,7 +21,6 @@ import java.time.LocalDateTime;
 @Log4j2
 @WebServlet("/entry.do")
 public class EntryController extends HttpServlet {
-
 
 
     private final EntryService entryService = EntryService.INSTANCE;
@@ -52,19 +49,11 @@ public class EntryController extends HttpServlet {
 
         // 📌 파라미터 추출
         String carNumber = req.getParameter("carNumber");
-        
-        // 컨트롤러단에서 예외 처리할지 고민해봐야함.
-//        if (carNumber == null || carNumber.isBlank()) {
-//            req.setAttribute("error", "차량 번호는 필수입니다.");
-//            req.getRequestDispatcher("/WEB-INF/views/in/vehicleIn.jsp").forward(req, resp);
-//            return;
-//        }
-//
         String carTypeCode = req.getParameter("carTypeCode");
         String driverName = req.getParameter("driverName");
         String phone = req.getParameter("phone");
 
-        log.info("번호: {} , 코드 : {} , 이름 : {} , 폰 : {}",carNumber,carTypeCode,driverName,phone);
+        log.info("번호: {} , 코드 : {} , 이름 : {} , 폰 : {}", carNumber, carTypeCode, driverName, phone);
 
         // 📌 DTO 생성
         CarDTO carDTO = CarDTO.builder()
@@ -77,6 +66,7 @@ public class EntryController extends HttpServlet {
         req.setAttribute("carDTO", carDTO);
 
         // 📌 입차 처리 + 예외/중복 체크
+
         try {
             entryService.processEntry(carDTO);
             req.setAttribute("successMessage", "입차 등록이 성공적으로 완료되었습니다.");
@@ -84,6 +74,7 @@ public class EntryController extends HttpServlet {
             log.error("입차 처리 중 오류 발생", e);
             req.setAttribute("errorMessage", "입차 등록 실패: " + e.getMessage());
         }
+        
         // 📌 결과를 JSP로 전달
         req.getRequestDispatcher("/WEB-INF/views/in/vehicleIn.jsp").forward(req, resp);
     }

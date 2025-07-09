@@ -18,13 +18,14 @@ public enum EntryService {
     private final ModelMapper modelMapper = MapperUtil.INSTANCE.getInstance();
 
     public void processEntry(CarDTO carDTO) {
+
         // ✅ 이미 활성화된 입차 로그가 있는지 확인
         ParkingLogDTO activeLog = ParkingLogService.INSTANCE.getActiveLogByCarNumber(carDTO.getCarNumber());
         if (activeLog != null && activeLog.getOutTime() == null) {
             throw new RuntimeException("이미 입차 처리된 차량입니다. 출차 후 다시 등록해주세요.");
         }
 
-        // ✅ 차량 등록 여부 확인
+        // ✅ 차량 등록 여부 확인 및 Car table 추가 처리.
         if (!carService.isRegistered(carDTO.getCarNumber())) {
             carService.addCar(carDTO);
         }

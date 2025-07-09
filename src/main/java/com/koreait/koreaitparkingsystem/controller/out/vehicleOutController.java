@@ -1,10 +1,9 @@
-package com.koreait.koreaitparkingsystem.controller;
+package com.koreait.koreaitparkingsystem.controller.out;
 
 import com.koreait.koreaitparkingsystem.dao.ParkingSpotDAO;
 import com.koreait.koreaitparkingsystem.dao.ParkingLogDAO;
 
 import com.koreait.koreaitparkingsystem.dto.CarDTO;
-import com.koreait.koreaitparkingsystem.service.CarService;
 import com.koreait.koreaitparkingsystem.service.MonthlyMemberService;
 import com.koreait.koreaitparkingsystem.service.TotalFeeService;
 import com.koreait.koreaitparkingsystem.vo.ParkingLogVO;

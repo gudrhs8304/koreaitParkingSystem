@@ -1,7 +1,6 @@
-<!-- Login Page -->
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- Login Page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,21 +23,28 @@
                         <div class="card shadow-lg border-0 rounded-lg mt-5">
                             <div class="card-header"><h3 class="text-center font-weight-light my-4">로그인</h3></div>
                             <div class="card-body">
+                                <c:if test="${not empty error}">
+                                    <div class="alert alert-danger text-center mt-2">
+                                            ${error}
+                                    </div>
+                                </c:if>
                                 <form action="${pageContext.request.contextPath}/login.do" method="post">
                                 <div class="form-floating mb-3">
                                         <input class="form-control" id="username" name="username" type="email"/>
                                         <label for="username">이메일</label>
                                     </div>
+
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="password" name="password" type="password"/>
                                         <label for="password">비밀 번호</label>
                                     </div>
+
                                     <div class="form-check mb-3">
-                                        <input class="form-check-input" id="rememberPassword" type="checkbox" name="remember" value="" />
-                                        <label class="form-check-label" for="rememberPassword">자동 로그인</label>
+                                        <input class="form-check-input" id="remember" type="checkbox" name="remember"/>
+                                        <label class="form-check-label" for="remember">자동 로그인</label>
                                     </div>
-                                    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                        <a class="small" href="#">비밀번호를 잊어 버리셨나요?</a>
+
+                                    <div class="d-flex align-items-center justify-content-end mt-4 mb-0">
                                         <button type="submit" class="btn btn-primary">로그인</button>
                                     </div>
                                 </form>
@@ -55,11 +61,9 @@
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid px-4">
                 <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                    <div class="text-muted">Copyright &copy; Copyright &copy; korea It Parking System</div>
                     <div>
                         <a href="#">Privacy Policy</a>
-                        &middot;
-                        <a href="#">Terms &amp; Conditions</a>
                     </div>
                 </div>
             </div>

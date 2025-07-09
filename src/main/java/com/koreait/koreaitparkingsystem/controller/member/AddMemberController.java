@@ -1,4 +1,4 @@
-package com.koreait.koreaitparkingsystem.controller;
+package com.koreait.koreaitparkingsystem.controller.member;
 
 import com.koreait.koreaitparkingsystem.dto.MonthlyMemberDTO;
 import com.koreait.koreaitparkingsystem.service.MonthlyMemberService;

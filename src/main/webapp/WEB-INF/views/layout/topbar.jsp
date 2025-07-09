@@ -1,35 +1,32 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Topbar Include -->
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="/index.jsp">주차관리 시스템</a>
+<nav class="sb-topnav navbar navbar-expand navbar-light bg-primary shadow-sm">
+    <!-- Navbar Brand -->
+    <a class="navbar-brand text-white ps-3 fw-bold" href="/index.jsp">KOREAIT PARKING</a>
 
-    <!-- Sidebar Toggle-->
-    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
-            class="fas fa-bars"></i></button>
+    <!-- Sidebar Toggle -->
+    <button class="btn btn-link text-white btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+    </button>
 
-
-    <!-- Navbar Search-->
+    <!-- Search Form -->
     <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" action="/topbar.do" method="post">
         <div class="input-group">
-            <input class="form-control" type="text" placeholder="차량번호 입력" aria-label="carNumber" name="carNumber"
-                   aria-describedby="btnNavbarSearch"/>
-            <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
+            <input class="form-control border-0 shadow-sm" type="text" placeholder="차량번호 입력" name="carNumber" />
+            <button class="btn btn-light text-primary fw-bold" id="btnNavbarSearch" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
         </div>
     </form>
 
-
-    <!-- Navbar-->
+    <!-- User Dropdown -->
     <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
-               aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                <i class="fas fa-user fa-fw"></i>
+            </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">Settings</a></li>
-                <li>
-                    <hr class="dropdown-divider"/>
-                </li>
-                <li><a class="dropdown-item" href="/logout.do">로그아웃</a></li>
+                <li><a class="dropdown-item text-dark" href="/logout.do">로그아웃</a></li>
             </ul>
         </li>
     </ul>

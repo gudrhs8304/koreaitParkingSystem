@@ -13,7 +13,7 @@ import java.io.IOException;
 public class UTF8Filter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        log.info("==========UTF8Filter(doFilter)==========");
+//        log.info("==========UTF8Filter(doFilter)==========");
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;

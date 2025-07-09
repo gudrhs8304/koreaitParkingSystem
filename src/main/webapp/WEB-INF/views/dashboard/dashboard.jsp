@@ -9,7 +9,7 @@
 
         <div class="col-xl-3 col-md-6">
             <div class="card bg-light text-dark mb-4">
-                <div class="card-body">전체 주차 공간: ${parkingSpots.size()}대</div>
+                <div class="card-body">전체 주차 공간: ${parkingSpots}대</div>
             </div>
         </div>
 

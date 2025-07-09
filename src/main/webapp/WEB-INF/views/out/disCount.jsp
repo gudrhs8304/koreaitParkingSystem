@@ -27,21 +27,24 @@
     <div id="layoutSidenav_content">
         <!-- 여기서 부터 메인 작업 시작. -->
         <main class="container-fluid px-4">
-            <h1 class="mt-4">할인 적용</h1>
-
-            <div class="row mb-3">
-                <label for="carNumber" class="col-sm-2 col-form-label">차량번호</label>
-                <div class="col-sm-4">
-                    <input type="text" name="carNumber" id="carNumber" class="form-control" readonly
-                           value="${carNumber}"/>
+            <h1 class="card-body">할인 적용</h1>
+            <div class="card shadow mb-4">
+                <div class="card-header bg-secondary text-white fs-4">
+                    할인 적용
                 </div>
-            </div>
-
-            <div class="d-flex gap-2">
-                <form action="/disCount.do" method="post" class="mt-3 w-100">
-                    <input type="hidden" name="carNumber" value="${carNumber}"/>
+                <div class="card-body">
 
                     <div class="row mb-3">
+                        <label for="carNumber" class="col-sm-2 col-form-label">차량번호</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="carNumber" id="carNumber" class="form-control" readonly
+                                   value="${carNumber}"/>
+                        </div>
+                    </div>
+
+                    <form action="/disCount.do" method="post" class="row mb-3">
+                        <input type="hidden" name="carNumber" value="${carNumber}"/>
+
                         <label class="col-sm-2 col-form-label">할인 종류</label>
                         <div class="col-sm-10 d-flex align-items-center gap-3">
                             <div class="form-check">
@@ -62,34 +65,30 @@
                                 <label for="discount3" class="form-check-label">전기차</label>
                             </div>
                         </div>
+                    </form>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">할인 적용 금액</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="discountAmount" class="form-control" value="${discountAmount}원"
+                                   readonly/>
+                        </div>
                     </div>
-                </form>
 
-            </div>
-
-
-            <!-- 할인 적용 금액 -->
-
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">할인 적용 금액</label>
-                <div class="col-sm-4">
-                    <input type="text" name=discountAmount" class="form-control"  value="${discountAmount}원" readonly/>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">결제 요금</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="finalFee" class="form-control" value="${finalFee}원" readonly/>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <form action="/out.do" method="post">
+                        <input type="hidden" name="carNumber" value="${carNumber}"/>
+                        <input type="submit" name="submitExit" value="출차 처리" class="btn btn-success"/>
+                    </form>
                 </div>
             </div>
-
-            <!-- 결제 요금 -->
-
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">결제 요금</label>
-                <div class="col-sm-4">
-                    <input type="text" name="finalFee" class="form-control"  value="${finalFee}원" readonly/>
-                </div>
-            </div>
-            <form action="/out.do" method="post" class="mt-3">
-                <input type="hidden" name="carNumber" value="${carNumber}"/>
-                <input type="submit" name="submitExit" value="출차 처리" class="btn btn-success"/>
-            </form>
-
         </main>
         <!-- footer 영역 -->
         <%@ include file="../layout/footer.jsp" %>

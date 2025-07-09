@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Membership Management Page -->
 <!DOCTYPE html>
@@ -56,7 +57,22 @@
                                                 href="${editUrl}"><c:out value="${member.carNumber}"/></a>
 
                                     </td>
-                                    <td><c:out value="${member.driverName}"/></td>
+                                    <td>
+                                        <c:out value="${member.driverName}"/>
+                                        <c:if test="${not empty member.badge}">
+                                            <c:choose>
+                                                <c:when test="${member.badge eq '연정액회원'}">
+                                                    <span class="badge bg-primary ms-2">${member.badge}</span>
+                                                </c:when>
+                                                <c:when test="${member.badge eq '월정액회원'}">
+                                                    <span class="badge bg-success ms-2">${member.badge}</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span class="badge bg-secondary ms-2">${member.badge}</span>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:if>
+                                    </td>
                                     <td><c:out value="${member.phone}"/></td>
                                     <td><c:out value="${member.startDate}"/></td>
                                     <td><c:out value="${member.endDate}"/></td>

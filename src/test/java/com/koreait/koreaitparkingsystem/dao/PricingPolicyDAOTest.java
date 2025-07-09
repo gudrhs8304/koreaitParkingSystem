@@ -4,6 +4,8 @@ import com.koreait.koreaitparkingsystem.vo.PricingPolicyVO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @Log4j2
 public class PricingPolicyDAOTest {
     PricingPolicyDAO pricingPolicyDAO = PricingPolicyDAO.INSTANCE;
@@ -24,6 +26,15 @@ public class PricingPolicyDAOTest {
         String name = "name";
         pricingPolicyDAO.updateFeeById(price,id);
         log.info(pricingPolicyDAO);
+    }
+
+    @Test
+    void selectDailyMaxFeeTest() {
+        int dailyMaxFee = pricingPolicyDAO.selectDailyMaxFee();
+        log.info("🔍 DailyMaxFee from DB: {}", dailyMaxFee);
+
+        // DB 값이 0보다 큰지 확인 (기본적으로 최대요금은 0일 수 없으니)
+        assertTrue(dailyMaxFee > 0, "일일최대요금은 0보다 커야 합니다.");
     }
 
 //    @Test

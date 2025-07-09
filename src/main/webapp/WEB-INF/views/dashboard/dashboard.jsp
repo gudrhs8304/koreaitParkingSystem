@@ -44,6 +44,11 @@
                         <p class="card-text">
                                 ${spot.isOccupied ? "사용 중" : "비어 있음"}
                         </p>
+                        <c:if test="${spot.isOccupied}">
+                            <p class="card-text">
+                                차량번호: ${spot.carNumber}
+                            </p>
+                        </c:if>
                     </div>
                 </div>
             </div>

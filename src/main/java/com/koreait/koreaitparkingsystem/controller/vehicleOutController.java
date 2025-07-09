@@ -6,6 +6,7 @@ import com.koreait.koreaitparkingsystem.dao.ParkingLogDAO;
 import com.koreait.koreaitparkingsystem.dto.CarDTO;
 import com.koreait.koreaitparkingsystem.service.CarService;
 import com.koreait.koreaitparkingsystem.service.MonthlyMemberService;
+import com.koreait.koreaitparkingsystem.service.TotalFeeService;
 import com.koreait.koreaitparkingsystem.vo.ParkingLogVO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -63,27 +64,35 @@ public class vehicleOutController extends HttpServlet {
         } else if (logVO.getOutTime() != null) {
             // 🚫 이미 출차된 차량
             req.setAttribute("errorMessage", "이미 출차된 차량입니다.");
-        } else {// ✅ 월정액 회원 여부 체크
+        } else {
+            // ✅ 월정액 회원 여부 체크
             boolean isMonthly = MonthlyMemberService.INSTANCE.isValidMonthlyMember(carNumber);
 
             if (isMonthly) {
+                // 👉 월정액 회원: 입차시간 "월정액 회원", 요금 0원으로 표기
                 req.setAttribute("inTime", "월정액 회원");
                 req.setAttribute("fee", "0");
             } else {
-                // 📌 주차 요금 계산 로직
-                java.sql.Timestamp now = java.sql.Timestamp.valueOf(java.time.LocalDateTime.now());
-                java.sql.Timestamp inTime = java.sql.Timestamp.valueOf(logVO.getInTime());
-                long durationMillis = now.getTime() - inTime.getTime();
-                long durationMinutes = durationMillis / (1000 * 60);
-                if (durationMinutes < 30) durationMinutes = 30;
-                double units = Math.ceil(durationMinutes / 30.0);
-                int fee = (int)(units * 3000.0);
+                // 👉 비회원: 요금 계산 (일일최대요금, 30분 단위)
+                CarDTO carDTO = CarDTO.builder().carNumber(carNumber).build();
+                // logVO를 ParkingLogDTO로 매핑
+                com.koreait.koreaitparkingsystem.dto.ParkingLogDTO logDTO =
+                        com.koreait.koreaitparkingsystem.dto.ParkingLogDTO.builder()
+                                .id(logVO.getId())
+                                .carNumber(logVO.getCarNumber())
+                                .carTypeCode(logVO.getCarTypeCode())
+                                .inTime(logVO.getInTime())
+                                .outTime(logVO.getOutTime())
+                                .build();
+                int fee = TotalFeeService.INSTANCE.calculateFee(logDTO);
+
+                // 👉 계산된 요금/입차시간 전달
                 req.setAttribute("fee", fee);
                 req.setAttribute("inTime", logVO.getInTime().toString().replace("T", " "));
             }
+                // 👉 차량번호/차종코드 데이터 전달 (공통)
                 req.setAttribute("carNumber", carNumber);
                 req.setAttribute("carTypeCode", logVO.getCarTypeCode());
-            // ✅ 정상 입차 상태인 차량
 
 
 

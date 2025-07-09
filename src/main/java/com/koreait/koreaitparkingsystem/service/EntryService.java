@@ -18,18 +18,24 @@ public enum EntryService {
     private final ModelMapper modelMapper = MapperUtil.INSTANCE.getInstance();
 
     public void processEntry(CarDTO carDTO) {
-        // 1. 차량 등록 여부 확인
+        // ✅ 이미 활성화된 입차 로그가 있는지 확인
+        ParkingLogDTO activeLog = ParkingLogService.INSTANCE.getActiveLogByCarNumber(carDTO.getCarNumber());
+        if (activeLog != null && activeLog.getOutTime() == null) {
+            throw new RuntimeException("이미 입차 처리된 차량입니다. 출차 후 다시 등록해주세요.");
+        }
+
+        // ✅ 차량 등록 여부 확인
         if (!carService.isRegistered(carDTO.getCarNumber())) {
             carService.addCar(carDTO);
         }
 
-        // 2. 빈 자리 배정
+        // ✅ 빈 자리 배정
         Integer spot = spotDAO.assignSpot();
         if (spot == null) {
             throw new RuntimeException("현재 빈 주차 공간이 없습니다. 입차할 수 없습니다.");
         }
 
-        // 3. DTO 생성
+        // ✅ DTO 생성
         ParkingLogDTO logDTO = ParkingLogDTO.builder()
                 .carNumber(carDTO.getCarNumber())
                 .carTypeCode(carDTO.getCarTypeCode())
@@ -37,11 +43,11 @@ public enum EntryService {
                 .inTime(LocalDateTime.now())
                 .build();
 
-        // 4. DTO → VO 변환 후 DB 저장
+        // ✅ DB 저장
         ParkingLogVO logVO = modelMapper.map(logDTO, ParkingLogVO.class);
         logDAO.insertEntry(logVO);
 
-        // 5. 주차 공간 상태 업데이트
+        // ✅ 자리 점유 처리
         spotDAO.occupySpot(spot);
     }
 }

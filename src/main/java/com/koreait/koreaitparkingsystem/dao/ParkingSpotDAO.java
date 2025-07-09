@@ -89,4 +89,29 @@ public enum ParkingSpotDAO {
         }
         return parkingSpots;
     }
+
+    public List<ParkingSpotVO> selectAllParkingSpotsWithCarNumber() {
+        String sql = "SELECT ps.spot_number, ps.is_occupied, pl.car_number " +
+                     "FROM parking_spot ps " +
+                     "LEFT JOIN parking_log pl " +
+                     "ON ps.spot_number = pl.parking_spot AND pl.out_time IS NULL order by ps.spot_number asc";
+        List<ParkingSpotVO> parkingSpots = new ArrayList<>();
+
+        try {
+            @Cleanup Connection connection = DBConnection.INSTANCE.getConnection();
+            @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            @Cleanup ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                ParkingSpotVO parkingSpotVO = ParkingSpotVO.builder()
+                        .spotNumber(rs.getInt("spot_number"))
+                        .isOccupied(rs.getBoolean("is_occupied"))
+                        .carNumber(rs.getString("car_number"))
+                        .build();
+                parkingSpots.add(parkingSpotVO);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return parkingSpots;
+    }
 }

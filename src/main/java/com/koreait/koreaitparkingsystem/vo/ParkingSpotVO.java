@@ -10,4 +10,5 @@ public class ParkingSpotVO {
 
     private int spotNumber;
     private boolean isOccupied;
+    private String carNumber;
 }

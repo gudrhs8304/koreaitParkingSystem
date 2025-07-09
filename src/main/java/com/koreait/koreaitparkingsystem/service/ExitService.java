@@ -161,21 +161,24 @@ public enum ExitService {
             log.warn("ExitService 164 ❌ 활성 주차 기록이 없습니다. 출차 처리 불가.");
             throw new RuntimeException("출차 처리할 입차 기록이 없습니다.");
         }
+
+        // 2. 요금 계산
         int fee = ParkingLogService.INSTANCE.calculateFee(logDTO);
 
+        // 3. 월정액 회원 여부에 따라 요금 0원 처리.
         boolean isMonthly = MonthlyMemberService.INSTANCE.isValidMonthlyMember(carDTO.getCarNumber());
         if (isMonthly) {
-            fee = 0;
+            fee = 0; // 월정액 회원은 무조건 0원
         }
-        ParkingLogService.INSTANCE.updateParkingLog(carDTO, fee);
-        // 2. 요금 계산
+        ParkingLogService.INSTANCE.updateParkingLog(carDTO);
+
         log.info("ExitService 170 💰 계산된 주차 요금 = " + fee);
 
-        // 3. parking_log 출차시간, 요금 update
+        // 4. parking_log 출차시간, 요금 update
         java.sql.Timestamp outTime = java.sql.Timestamp.valueOf(java.time.LocalDateTime.now());
         ParkingLogDAO.INSTANCE.updateExit(carDTO.getCarNumber(), outTime, fee);
 
-        // 4. parking_spot 자리 비우기
+        // 5. parking_spot 자리 비우기
         ParkingSpotService.INSTANCE.isParkingSpot(carDTO);
 
         log.info("ExitService 178 ✅ 출차 처리 완료");
@@ -199,7 +202,7 @@ public enum ExitService {
             fee = 0;
         }
 
-        ParkingLogService.INSTANCE.updateParkingLog(carDTO, fee);
+        ParkingLogService.INSTANCE.updateParkingLog(carDTO);
         ParkingSpotService.INSTANCE.isParkingSpot(carDTO);
 
         log.info("processExitByCarNumber ✅ 출차 처리 완료");

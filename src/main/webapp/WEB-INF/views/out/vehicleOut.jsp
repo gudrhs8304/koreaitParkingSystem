@@ -21,66 +21,77 @@
 
     <div id="layoutSidenav_content">
         <main class="container-fluid px-4">
-            <h1 class="mt-4 mb-4">출차 관리</h1>
+            <h1 class="card-body">출차 관리</h1>
 
             <!-- 경고 메시지 -->
             <c:if test="${not empty errorMessage}">
-                <div class="alert alert-danger" role="alert">
-                        ${errorMessage}
-                </div>
+            <div class="alert alert-danger" role="alert">
+                    ${errorMessage}
+            </div>
             </c:if>
 
             <!-- 차량 검색 -->
-            <form action="/vehicleOut.do" method="post" class="row align-items-center d-grid gap-3 column-gap-1">
+            <div class="card shadow mb-4">
+                <div class="card-header bg-secondary text-white fs-4">
+                    차량 검색
+                </div>
+                <div class="card-body">
+                    <form action="/vehicleOut.do" method="post" class="row g-3">
+                        <div class="col-12">
+                            <label for="carNumber" class="form-label fs-5">차량 번호</label>
+                            <input type="text" id="carNumber" name="carNumber"
+                                   class="form-control form-control-lg"
+                                   value="${carNumber != null ? carNumber : ''}" placeholder="차량번호 입력"/>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-lg w-50 float-end">검색</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
-                <div class="col-md-6">
-                    <label for="carNumber" class="col-form-control fs-3">차량 번호</label>
-                    <input type="text" id="carNumber" name="carNumber"
-                           class="form-control form-control-lg w-100"
-                           value="${carNumber != null ? carNumber : ''}" placeholder="차량번호 입력"/>
+            <!-- 입차 정보 및 주차 요금 -->
+            <div class="card shadow mb-4">
+                <div class="card-header bg-secondary text-white fs-4">
+                    입차 정보
                 </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary btn-lg px-4">검색</button>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label fs-5">입차 시간</label>
+                        <div class="col">
+                            <input type="text" class="form-control form-control-lg text-start" readonly
+                                   value="${inTime != null ? inTime : ''}"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-3 col-form-label fs-5">주차 요금</label>
+                        <div class="col">
+                            <input type="text" class="form-control form-control-lg text-start" readonly
+                                   value="${fee != null ? fee : 0}원"/>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+    <!-- 할인 적용 & 출차 처리 -->
+    <div class="row g-4 mt-5">
+        <div class="col-12 col-md-6">
+            <form action="/disCount.do" method="post" class="h-100">
+                <input type="hidden" name="carNumber" value="${carNumber}"/>
+                <input type="hidden" name="carTypeCode" value="${carTypeCode}"/>
+                <button type="submit" class="btn btn-success btn-lg w-100 py-4">할인 적용</button>
             </form>
-
-            <!-- 입차 정보 -->
-            <div class="row mb-4 align-items-center">
-                <label class="col-sm-2 col-form-label fs-3">입차 시간</label>
-                <div class="col-md-6">
-                    <input type="text" class="form-control form-control-lg w-100 text-start" readonly
-                           value="${inTime != null ? inTime : ''}"/>
-                </div>
-            </div>
-
-            <!-- 주차 요금 -->
-            <div class="row mb-5 align-items-center">
-                <label class="col-sm-2 col-form-label fs-3">주차 요금</label>
-                <div class="col-md-6">
-                    <input type="text" class="form-control form-control-lg w-100 text-start" readonly
-                           value="${fee != null ? fee : 0}원"/>
-                </div>
-            </div>
-
-            <!-- 할인 적용 & 출차 처리 -->
-            <div class="row g-4 mt-5">
-                <div class="col-12 col-md-6">
-                    <form action="/disCount.do" method="post" class="h-100">
-                        <input type="hidden" name="carNumber" value="${carNumber}"/>
-                        <input type="hidden" name="carTypeCode" value="${carTypeCode}"/>
-                        <button type="submit" class="btn btn-success btn-lg w-100 py-4">할인 적용</button>
-                    </form>
-                </div>
-                <div class="col-12 col-md-6">
-                    <form action="/out.do" method="post" class="h-100">
-                        <input type="hidden" name="carNumber" value="${carNumber}"/>
-                        <button type="submit" class="btn btn-secondary btn-lg w-100 py-4">출차 처리</button>
-                    </form>
-                </div>
-            </div>
-        </main>
-        <%@ include file="../layout/footer.jsp" %>
+        </div>
+        <div class="col-12 col-md-6">
+            <form action="/out.do" method="post" class="h-100">
+                <input type="hidden" name="carNumber" value="${carNumber}"/>
+                <button type="submit" class="btn btn-secondary btn-lg w-100 py-4">출차 처리</button>
+            </form>
+        </div>
     </div>
+    </main>
+    <%@ include file="../layout/footer.jsp" %>
+</div>
 </div>
 
 </div>

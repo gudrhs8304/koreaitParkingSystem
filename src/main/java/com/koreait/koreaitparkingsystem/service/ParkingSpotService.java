@@ -15,6 +15,12 @@ import org.modelmapper.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
+/**
+ * ✅ ParkingSpotService
+ * - 주차공간(스팟) 조회 및 관리 서비스
+ * - 전체 주차구역 조회, 출차시 자리 해제 등 주차장 상태 변경 처리
+ */
+
 @Log4j2
 public enum ParkingSpotService {
     INSTANCE;
@@ -37,6 +43,17 @@ public enum ParkingSpotService {
         // 2) VO -> DTO 리스트로 변환 후 반환
         Type listType = new TypeToken<List<ParkingSpotDTO>>() {}.getType();
         return modelMapper.map(parkingSpotVOS, listType); // 값을 반환 인라인화.
+    }
+
+    /*
+     * ✅ 차량번호 포함 모든 주차구역 목록 조회
+     * - DAO의 selectAllParkingSpotsWithCarNumber() 호출
+     * - ModelMapper로 ParkingSpotDTO 리스트로 변환 후 반환
+     */
+    public List<ParkingSpotDTO> getParkingSpotsWithCarNumber() {
+        List<ParkingSpotVO> parkingSpotVOS = parkingSpotDAO.selectAllParkingSpotsWithCarNumber();
+        Type listType = new TypeToken<List<ParkingSpotDTO>>() {}.getType();
+        return modelMapper.map(parkingSpotVOS, listType);
     }
 
     /*

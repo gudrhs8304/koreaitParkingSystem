@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Vehicle In Page -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -27,6 +28,30 @@
         <!-- 여기서 부터 메인 작업 시작. -->
         <main class="container-fluid px-4">
             <h1 class="mt-4">입차 관리</h1>
+            <c:if test="${not empty successMessage}">
+                <div id="successAlert" class="alert alert-success" role="alert">
+                    ${successMessage}
+                </div>
+            </c:if>
+            <c:if test="${not empty errorMessage}">
+                <div id="errorAlert" class="alert alert-danger" role="alert">
+                    ${errorMessage}
+                </div>
+            </c:if>
+            <script>
+                // 페이지 로드 후 3초 뒤에 사라지게
+                window.addEventListener('DOMContentLoaded', () => {
+                    const successAlert = document.getElementById('successAlert');
+                    const errorAlert = document.getElementById('errorAlert');
+
+                    if (successAlert) {
+                        setTimeout(() => successAlert.style.display = 'none', 3000);
+                    }
+                    if (errorAlert) {
+                        setTimeout(() => errorAlert.style.display = 'none', 3000);
+                    }
+                });
+            </script>
             <form action="${pageContext.request.contextPath}/entry.do" method="post" class="mt-3">
                 <div class="row mb-3">
                     <label for="carNumber" class="col-sm-2 col-form-label">차량번호</label>

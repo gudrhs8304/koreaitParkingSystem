@@ -37,7 +37,7 @@
                             <div class="col-md-6 col-lg-4">
                                 <input type="search" name="keyword" class="form-control"
                                        placeholder="차량번호, 운전자명, 연락처"
-                                       value="${fn:escapeXml(param.keyword)}" required>
+                                       value="${fn:escapeXml(param.keyword)}${carNumber != null ? carNumber : ""}" required>
                             </div>
                             <div class="col-auto">
                                 <button type="submit" class="btn btn-primary">검색</button>

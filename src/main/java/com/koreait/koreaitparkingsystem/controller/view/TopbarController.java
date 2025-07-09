@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 @Log4j2
 @WebServlet("/topbar.do")
@@ -18,8 +19,9 @@ public class TopbarController extends HttpServlet {
         log.info("***************TopbarController(doPost)*************");
         String carNumber = req.getParameter("carNumber");
         log.info("carNumber: {}", carNumber);
-        req.setAttribute("carNumber", carNumber);
 
-        resp.sendRedirect("/vehicleOut.do?carNumber="+carNumber);
+        String encodedCarNumber = URLEncoder.encode(carNumber, "UTF-8");
+        resp.sendRedirect("/search.do?carNumber=" + encodedCarNumber);
+
     }
 }

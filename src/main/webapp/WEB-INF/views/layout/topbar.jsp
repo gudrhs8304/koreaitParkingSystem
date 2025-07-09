@@ -2,7 +2,7 @@
 <!-- Topbar Include -->
 <nav class="sb-topnav navbar navbar-expand navbar-light bg-primary shadow-sm">
     <!-- Navbar Brand -->
-    <a class="navbar-brand text-white ps-3 fw-bold" href="/index.jsp">KOREAIT PARKING</a>
+    <a class="navbar-brand text-white ps-3 fw-bold" href="/main.do">KOREAIT PARKING</a>
 
     <!-- Sidebar Toggle -->
     <button class="btn btn-link text-white btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle">

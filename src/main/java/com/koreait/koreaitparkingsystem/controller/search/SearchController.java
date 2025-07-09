@@ -20,6 +20,8 @@ public class SearchController extends HttpServlet {
         try {
             String keyword = req.getParameter("keyword"); // 검색
             String pageParam = req.getParameter("page"); // 페이지
+            String carNumber = req.getParameter("carNumber");
+            req.setAttribute("carNumber", carNumber);
 
             // 🔹 유효성 검사: page 파라미터 정수 검증
             int page;

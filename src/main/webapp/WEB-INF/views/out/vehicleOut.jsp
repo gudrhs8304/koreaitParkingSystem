@@ -24,74 +24,69 @@
     <%@ include file="../layout/sidebar.jsp" %>
 
     <div id="layoutSidenav_content">
-        <main class="container-fluid px-4">
-            <h1 class="card-body">출차 관리</h1>
 
-            <!-- 경고 메시지 -->
+        <main class="container-fluid px-4">
+            <h1 class="mt-4">출차 관리</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">차량 출차</li>
+            </ol>
+
             <c:if test="${not empty errorMessage}">
-                <div class="alert alert-danger" role="alert">
+                <div class="alert bg-danger-subtle text-danger-emphasis border-0 shadow-sm" role="alert">
                         ${errorMessage}
                 </div>
             </c:if>
 
-            <!-- 차량 검색 -->
-            <div class="card shadow mb-4">
-                <div class="card-header bg-secondary text-white fs-4">
-                    차량 검색
+            <div class="card shadow-sm border-0 mb-5">
+                <div class="card-header bg-primary text-white fw-semibold">
+                    차량 출차 처리
                 </div>
+
                 <div class="card-body">
-                    <form action="/vehicleOut.do" method="post" class="row g-3">
-                        <div class="col-12">
-                            <label for="carNumber" class="form-label fs-5">차량 번호</label>
-                            <input type="text" id="carNumber" name="carNumber"
-                                   class="form-control form-control-lg"
-                                   value="${carNumber != null ? carNumber : ''}" placeholder="차량번호 입력"/>
+                    <form action="/vehicleOut.do" method="post" class="row gy-3 mb-4">
+                        <div class="col-md-6">
+                            <label for="carNumber" class="form-label">차량 번호</label>
+                            <input type="text" id="carNumber" name="carNumber" class="form-control"
+                                   value="${carNumber != null ? carNumber : ''}" placeholder="차량번호 입력">
                         </div>
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-lg w-50 float-end">검색</button>
+                        <div class="col-md-6 d-flex align-items-end">
+                            <button type="submit" class="btn btn-outline-primary w-100">검색</button>
                         </div>
                     </form>
-                </div>
-            </div>
 
-            <!-- 입차 정보 및 주차 요금 -->
-            <div class="card shadow mb-4">
-                <div class="card-header bg-secondary text-white fs-4">
-                    입차 정보
-                </div>
-                <div class="card-body">
                     <div class="row mb-3">
-                        <label class="col-sm-3 col-form-label fs-5">입차 시간</label>
-                        <div class="col">
-                            <input type="text" class="form-control form-control-lg text-start" readonly
-                                   value="${inTime != null ? inTime : ''}"/>
+                        <label class="col-sm-3 col-form-label">입차 시간</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" readonly
+                                   value="${inTime != null ? inTime : ''}">
                         </div>
                     </div>
-                    <div class="row">
-                        <label class="col-sm-3 col-form-label fs-5">주차 요금</label>
-                        <div class="col">
-                            <input type="text" class="form-control form-control-lg text-start" readonly
-                                   value="${fee != null ? fee : 0}원"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- 할인 적용 & 출차 처리 -->
-            <div class="row g-4 mt-5">
-                <div class="col-12 col-md-6">
-                    <form action="/disCount.do" method="post" class="h-100">
-                        <input type="hidden" name="carNumber" value="${carNumber}"/>
-                        <input type="hidden" name="carTypeCode" value="${carTypeCode}"/>
-                        <button type="submit" class="btn btn-success btn-lg w-100 py-4">할인 적용</button>
-                    </form>
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">주차 요금</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" readonly
+                                   value="${fee != null ? fee : 0}원">
+                        </div>
+                    </div>
                 </div>
-                <div class="col-12 col-md-6">
-                    <form action="/out.do" method="post" class="h-100">
-                        <input type="hidden" name="carNumber" value="${carNumber}"/>
-                        <button type="submit" class="btn btn-secondary btn-lg w-100 py-4">출차 처리</button>
-                    </form>
+
+                <div class="row mt-4">
+                    <div class="col-md-6 d-grid">
+                        <form action="/disCount.do" method="post">
+                            <input type="hidden" name="carNumber" value="${carNumber}">
+                            <input type="hidden" name="carTypeCode" value="${carTypeCode}">
+                            <button type="submit" class="btn btn-outline-success w-100">할인 적용</button>
+                        </form>
+                    </div>
+                    <div class="col-md-6 d-grid">
+                        <form action="/out.do" method="post">
+                            <input type="hidden" name="carNumber" value="${carNumber}">
+                            <button type="submit" class="btn btn-primary w-100">출차 처리</button>
+                        </form>
+                    </div>
                 </div>
+
             </div>
         </main>
         <%@ include file="../layout/footer.jsp" %>

@@ -25,13 +25,21 @@
     <div id="layoutSidenav_content">
         <!-- 여기서 부터 메인 작업 시작. -->
         <main class="container-fluid px-4">
-            <h1 class="mt-5">출차 처리 완료</h1>
-            <form action="vehicleOut.do" method="post" class="mt-4">
-                <div class="alert alert-success" role="alert">
-                    출차 처리되었습니다.
+            <h1 class="mt-4">출차 완료</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">출차 결과</li>
+            </ol>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <div class="alert bg-success-subtle text-success-emphasis border-0 fw-semibold" role="alert">
+                        출차가 정상적으로 처리되었습니다.
+                    </div>
+                    <div class="mt-3 d-flex justify-content-end">
+                        <a href="/main.do" class="btn btn-primary">메인 메뉴로 이동</a>
+                    </div>
                 </div>
-                <a href="/main.do" class="btn btn-success">메인메뉴</a>
-            </form>
+            </div>
         </main>
         <!-- footer 영역 -->
         <%@ include file="../layout/footer.jsp" %>

@@ -27,77 +27,82 @@
         <!-- 여기서 부터 메인 작업 시작. -->
         <main class="container-fluid px-4">
             <h1 class="mt-4">입차 관리</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">차량 입차</li>
+            </ol>
+
+            <!-- 알림 메시지 -->
             <c:if test="${not empty successMessage}">
-                <div id="successAlert" class="alert alert-success" role="alert">
-                    ${successMessage}
+                <div id="successAlert" class="alert bg-success-subtle text-success-emphasis border-0 shadow-sm">
+                        ${successMessage}
                 </div>
             </c:if>
             <c:if test="${not empty errorMessage}">
-                <div id="errorAlert" class="alert alert-danger" role="alert">
-                    ${errorMessage}
+                <div id="errorAlert" class="alert bg-danger-subtle text-danger-emphasis border-0 shadow-sm">
+                        ${errorMessage}
                 </div>
             </c:if>
-            <script>
-                // 페이지 로드 후 3초 뒤에 사라지게
-                window.addEventListener('DOMContentLoaded', () => {
-                    const successAlert = document.getElementById('successAlert');
-                    const errorAlert = document.getElementById('errorAlert');
 
-                    if (successAlert) {
-                        setTimeout(() => successAlert.style.display = 'none', 3000);
-                    }
-                    if (errorAlert) {
-                        setTimeout(() => errorAlert.style.display = 'none', 3000);
-                    }
+            <script>
+                window.addEventListener('DOMContentLoaded', () => {
+                    ['successAlert', 'errorAlert'].forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) setTimeout(() => el.style.display = 'none', 3000);
+                    });
                 });
             </script>
-            <form action="${pageContext.request.contextPath}/entry.do" method="post" class="mt-3">
-                <div class="row mb-3">
-                    <label for="carNumber" class="col-sm-2 col-form-label">차량번호</label>
-                    <div class="col-sm-4">
-                        <input type="text" name="carNumber" id="carNumber" class="form-control" required/>
-                    </div>
+
+            <!-- 카드 전체 구조 -->
+            <div class="card shadow-sm border-0 mb-5">
+                <div class="card-header bg-primary text-white fw-semibold">
+                    차량 정보 입력
                 </div>
 
-                <div class="row mb-3">
-                    <label for="carTypeCode" class="col-sm-2 col-form-label">차량 유형</label>
-                    <div class="col-sm-4">
-                        <select name="carTypeCode" id="carTypeCode" class="form-select" required>
-                            <option value="normal" selected>일반</option>
-                            <option value="disabled">장애인</option>
-                            <option value="compact">경차</option>
-                        </select>
-                    </div>
-                </div>
+                <div class="card-body">
+                    <form action="${pageContext.request.contextPath}/entry.do" method="post">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label for="carNumber" class="form-label">차량번호</label>
+                                <input type="text" name="carNumber" id="carNumber" class="form-control" required>
+                            </div>
 
-                <div class="row mb-3">
-                    <label for="driverName" class="col-sm-2 col-form-label">운전자명</label>
-                    <div class="col-sm-4">
-                        <input type="text" name="driverName" id="driverName" class="form-control" required/>
-                    </div>
-                </div>
+                            <div class="col-md-6">
+                                <label for="carTypeCode" class="form-label">차량 유형</label>
+                                <select name="carTypeCode" id="carTypeCode" class="form-select" required>
+                                    <option value="normal">일반</option>
+                                    <option value="disabled">장애인</option>
+                                    <option value="compact">경차</option>
+                                </select>
+                            </div>
 
-                <div class="row mb-3">
-                    <label for="phone" class="col-sm-2 col-form-label">연락처</label>
-                    <div class="col-sm-4">
-                        <input type="text" name="phone" id="phone" class="form-control" required/>
-                    </div>
-                </div>
+                            <div class="col-md-6">
+                                <label for="driverName" class="form-label">운전자명</label>
+                                <input type="text" name="driverName" id="driverName" class="form-control" required>
+                            </div>
 
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">입차 시간</label>
-                    <div class="col-sm-4">
-                        <input type="text" name="inTime" class="form-control"
-                               value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()) %>"
-                               readonly/>
-                    </div>
-                </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">연락처</label>
+                                <input type="text" name="phone" id="phone" class="form-control" required>
+                            </div>
 
-                <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary">입차 등록</button>
-                    <a href="/" class="btn btn-secondary">메인으로</a>
+                            <div class="col-md-6">
+                                <label class="form-label">입차 시간</label>
+                                <input type="text" name="inTime" class="form-control" readonly
+                                       value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()) %>">
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-6 d-grid">
+                                <button type="submit" class="btn btn-primary">입차 등록</button>
+                            </div>
+                            <div class="col-md-6 d-grid">
+                                <a href="/" class="btn btn-outline-secondary">메인으로</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </main>
 
         <!-- footer 영역 -->

@@ -26,35 +26,51 @@
         <!-- 여기서 부터 메인 작업 시작. -->
         <main class="container-fluid px-4">
             <h1 class="mt-4">회원 정보 추가</h1>
-            <form action="/addMember.do" method="post" class="mt-4">
-                <div class="mb-3">
-                    <label for="carNumber" class="form-label">차량번호</label>
-                    <input type="text" class="form-control" id="carNumber" name="carNumber" required/>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">회원 등록</li>
+            </ol>
+
+            <div class="card shadow-sm border-0 mb-5">
+                <div class="card-header bg-primary text-white fw-semibold">
+                    신규 회원 등록
                 </div>
 
-                <div class="mb-3">
-                    <label for="driverName" class="form-label">운전자명</label>
-                    <input type="text" class="form-control" id="driverName" name="driverName" required />
-                </div>
+                <div class="card-body">
+                    <form action="/addMember.do" method="post">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label for="carNumber" class="form-label">차량번호</label>
+                                <input type="text" class="form-control" id="carNumber" name="carNumber" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="driverName" class="form-label">운전자명</label>
+                                <input type="text" class="form-control" id="driverName" name="driverName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">전화번호</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="startDate" class="form-label">시작일</label>
+                                <input type="date" class="form-control" id="startDate" name="startDate" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="endDate" class="form-label">종료일</label>
+                                <input type="date" class="form-control" id="endDate" name="endDate" required>
+                            </div>
+                        </div>
 
-                <div class="mb-3">
-                    <label for="phone" class="form-label">전화번호</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" required />
+                        <div class="row mt-4 gx-3">
+                            <div class="col-md-6 d-grid">
+                                <button type="submit" class="btn btn-primary">등록 완료</button>
+                            </div>
+                            <div class="col-md-6 d-grid">
+                                <a href="/members.do" class="btn btn-outline-secondary">취소</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-
-                <div class="mb-3">
-                    <label for="startDate" class="form-label">시작일</label>
-                    <input type="date" class="form-control" id="startDate" name="startDate" required />
-                </div>
-
-                <div class="mb-3">
-                    <label for="endDate" class="form-label">종료일</label>
-                    <input type="date" class="form-control" id="endDate" name="endDate" required />
-                </div>
-
-                <button type="submit" class="btn btn-primary">등록 완료</button>
-                <a href="/members.do" class="btn btn-secondary">취소</a>
-            </form>
+            </div>
         </main>
         <!-- footer 영역 -->
         <%@ include file="../layout/footer.jsp" %>

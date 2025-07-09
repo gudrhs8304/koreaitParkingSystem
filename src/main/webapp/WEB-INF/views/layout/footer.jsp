@@ -1,12 +1,10 @@
 <!-- Footer Include -->
-<footer class="py-4 bg-light mt-auto">
+<footer class="py-4 bg-white mt-auto">
     <div class="container-fluid px-4">
-        <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; korea It Parking System</div>
+        <div class="d-flex align-items-center justify-content-between small text-black">
+            <div>&copy; KOREA IT Parking System</div>
             <div>
-                <a href="#">Privacy Policy</a>
-                &middot;
-                <a href="#">Terms &amp; Conditions</a>
+                <a href="#" class="text-black">Privacy Policy</a>
             </div>
         </div>
     </div>

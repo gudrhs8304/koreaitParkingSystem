@@ -25,70 +25,66 @@
     <%@ include file="../layout/sidebar.jsp" %>
     <div id="layoutSidenav_content">
         <!-- 여기서 부터 메인 작업 시작. -->
-        <main>
-            <div class="container-fluid px-4">
-                <h1 class="mt-4">회원 목록</h1>
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-table me-1"></i>
-                        등록된 회원 정보
-                    </div>
-                    <div class="card-body">
-                        <table id="membersTable" class="table table-bordered table-hover">
-                            <thead class="table-light text-center">
-                            <tr>
-                                <th>차량번호</th>
-                                <th>운전자명</th>
-                                <th>전화번호</th>
-                                <th>시작일</th>
-                                <th>종료일</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <%-- 반복될 부분 , 공백문자 대비 url jstl 코딩 , 파라미터로 넘길것. --%>
-                            <c:forEach var="member" items="${members}">
-                                <tr class="text-center">
-                                    <td>
-                                        <c:url var="editUrl" value="/editMember.do">
-                                            <c:param name="carNumber" value="${member.carNumber}"/>
-                                        </c:url>
-                                        <a class="text-decoration-none text-dark fw-bold"
-                                                href="${editUrl}"><c:out value="${member.carNumber}"/></a>
+        <main class="container-fluid px-4">
+            <h1 class="mt-4">회원 목록</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">정기권 회원 정보</li>
+            </ol>
 
-                                    </td>
-                                    <td>
-                                        <c:out value="${member.driverName}"/>
-                                        <c:if test="${not empty member.badge}">
-                                            <c:choose>
-                                                <c:when test="${member.badge eq '연정액회원'}">
-                                                    <span class="badge bg-primary ms-2">${member.badge}</span>
-                                                </c:when>
-                                                <c:when test="${member.badge eq '월정액회원'}">
-                                                    <span class="badge bg-success ms-2">${member.badge}</span>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <span class="badge bg-secondary ms-2">${member.badge}</span>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </c:if>
-                                    </td>
-                                    <td><c:out value="${member.phone}"/></td>
-                                    <td><c:out value="${member.startDate}"/></td>
-                                    <td><c:out value="${member.endDate}"/></td>
-                                </tr>
-                            </c:forEach>
-
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header bg-primary text-white fw-semibold">
+                    등록된 회원 정보
                 </div>
-                <div class="row">
-                    <div class="d-flex justify-content-end">
-                        <a href="/addMember.do" class="btn btn-dark">회원 등록</a>
-                    </div>
+                <div class="card-body">
+                    <table id="membersTable" class="table table-bordered table-hover align-middle text-center">
+                        <thead class="table-light">
+                        <tr>
+                            <th>차량번호</th>
+                            <th>운전자명</th>
+                            <th>전화번호</th>
+                            <th>시작일</th>
+                            <th>종료일</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="member" items="${members}">
+                            <tr>
+                                <td>
+                                    <c:url var="editUrl" value="/editMember.do">
+                                        <c:param name="carNumber" value="${member.carNumber}"/>
+                                    </c:url>
+                                    <a href="${editUrl}" class="text-decoration-none text-dark fw-bold">
+                                        <c:out value="${member.carNumber}"/>
+                                    </a>
+                                </td>
+                                <td>
+                                    <c:out value="${member.driverName}"/>
+                                    <c:if test="${not empty member.badge}">
+                                        <c:choose>
+                                            <c:when test="${member.badge eq '연정액회원'}">
+                                                <span class="badge bg-primary ms-2">${member.badge}</span>
+                                            </c:when>
+                                            <c:when test="${member.badge eq '월정액회원'}">
+                                                <span class="badge bg-success ms-2">${member.badge}</span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span class="badge bg-secondary ms-2">${member.badge}</span>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:if>
+                                </td>
+                                <td><c:out value="${member.phone}"/></td>
+                                <td><c:out value="${member.startDate}"/></td>
+                                <td><c:out value="${member.endDate}"/></td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer d-flex justify-content-end bg-light">
+                    <a href="/addMember.do" class="btn btn-outline-primary">회원 등록</a>
                 </div>
             </div>
-
         </main>
         <!-- footer 영역 -->
         <%@ include file="../layout/footer.jsp" %>

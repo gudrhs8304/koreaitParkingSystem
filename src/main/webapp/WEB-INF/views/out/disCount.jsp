@@ -27,65 +27,73 @@
     <div id="layoutSidenav_content">
         <!-- 여기서 부터 메인 작업 시작. -->
         <main class="container-fluid px-4">
-            <h1 class="card-body">할인 적용</h1>
-            <div class="card shadow mb-4">
-                <div class="card-header bg-secondary text-white fs-4">
-                    할인 적용
+            <h1 class="mt-4">할인 적용</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">요금 조정</li>
+            </ol>
+
+            <div class="card shadow-sm border-0 mb-5">
+                <div class="card-header bg-primary text-white fw-semibold">
+                    할인 정보 입력
                 </div>
+
                 <div class="card-body">
+                    <form action="/disCount.do" method="post">
+                        <input type="hidden" name="carNumber" value="${carNumber}">
 
-                    <div class="row mb-3">
-                        <label for="carNumber" class="col-sm-2 col-form-label">차량번호</label>
-                        <div class="col-sm-4">
-                            <input type="text" name="carNumber" id="carNumber" class="form-control" readonly
-                                   value="${carNumber}"/>
-                        </div>
-                    </div>
-
-                    <form action="/disCount.do" method="post" class="row mb-3">
-                        <input type="hidden" name="carNumber" value="${carNumber}"/>
-
-                        <label class="col-sm-2 col-form-label">할인 종류</label>
-                        <div class="col-sm-10 d-flex align-items-center gap-3">
-                            <div class="form-check">
-                                <input type="radio" name="discountType" value="disabled"
-                                ${empty discountType eq 'disabled' ? 'checked="checked"' : ''} />
-                                <label for="discount1" class="form-check-label">장애인</label>
+                        <div class="row g-4">
+                            <!-- 차량번호 -->
+                            <div class="col-md-6">
+                                <label for="carNumber" class="form-label">차량번호</label>
+                                <input type="text" class="form-control" id="carNumber" value="${carNumber}" readonly>
                             </div>
-                            <div class="form-check">
-                                <input type="radio" name="discountType" id="discount2" value="compact"
-                                       class="form-check-input"
-                                ${discountType eq 'compact' ? 'checked="checked"' : ''}/>
-                                <label for="discount2" class="form-check-label">경차</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="radio" name="discountType" id="discount3" value="electric"
-                                       class="form-check-input"
-                                ${discountType eq 'electric' ? 'checked="checked"' : ''}/>
-                                <label for="discount3" class="form-check-label">전기차</label>
-                            </div>
-                        </div>
-                    </form>
 
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">할인 적용 금액</label>
-                        <div class="col-sm-4">
-                            <input type="text" name="discountAmount" class="form-control" value="${discountAmount}원"
-                                   readonly/>
-                        </div>
-                    </div>
+                            <!-- 할인 종류 선택 -->
+                            <div class="col-md-6">
+                                <label class="form-label d-block mb-2">할인 종류</label>
+                                <div class="d-flex gap-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="discountType" id="discount1" value="disabled"
+                                        ${empty discountType eq 'disabled' ? 'checked="checked"' : ''}>
+                                        <label class="form-check-label" for="discount1">장애인</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="discountType" id="discount2" value="compact"
+                                        ${discountType eq 'compact' ? 'checked="checked"' : ''}>
+                                        <label class="form-check-label" for="discount2">경차</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="discountType" id="discount3" value="electric"
+                                        ${discountType eq 'electric' ? 'checked="checked"' : ''}>
+                                        <label class="form-check-label" for="discount3">전기차</label>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">결제 요금</label>
-                        <div class="col-sm-4">
-                            <input type="text" name="finalFee" class="form-control" value="${finalFee}원" readonly/>
+                            <!-- 할인 금액 -->
+                            <div class="col-md-6">
+                                <label class="form-label">할인 적용 금액</label>
+                                <input type="text" name="discountAmount" class="form-control" value="${discountAmount}원" readonly>
+                            </div>
+
+                            <!-- 결제 요금 -->
+                            <div class="col-md-6">
+                                <label class="form-label">결제 요금</label>
+                                <input type="text" name="finalFee" class="form-control" value="${finalFee}원" readonly>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <form action="/out.do" method="post">
-                        <input type="hidden" name="carNumber" value="${carNumber}"/>
-                        <input type="submit" name="submitExit" value="출차 처리" class="btn btn-success"/>
+
+                        <div class="row mt-4">
+                            <div class="col-md-6 d-grid">
+                                <button type="submit" class="btn btn-outline-primary">할인 적용</button>
+                            </div>
+                            <div class="col-md-6 d-grid">
+                                <form action="/out.do" method="post">
+                                    <input type="hidden" name="carNumber" value="${carNumber}">
+                                    <button type="submit" class="btn btn-success">출차 처리</button>
+                                </form>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

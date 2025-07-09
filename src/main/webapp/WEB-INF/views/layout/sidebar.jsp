@@ -22,6 +22,10 @@
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
                     차량 검색
                 </a>
+<%--                <a class="nav-link" href="page/statement/parkingStatus.jsp">--%>
+<%--                    <div class="sb-nav-link-icon"><i class="fa-solid fa-eye"></i></div>--%>
+<%--                    실시간 현황--%>
+<%--                </a>--%>
                 <a class="nav-link" href="/members.do">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
                     회원 관리

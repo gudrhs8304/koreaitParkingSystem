@@ -17,7 +17,8 @@ public enum DiscountPolicyDAO {
     INSTANCE;
 
     public int selectDiscountRate(String carTypeCode) {
-        String sql = "select discount_rate from discount_policy where car_type_code=?";
+        String sql = "select discount_rate from discount_poli" +
+                "cy where car_type_code=?";
 
         try {
             @Cleanup Connection connection = DBConnection.INSTANCE.getConnection();

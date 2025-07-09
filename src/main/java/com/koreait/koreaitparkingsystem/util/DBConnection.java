@@ -16,8 +16,8 @@ public enum DBConnection {
 
         HikariConfig config = new HikariConfig();
 
-        config.setDriverClassName("org.mariadb.jdbc.Driver");
-        config.setJdbcUrl("jdbc:mariadb://sa98077.ipdisk.co.kr:3306/koreaPark");
+        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        config.setJdbcUrl("jdbc:mysql://sa98077.ipdisk.co.kr:3306/koreaPark");
         config.setUsername("kdh");
         config.setPassword("kdh@123");
         config.addDataSourceProperty("cachePrepStmts", "true"); // ps

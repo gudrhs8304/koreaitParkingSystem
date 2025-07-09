@@ -61,7 +61,7 @@ dependencies {
     implementation("org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.0")
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
-
+    implementation 'com.mysql:mysql-connector-j:8.0.33'
 }
 
 test {

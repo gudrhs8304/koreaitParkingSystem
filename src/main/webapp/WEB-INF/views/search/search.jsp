@@ -41,6 +41,10 @@
                     </div>
                 </div>
             </form>
+            <!-- ✅ 오류 메시지 출력 블럭 추가 (폼 위 or 아래에) -->
+            <c:if test="${not empty error}">
+                <div class="alert alert-danger">${error}</div>
+            </c:if>
             <!-- 전체/사용중/빈자리 요약 -->
             <div class="row mb-4">
                 <div class="col-md-4">

@@ -50,4 +50,12 @@ public enum CarStatusService {
     public int getUsedSpots() {
         return carDAO.countActiveLogs(); // 출차하지 않은 차량 수
     }
+
+    public long countOverstayedCars() {
+        List<CarStatusDTO> cars = getStatusList(null); // 전체 검색
+        return cars.stream()
+                .filter(CarStatusDTO::isOver12Hours)
+                .count();
+    }
+
 }

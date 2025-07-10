@@ -16,7 +16,15 @@ public class RemoveMemberController extends HttpServlet {
         log.info("***************RemoveMemberController(doGet)*************");
         String carNumber = req.getParameter("carNumber");
         log.info("carNumber: {}", carNumber);
-        monthlyMemberService.removeMonthlyMember(carNumber);
+        try {
+            monthlyMemberService.removeMonthlyMember(carNumber);
+        }catch (Exception e) {
+            log.error(e);
+            req.setAttribute("errorMsg","회원 정보 삭제 중 오류가 발생했습니다");
+            req.getRequestDispatcher("/WEB-INF/views/member/editMember.jsp").forward(req, resp);
+            return;
+        }
+
         resp.sendRedirect("/members.do");
     }
 }

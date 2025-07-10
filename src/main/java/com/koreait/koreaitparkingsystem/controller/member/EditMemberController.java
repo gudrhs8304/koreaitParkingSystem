@@ -45,9 +45,15 @@ public class EditMemberController extends HttpServlet {
                 .startDate(startDate)
                 .endDate(endDate)
                 .build();
+        try {
+            monthlyMemberService.editMonthlyMember(memberDTO);
+            resp.sendRedirect("/members.do");
+        } catch (Exception e) {
+            log.error(e);
+            req.setAttribute("errorMsg", "회원 정보 수정 중 오류가 발생했습니다");
+            req.setAttribute("member", memberDTO);
+            req.getRequestDispatcher("/WEB-INF/views/member/editMember.jsp").forward(req, resp);
+        }
 
-        monthlyMemberService.editMonthlyMember(memberDTO);
-
-        resp.sendRedirect("/members.do");
     }
 }

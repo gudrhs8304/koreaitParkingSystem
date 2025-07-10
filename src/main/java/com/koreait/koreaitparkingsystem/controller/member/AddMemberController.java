@@ -40,7 +40,16 @@ public class AddMemberController extends HttpServlet {
                 .endDate(endDate)
                 .build();
         log.info("dto: {}", dto);
-        monthlyMemberService.addMonthlyMember(dto);
-        resp.sendRedirect("/members.do");
+
+        try {
+            monthlyMemberService.addMonthlyMember(dto);
+            resp.sendRedirect("/members.do");
+        }catch (Exception e) {
+            log.error(e);
+            req.setAttribute("errorMsg","회원 등록 중 오류가 발생했습니다");
+            req.setAttribute("dto", dto);
+            req.getRequestDispatcher("/WEB-INF/views/member/addMember.jsp").forward(req, resp);
+        }
+
     }
 }

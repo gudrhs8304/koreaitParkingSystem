@@ -29,6 +29,10 @@
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active">회원 관리</li>
             </ol>
+            <c:if test="${not empty errorMsg}">
+                <div class="alert alert-danger">${errorMsg}</div>
+            </c:if>
+
 
             <div class="card shadow-sm border-0 mb-5">
                 <div class="card-header bg-primary text-white fw-semibold">

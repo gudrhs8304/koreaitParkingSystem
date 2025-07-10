@@ -72,6 +72,8 @@
                                     <option value="normal">일반</option>
                                     <option value="disabled">장애인</option>
                                     <option value="compact">경차</option>
+                                    <option value="electric">전기차</option>
+
                                 </select>
                             </div>
 
@@ -97,7 +99,7 @@
                                 <button type="submit" class="btn btn-primary">입차 등록</button>
                             </div>
                             <div class="col-md-6 d-grid">
-                                <a href="/" class="btn btn-outline-secondary">메인으로</a>
+                                <a href="/main.do" class="btn btn-outline-secondary">메인으로</a>
                             </div>
                         </div>
                     </form>

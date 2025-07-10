@@ -33,8 +33,8 @@ public class MembersController extends HttpServlet {
         log.info("*******************MEMBER CONTROLLER(doGet)******************");
 
         // 👉 월정액/연정액 회원 리스트+뱃지정보 가져오기
-        List<MonthlyMemberDTO> members = MonthlyMemberService.INSTANCE.getMonthlyMembersWithBadge();
-
+        List<MonthlyMemberDTO> members2 = MonthlyMemberService.INSTANCE.getMonthlyMembersWithBadge();
+        List<MonthlyMemberDTO> members = MonthlyMemberService.INSTANCE.getMonthlyMembers();
         // 👉 JSP에 데이터 전달
         req.setAttribute("members", members);
 

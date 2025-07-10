@@ -71,7 +71,7 @@ public enum MonthlyMemberDAO {
         }
     }
     public void insertMember(MonthlyMemberVO monthlyMemberVO) {
-        String sql = "INSERT INTO monthly_member VALUES(?,?,?,?)";
+        String sql = "INSERT INTO monthly_member VALUES(?,?,?,?,?)";
         try {
             @Cleanup Connection connection = DBConnection.INSTANCE.getConnection();
             @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -79,6 +79,7 @@ public enum MonthlyMemberDAO {
             preparedStatement.setString(2, monthlyMemberVO.getDriverName());
             preparedStatement.setString(3, monthlyMemberVO.getPhone());
             preparedStatement.setDate(4, Date.valueOf(LocalDate.now()));
+            preparedStatement.setDate(5, Date.valueOf(monthlyMemberVO.getEndDate()));
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             log.error(e);

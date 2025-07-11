@@ -86,7 +86,7 @@ public enum MonthlyMemberDAO {
         }
     }
     public void updateMember(MonthlyMemberVO monthlyMemberVO) {
-        String sql = "UPDATE monthly_member set end_date = ?,start_date = ?, driver_name= ?, phone = ? where car_number = ?";
+        String sql = "UPDATE monthly_member set end_date = ?, start_date = ?, driver_name= ?, phone = ? where car_number = ?";
         try {
             @Cleanup Connection connection = DBConnection.INSTANCE.getConnection();
             @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);

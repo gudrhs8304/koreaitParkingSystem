@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="/disCount.do" method="post">
+                    <div>
                         <input type="hidden" name="carNumber" value="${carNumber}">
 
                         <div class="row g-4">
@@ -85,16 +85,18 @@
 
                         <div class="row mt-4">
                             <div class="col-md-6 d-grid">
-                                <button type="submit" class="btn btn-outline-primary">할인 적용</button>
+                                <form action="/disCount.do" method="post">
+                                <button type="submit" class="btn btn-outline-primary w-100">할인 적용</button>
+                                </form>
                             </div>
                             <div class="col-md-6 d-grid">
                                 <form action="/out.do" method="post">
                                     <input type="hidden" name="carNumber" value="${carNumber}">
-                                    <button type="submit" class="btn btn-success">출차 처리</button>
+                                    <button type="submit" class="btn btn-success w-100">출차 처리</button>
                                 </form>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </main>

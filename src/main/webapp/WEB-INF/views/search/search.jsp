@@ -22,6 +22,7 @@
     <%@ include file="../layout/sidebar.jsp" %>
 
     <div id="layoutSidenav_content">
+        <!-- MAIN -->
         <main class="container-fluid px-4">
             <h1 class="mt-4">차량 검색</h1>
             <ol class="breadcrumb mb-4">
@@ -105,17 +106,37 @@
             <!-- 페이지네이션 -->
             <nav class="mt-4">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item ${page == 1 ? 'disabled' : ''}">
-                        <a class="page-link" href="/search.do?page=${page - 1}&keyword=${fn:escapeXml(param.keyword)}">← 이전</a>
-                    </li>
+
+                    <!-- 이전 -->
+                    <c:choose>
+                        <c:when test="${page <= 1}">
+                            <li class="page-item disabled"><span class="page-link">이전</span></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item">
+                                <a class="page-link" href="/search.do?page=${page - 1}&keyword=${keyword}">이전</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <!-- 페이지 번호 -->
                     <c:forEach begin="1" end="${totalPage}" var="p">
                         <li class="page-item ${p == page ? 'active' : ''}">
-                            <a class="page-link" href="/search.do?page=${p}&keyword=${fn:escapeXml(param.keyword)}">${p}</a>
+                            <a class="page-link" href="/search.do?page=${p}&keyword=${keyword}">${p}</a>
                         </li>
                     </c:forEach>
-                    <li class="page-item ${page == totalPage ? 'disabled' : ''}">
-                        <a class="page-link" href="/search.do?page=${page + 1}&keyword=${fn:escapeXml(param.keyword)}">다음 →</a>
-                    </li>
+
+                    <!-- 다음 -->
+                    <c:choose>
+                        <c:when test="${page >= totalPage}">
+                            <li class="page-item disabled"><span class="page-link">다음</span></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item">
+                                <a class="page-link" href="/search.do?page=${page + 1}&keyword=${keyword}">다음</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
                 </ul>
             </nav>
         </main>
